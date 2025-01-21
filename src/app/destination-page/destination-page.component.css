@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.logout {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.booking h2{
+  font-weight: bold;
+}
+
+
+.title-section {
+  margin-bottom: 30px;
+}
+
+.title-section h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.title-section p {
+  color: #666;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Quattro colonne */
+  grid-template-rows: auto; /* Altezza delle righe automatica */
+  gap: 16px; /* Spaziatura tra le immagini */
+  margin:20px;
+}
+
+.image-grid img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px; /* Arrotonda gli angoli */
+  object-fit: cover; /* Adatta le immagini */
+
+}
+.packages img{
+  width: 100%;
+  height: 100%;
+  border-radius: 12px; /* Arrotonda gli angoli */
+  object-fit: cover; /* Adatta le immagini */
+}
+
+.grid img{
+  width: 100%;
+  height: 100%;
+  border-radius: 12px; /* Arrotonda gli angoli */
+  object-fit: cover; /* Adatta le immagini */
+}
+.grid p{
+  font-weight: bold;
+}
+.packages p{
+  font-weight: bold;
+  margin-bottom:20px;
+}
+.packages h2{
+  margin:10px;
+  font-weight: bold;
+}
+.text p{
+  width:500px;
+  margin-top:10px;
+}
+.text h2{
+  font-weight: bold;
+}
+.container h1{
+  font-weight: bold;
+}
+.facilities h2{
+  font-weight: bold;
+}
+.facilities img{
+  width:40px;
+  height: 40px;
+}
+
+.about-section {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.about-section .text {
+  flex: 2;
+}
+
+.about-section .booking {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.booking h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.booking form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.booking button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.facilities {
+  margin-bottom: 40px;
+}
+
+.facilities h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.facilities .icons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.facilities .icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.packages {
+  margin-bottom: 40px;
+}
+
+.packages h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.packages .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.packages .grid div {
+  text-align: center;
+}
+
+.packages .grid img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  font-size: 14px;
+}

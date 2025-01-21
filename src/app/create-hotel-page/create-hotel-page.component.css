@@ -1,0 +1,146 @@
+/* Generale */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Sfondo chiaro */
+  color: #1E1E1E;
+}
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+}
+
+header .logo img {
+  width: 100px;
+  height: auto;
+}
+
+header nav {
+  display: flex;
+  gap: 1rem; /* Spazio tra i link */
+}
+
+header nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 15px;
+}
+header nav a:hover {
+  text-decoration: underline;
+}
+
+.logout-button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin:20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  header {
+     flex-direction: column;
+     align-items: flex-start;
+  }
+
+  header nav {
+     flex-direction: column;
+     gap: 0.5rem;
+     width: 100%;
+  }
+
+  .logout-button {
+     align-self: flex-end;
+     margin-top: 1rem;
+  }
+}
+
+
+
+/* Media query per schermi molto piccoli */
+@media (max-width: 480px) {
+  header .logo img {
+     width: 120px;
+  }
+
+  header nav a {
+     font-size: 16px; /* Ulteriore riduzione del testo */
+  }
+
+  .logout-button {
+     font-size: 18px;
+     padding: 6px 12px;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 40px auto;
+}
+
+.form-container {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 10px;
+  width: 800px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight:bold;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-size:20px;
+}
+
+.form-container input[type="text"],
+.form-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-container button {
+  width: 100%;
+  background-color: #222121;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin:20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.form-container button:hover {
+  background-color:black ;
+
+}
+

@@ -1,0 +1,323 @@
+/* Generale */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Sfondo chiaro */
+  color: #1E1E1E;
+}
+/* Stile base della navbar (già fornito) */
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+}
+
+header .logo img {
+  width: 100px;
+  height: auto;
+}
+
+header nav {
+  display: flex;
+  gap: 1rem; /* Spazio tra i link */
+}
+#pointer{
+  width:20px;
+  height: 20px;
+}
+#photourl
+{
+  width: 50px;
+  height: 50px;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 20px;
+  margin:20px;
+}
+header nav a:hover {
+  text-decoration: underline;
+}
+
+.logout-button {
+  background-color: white;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin:20px;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  header {
+     flex-direction: column;
+     align-items: flex-start;
+  }
+
+  header nav {
+     flex-direction: column;
+     gap: 0.5rem;
+     width: 100%;
+  }
+
+  .logout-button {
+     align-self: flex-end;
+     margin-top: 1rem;
+  }
+}
+
+
+
+/* Media query per schermi molto piccoli */
+@media (max-width: 480px) {
+  header .logo img {
+     width: 120px;
+  }
+
+  header nav a {
+     font-size: 16px; /* Ulteriore riduzione del testo */
+  }
+
+  .logout-button {
+     font-size: 18px;
+     padding: 6px 12px;
+  }
+}
+
+.search-results h2{
+  text-align:center;
+  margin-top:20px;
+}
+.citycontainer h2{
+  text-align: center;
+}
+
+
+/*Hero section
+.container {
+  width: 100%;
+  max-width: 1500px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #1E1E1E;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-top:20px;
+}*/
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; /* Spaziatura tra input e pulsante */
+  margin: 20px auto;
+  width: 100%; /* Occupa tutta la larghezza dello schermo */
+  padding: 0 20px; /* Spaziatura ai lati */
+  box-sizing: border-box; /* Includi padding nel calcolo della larghezza */
+}
+
+#destination {
+  padding: 20px 25px; /* Rendi l'input più grande */
+  font-size: 18px; /* Aumenta il font */
+  border: 2px solid black;
+  border-radius: 25px; /* Bordi arrotondati */
+  flex: 1; /* L'input occupa tutto lo spazio disponibile */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animazioni */
+}
+
+#destination:focus {
+  border-color: #007BFF; /* Colore di focus */
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* Ombra blu leggera */
+  outline: none;
+}
+
+.btn {
+  padding: 20px 30px; /* Rendi il pulsante più grande */
+  font-size: 15px; /* Aumenta il font */
+  font-weight: bold;
+  color:white;
+  border: 2px solid black;
+  border-radius: 25px; /* Bordi arrotondati */
+  cursor: pointer;
+  background-color: #1E1E1E;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Animazioni */
+}
+
+.btn:hover {
+  background-color: rgb(100, 117, 122); /* Colore al passaggio */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra più intensa */
+}
+
+.btn:active {
+  background-color: #003f7f; /* Colore cliccato */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Riduci l'ombra */
+}
+
+/*-----------*/
+
+.left-section {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrare verticalmente */
+  align-items: center; /* Centrare orizzontalmente */
+  text-align: center; /* Centrare il testo */
+  padding: 20px; /* Aggiungere un po' di spazio */
+}
+
+.left-section h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.left-section h2 {
+  font-size: 28px;
+  font-style: italic;
+  margin: 5px 0 30px 0;
+  font-weight: 300;
+  color:white
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.form-group label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 25px;
+  border: none;
+  background-color: white;
+}
+
+.form-group input:focus {
+  outline: none;
+}
+
+.button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  background-color: white;
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  width:auto;
+}
+
+.button:hover {
+  background-color: #ccc;
+}
+
+.right-section {
+  background-image: url('https://images.pexels.com/photos/1577510/pexels-photo-1577510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); /* Sostituisci con il percorso dell'immagine */
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+}
+
+/*------*/
+
+/* Popular Destinations */
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 30px;
+  text-transform: uppercase;
+  color: #1E1E1E;
+}
+
+.row.text-center .col-md-3 img {
+  width: 300px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.row.text-center .col-md-3 p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+/* Best Selling Trips */
+.yourcountrycontainer h2{
+  font-size: 30px;
+  margin:20px;
+  margin-top:30px;
+}
+.list-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  width:auto;
+  margin-left: 40px;
+  margin-right: 40px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.list-group-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item img {
+  width: 220px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10%;
+  margin-right: 15px;
+}
+
+.list-group-item span {
+  font-size: 16px;
+  color: #666;
+}
+
+.list-group-item h5 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+.citycontainer h2{
+font-size: 30px;
+margin:20px;
+}

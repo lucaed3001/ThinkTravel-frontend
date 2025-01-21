@@ -1,0 +1,77 @@
+
+  <header>
+    <div class="logo">
+        <img src="img/logo.png" alt="Thynk Travel Logo">
+
+    </div>
+    <nav>
+        <a routerLink="/">HOME</a>
+        <a href="#">RESERVATION</a>
+        <a href="#">PLAN</a>
+        <a href="/login">CALENDAR</a>
+        <a routerLink="/searchDest">EXPLORE</a>
+    </nav>
+    <button class="logout-button" routerLink="/login">LOGIN</button>
+  </header>
+
+  <div class="container">
+    <div class="left-section">
+        <h1>BOOK YOUR</h1>
+        <h2>NEXT TRIP !</h2>
+        <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" placeholder="City or destination" [(ngModel)]="searchQuery" >
+        </div>
+        <div
+    *ngIf="searchQuery.trim().length === 0 && submitted"
+    style="color: red; font-size: 1em;padding-bottom: 15px;"
+  >
+    Inserisci almeno un carattere per effettuare la ricerca.
+  </div>
+        <button class="button"  (click)="search()" >Search</button>
+    </div>
+    <div class="right-section"></div>
+    </div>
+
+
+  <!-- Hero Section -->
+
+  <!-- Popular Destinations -->
+  <h2 id="popularDest">POPULAR DESTINATION</h2>
+  <div class="cities-gallery">
+    <div *ngFor="let cit of citys" class="city-card">
+      <!-- Immagine della città -->
+      <img [src]="cit.photos" [alt]="cit.name" />
+
+      <!-- Nome della città -->
+      <h5 class="city-name">{{ cit.name }}</h5>
+    </div>
+  </div>
+
+  <!-- Best Selling Trips -->
+  <h2 id="h2MostRecommended">MOST RECOMENDED</h2>
+
+  <div class="citycontainer">
+    <div class="list-group">
+      <div *ngFor="let city of cities" class="list-group-item">
+        <!-- Immagine della città -->
+        <img [src]="city.photos" [alt]="city.name" />
+
+        <div>
+          <!-- Nome città e paese -->
+          <h5>{{ city.name }}</h5>
+          <span>{{ city.country.name }} {{ city.country.flag }}</span>
+
+          <!-- Descrizione della città -->
+          <p>{{ city.description }}</p>
+
+          <!-- Informazioni aggiuntive -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+  <app-footer></app-footer>
+</footer>

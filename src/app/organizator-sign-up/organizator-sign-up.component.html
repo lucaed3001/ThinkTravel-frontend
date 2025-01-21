@@ -1,0 +1,30 @@
+<body>
+  <div class="login-container">
+      <div class="form-container">
+        <div class="header">
+          <div>
+              <h1>REGISTER</h1>
+              <p>Please enter your details for create an organizator account</p>
+          </div>
+          <img src="img/logo.png" alt="Logo">
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input type="email" placeholder="Email" formControlName="email" >
+        <input type="password" placeholder="Password" formControlName="password" >
+        <select formControlName="country">
+          <option *ngFor="let country of countries" [value]="country._id" >
+            {{ country.name }}
+          </option>
+        </select>
+          <input type="text" placeholder="Name" formControlName="name">
+          <input type="text" placeholder="IVA" formControlName="iva">
+          <input type="tel" placeholder="Phone" formControlName="phone" >
+          <button type="submit" [disabled]="loginForm.invalid">REGISTER</button>
+      </form>
+      <div class="signup">
+          Do you have an account? <a routerLink="/login">Log In</a>
+      </div>
+      </div>
+  </div>
+</body>
+

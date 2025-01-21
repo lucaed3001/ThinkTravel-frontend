@@ -1,0 +1,61 @@
+
+<header>
+  <div class="logo">
+      <img src="img/logo.png" alt="Thynk Travel Logo">
+
+  </div>
+  <nav>
+      <a routerLink="/">HOME</a>
+      <a href="#">RESERVATION</a>
+      <a href="#">PLAN</a>
+  </nav>
+  <button class="logout-button" routerLink="/login">LOGIN</button>
+</header>
+
+
+
+<div class="container search-container">
+  <input type="text" id="destination" placeholder="Name city"  />
+  <button class="btn" (click)="searchDestination()">Search</button>
+</div>
+
+<div *ngIf="!searchActive" class="citycontainer">
+  <h2>EXPLORE THESE DESTINATIONS</h2>
+  <div class="list-group">
+    <div *ngFor="let city of defaultCities" class="list-group-item" (click)="searchDestinationClick(city.name)">
+      <!-- Immagine della città -->
+      <img [src]="city.photoUrl" [alt]="city.name" />
+
+      <div>
+        <!-- Nome città e paese -->
+        <h5>{{ city.name }}</h5>
+        <span>{{ city.country.name }} {{ city.country.flag }}</span>
+
+        <!-- Descrizione della città -->
+        <p>{{ city.description }}</p>
+
+        <!-- Informazioni aggiuntive -->
+        <small>
+          Language: {{ city.language.name }} ({{ city.language.code }})<br />
+          Currency: {{ city.country.currency }}
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="searchActive" class="search-results">
+  <h2>SEARCH RESULTS FOR "{{ searchQuery }}"</h2>
+  <div class="list-group">
+    <div *ngFor="let city of searchResults" class="list-group-item">
+      <img [src]="city.photoUrl" [alt]="city.name" />
+      <div>
+        <h5>{{ city.name }}</h5>
+        <span>{{ city.address }}</span>
+        <p>{{ city.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+

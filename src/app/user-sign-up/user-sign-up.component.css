@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background: url('https://images.pexels.com/photos/18608911/pexels-photo-18608911/free-photo-of-mare-citta-oceano-edifici.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center;
+  background-size: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Overlay nero con opacità */
+  z-index: 1; /* Assicura che l'overlay sia sopra lo sfondo */
+}
+
+.form-container {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 2; /* Per stare sopra l'overlay */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 40px;
+  color: #587676;
+  margin: 0;
+  font-weight: bold;
+}
+
+.header img {
+  width: 200px;
+  height: auto;
+}
+
+.header p {
+  font-size: 14px;
+  color: #587676;
+  margin-top: 5px;
+}
+
+.form-container h1 {
+  font-size: 35px;
+  margin-bottom: 10px;
+  color: #1a6380;
+}
+
+.form-container p {
+  font-size: 20px;
+  color: #1a6380;
+  margin-bottom: 20px;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background: #1a6380;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.form-container button:hover {
+  background: #0d445b;
+}
+
+.form-container .signup {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.form-container .signup a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.form-container .signup a:hover {
+  text-decoration: underline;
+}
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: white; /* Opzionale, per mantenere lo stile */
+}
+.form-container select option {
+  text-align: center; /* Centra il testo nelle opzioni */
+}

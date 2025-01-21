@@ -1,0 +1,24 @@
+
+<body>
+    <div class="login-container">
+        <div class="form-container">
+          <div class="header">
+          <div>
+              <h1>WELCOME BACK ! </h1>
+              <p>Please enter your details </p>
+          </div>
+          <img src="img/logo.png" alt="Logo">
+      </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <input type="email" placeholder="Email" formControlName="email" >
+                <input type="password" placeholder="Password" formControlName="password" >
+                <button type="submit" [disabled]="loginForm.invalid" >LOGIN</button><!--routerLink="/homeUser" tolto per vedere se funziona nell'altro modo-->
+            </form>
+            <div class="signup">
+                Don’t have any account? Sign up like an <a  routerLink="/userSignUp">User</a> or <a routerLink="/orgSignUp">Organizator</a>
+            </div>
+            <div class="signup">Back to the <a href="/">HOME</a></div>
+        </div>
+    </div>
+</body>
+
