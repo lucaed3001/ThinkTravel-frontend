@@ -24,12 +24,12 @@
   <div class="list-group">
     <div *ngFor="let city of defaultCities" class="list-group-item" (click)="searchDestinationClick(city.name)">
       <!-- Immagine della città -->
-      <img id="photourl" [src]="city.photoUrl" [alt]="city.name" />
+      <img [src]="city.photoUrl" [alt]="city.name" />
 
       <div>
         <!-- Nome città e paese -->
         <h5>{{ city.name }}</h5>
-        <img id="pointer" src="img/Pointer.png"> <span>{{ city.country.name }} {{ city.country.flag }}</span>
+        <span>{{ city.country.name }} {{ city.country.flag }}</span>
 
 
         <!-- Descrizione della città -->

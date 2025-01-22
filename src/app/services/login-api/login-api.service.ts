@@ -5,7 +5,7 @@ import * as crypto from 'crypto-js';
 })
 export class LoginApiService {
 
-  private baseUrl:string = "https://"+location.host.replace("4200", "8081");
+  private baseUrl:string = "http://localhost:8081";
 
   private userUrl = this.baseUrl+'/user/login';
   private orgUrl = this.baseUrl+'/org/login';

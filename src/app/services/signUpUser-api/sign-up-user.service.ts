@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class SignUpUserService {
 
-  private baseUrl:string = "https://"+location.host.replace("4200", "8081");
+  private baseUrl:string = "http://localhost:8081";
 
   private apiUrl = this.baseUrl+'/user/register';
   private apiUrlOrg = this.baseUrl+'/org/register';

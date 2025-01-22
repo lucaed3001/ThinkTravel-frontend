@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FunzioniApiService {
-  private baseUrl:string = "https://"+location.host.replace("4200", "8081");
+  private baseUrl:string = "http://localhost:8081";
   private urlCity = this.baseUrl + '/cities';
 
   constructor() {}
