@@ -22,7 +22,7 @@
   <section class="hero">
     <!-- Video di sfondo -->
     <video autoplay muted loop id="video-background">
-      <source src="img/Roma.mp4" alt="HomeVideo" type="video/mp4"> 
+      <source src="video/Home.mp4" alt="HomeVideo" type="video/mp4"> 
     </video>
     <!-- Overlay sopra il video per migliorare visibilità del contenuto -->
     <div class="overlay"></div>
@@ -35,9 +35,40 @@
         </div>
     </div>
   </section>
-  <section class="mostrecommended">
-    <h1>MOST RECOMMENDED</h1>
-  </section>
+  <h2 id="popularDest">POPULAR DESTINATION</h2>
+  <div class="cities-gallery">
+    <div *ngFor="let cit of citys" class="city-card">
+      <!-- Immagine della città -->
+      <img [src]="cit.photos" [alt]="cit.name" />
+
+      <!-- Nome della città -->
+      <h5 class="city-name">{{ cit.name }}</h5>
+    </div>
+  </div>
+
+  <!-- Best Selling Trips -->
+  <h2 id="h2MostRecommended">MOST RECOMENDED</h2>
+
+  <div class="citycontainer">
+    <div class="list-group">
+      <div *ngFor="let city of cities" class="list-group-item">
+        <!-- Immagine della città -->
+        <img [src]="city.photos" [alt]="city.name" />
+
+        <div>
+          <!-- Nome città e paese -->
+          <h5>{{ city.name }}</h5>
+          <span>{{ city.country.name }} {{ city.country.flag }}</span>
+
+          <!-- Descrizione della città -->
+          <p>{{ city.description }}</p>
+
+          <!-- Informazioni aggiuntive -->
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
