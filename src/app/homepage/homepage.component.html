@@ -3,7 +3,7 @@
     <div class="Body"></div>
     <nav class="navbar">
         <div class="logo">
-            <img src="img/LigthLogo.png" alt="logo">
+            <img src="img/logo.png" alt="logo">
         </div>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
@@ -13,26 +13,22 @@
             <li><a href="#">Explore</a></li>
         </ul>
         <div class="auth-buttons">
-            <button class="login">Login</button>
-            <button class="signup">Signup</button>
+          <a href="/login">LOGIN</a>
+            <button class="signup">SIGN UP</button>
         </div>
     </nav>
   </header>
 
   <section class="hero">
-    <!-- Video di sfondo -->
-    <video autoplay muted loop id="video-background">
-      <source src="video/Home.mp4" alt="HomeVideo" type="video/mp4"> 
+    <video autoplay muted loop playsinline id="video-background">
+      <source src="video/Home.mp4" type="video/mp4">
     </video>
-    <!-- Overlay sopra il video per migliorare visibilità del contenuto -->
-    <div class="overlay"></div>
     <div class="hero-content">
-        <h1>BOOK YOUR </h1>
-        <p>NEXT TRIP! </p>
-        <div class="search-bar">
-            <input type="text" placeholder="Where you want to go ?">
-            <button>BOOK</button>
-        </div>
+      <h1>BOOK YOUR NEXT TRIP!</h1>
+      <div class="search-bar">
+        <input type="text" placeholder="Where do you want to go?">
+        <button>BOOK</button>
+      </div>
     </div>
   </section>
   <h2 id="popularDest">POPULAR DESTINATION</h2>

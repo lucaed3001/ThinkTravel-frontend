@@ -2,39 +2,31 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', Arial, sans-serif; /* Font moderno e pulito */
+  font-family: 'Poppins', Arial, sans-serif;
 }
 
 body {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
- 
+  color: #333;
+  overflow-x: hidden;
 }
-.Body{
-  overflow: hidden; /* Evita lo scorrimento orizzontale */
-}
+
 .navbar {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 50px;
-  background: rgba(0, 0, 0, 0.7); /* Più scuro per miglior contrasto */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 2; /* Navbar sopra il video */
+  padding: 15px 50px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .logo img {
-  width: 200px;
-  height: 200px;
+  width: 70px;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
 .nav-links {
@@ -45,59 +37,47 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: white;
-  font-size: 30px;
+  color: #2c3e50;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #00bfff; /* Aggiunto hover per migliorare interattività */
+  color: #007bff;
 }
 
-.auth-buttons button {
-  padding: 12px 25px;
-  border: none;
-  cursor: pointer;
-  font-size: 30px;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.login {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-}
-
-.login:hover {
-  background: white;
-  color: #00bfff;
+.auth-buttons a {
+  color: #2c3e50;
+  text-decoration: none;
+  margin-right: 12px;
+  font-weight: 600;
 }
 
 .signup {
-  background: white;
-  color: black;
-  border-radius: 10px;
+  padding: 12px 25px;
+  background:#007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .signup:hover {
-  background: #0087b2;
+  background: #0056b3;
 }
 
+/* Hero Section */
 .hero {
   position: relative;
-  width: 100%;
-  height: 300vh; /* Imposta l'altezza della sezione hero a piena altezza del viewport */
+  height: 80vh;
+  margin-top: 80px;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  color: white;
-  text-align: center;
-  overflow: hidden; /* Evita lo scorrimento orizzontale */
+  justify-content: center;
 }
 
 #video-background {
@@ -106,178 +86,210 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Fa sì che il video copra tutta la sezione senza distorsioni */
-
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Colore scuro per migliorare la visibilità del testo sopra */
-  z-index: 1; /* Overlay sopra il video */
+  object-fit: cover;
+  z-index: 2;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2; /* Assicurati che il contenuto resti sopra al video e all'overlay */
-  max-width: 700px;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 15px;
 }
 
 .hero-content h1 {
-  font-size: 80px;
-
+  font-size: 35px;
   font-weight: bold;
-}
-
-.hero-content p {
-  font-size: 50px;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
 }
 
 .search-bar {
+  max-width: 1000px;
+  margin: 2rem auto;
   display: flex;
   gap: 10px;
-  justify-content: center;
 }
 
 .search-bar input {
-  padding: 20px;
-  width: 600px;
-  border: none;
-  outline: none;
+  flex: 1;
+  padding: 15px 25px;
   border-radius: 20px;
-  font-size: 30px;
+  border: none;
+  font-size: 1.1rem;
 }
 
 .search-bar button {
-  background: #366b7c;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  cursor: pointer;
+  padding: 15px 40px;
   border-radius: 20px;
-  font-weight: BOLD;
+  border: none;
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.mostrecommended h1{
-  color:black;
+.search-bar button:hover {
+  background: #0056b3;
 }
 
+/* Popular Destinations */
 #popularDest {
   font-size: 30px;
+  color: #2c3e50;
+  margin: 4rem 0 2rem;
   font-weight: bold;
-  margin-top: 30px;
-  text-transform: uppercase;
-  color: #1E1E1E;
-  text-align:center;
-  margin:20px;
+  text-align: center;
 }
 
-/*.row.text-center .col-md-3 img {
-  width: 300px;
-  height: 500px;
+.cities-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 20px;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.city-card {
+  width: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.city-card:hover {
+  transform: translateY(-5px);
+}
+
+.city-card img {
+  width: 100%;
+  height: 320px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 15px 15px 0 0;
 }
 
-.row.text-center .col-md-3 p {
-  font-size: 14px;
+.city-name {
+  font-size: 12px;
+  padding: 15px;
   font-weight: bold;
-  margin-top: 10px;
-  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  color: #2c3e50;
 }
-  */
-  .cities-gallery {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px; /* Spaziatura tra le card */
-    flex-wrap: wrap; /* Permette di andare a capo se necessario */
-    padding: 20px;
-  }
 
-  .city-card {
-    width: 250px; /* Larghezza maggiore per le card */
-    text-align: center; /* Centra testo e contenuto */
-    border-radius: 10px;
-    overflow: hidden;
-  }
+/* Most Recommended Section */
+#h2MostRecommended {
+  font-size: 30px;
+  color: #2c3e50;
+  margin: 4rem 0 2rem;
+  text-align: center;
+  font-weight: bold;
+}
 
-  .city-card img {
-    width: 100%; /* Immagine piena larghezza */
-    height: 350px; /* Altezza proporzionata per uniformità */
-    object-fit: cover; /* Ritaglia l'immagine per adattarla */
-    border-radius: 10px;
-  }
-  .city-card img:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 10);
-  }
-
-  .city-name {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #333; /* Colore del testo */
-    font-style: italic; /* Stile in corsivo */
-  }
-
-
-/* Best Selling Trips */
-.list-group {
-  margin-top: 20px;
-  margin-bottom: 20px;
+.citycontainer {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .list-group-item {
   display: flex;
   align-items: center;
-  padding: 15px;
-  background-color: #f1f1f1;
-  border: none;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  transition: box-shadow 0.2s ease-in-out;
-  margin-left:20px;
-  margin-right: 20px;
+  padding: 20px;
+  background: #e9ebed;
+  border-radius: 15px !important;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  gap: 25px;
 }
 
 .list-group-item:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(10px);
 }
 
 .list-group-item img {
   width: 150px;
   height: 150px;
   object-fit: cover;
-  border-radius: 20%;
-  margin-right: 15px;
+  border-radius: 15px;
 }
 
-
-.list-group-item span {
-  font-size: 16px;
-  color: #666;
-}
-#pointer{
-width:40px;
-height:40px;
-}
 .list-group-item h5 {
-  margin: 0;
   font-size: 20px;
   font-weight: bold;
-}
-#h2MostRecommended
-{
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 30px;
-  text-transform: uppercase;
-  color: #1E1E1E;
-  text-align:center;
-  margin:20px;
+  color: #2c3e50;
+  margin-bottom: 10px;
 }
 
+.list-group-item p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 15px 30px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .nav-links {
+    margin: 15px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .list-group-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .list-group-item img {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .search-bar input {
+    font-size: 1rem;
+  }
+
+  .city-card {
+    width: 100%;
+  }
+}
