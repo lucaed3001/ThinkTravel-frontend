@@ -11,7 +11,7 @@ body {
 }
 
 .login-container {
-  background: url('https://images.pexels.com/photos/1309407/pexels-photo-1309407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center;
+  background: url('https://images.pexels.com/photos/27278819/pexels-photo-27278819/free-photo-of-citta-paesaggio-arte-punto-di-riferimento.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center;
   background-size: cover;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -57,7 +57,7 @@ body {
 
 .header h1 {
   font-size: 40px;
-  color: #587676;
+  color: #279b91;
   margin: 0;
   font-weight: bold;
 }

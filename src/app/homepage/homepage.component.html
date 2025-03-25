@@ -6,11 +6,11 @@
             <img src="img/logo.png" alt="logo">
         </div>
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
+            <li><a routerLink="/">Home</a></li>
             <li><a href="#">Reservation</a></li>
             <li><a href="#">Plan</a></li>
             <li><a href="#">Calendar</a></li>
-            <li><a href="#">Explore</a></li>
+            <li><a routerLink="/searchDest">Explore</a></li>
         </ul>
         <div class="auth-buttons">
           <a href="/login">LOGIN</a>
@@ -26,8 +26,14 @@
     <div class="hero-content">
       <h1>BOOK YOUR NEXT TRIP!</h1>
       <div class="search-bar">
-        <input type="text" placeholder="Where do you want to go?">
-        <button>BOOK</button>
+        <input type="text" id="destination" placeholder="City or destination" [(ngModel)]="searchQuery" >
+        <div
+        *ngIf="searchQuery.trim().length === 0 && submitted"
+        style="color: red; font-size: 1em;padding-bottom: 15px;"
+      >
+        Inserisci almeno un carattere per effettuare la ricerca.
+      </div>
+        <button class="button" (click)="search()">BOOK</button>
       </div>
     </div>
   </section>
