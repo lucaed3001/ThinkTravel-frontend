@@ -1,20 +1,21 @@
+
 <header>
   <div class="Body"></div>
   <nav class="navbar">
-    <div class="logo">
-        <img src="img/logo.png" alt="logo">
-    </div>
-    <ul class="nav-links">
-        <li><a routerLink="/">Home</a></li>
-        <li><a href="#">Reservation</a></li>
-        <li><a href="#">Plan</a></li>
-        <li><a href="#">Calendar</a></li>
-        <li><a routerLink="/searchDest">Explore</a></li>
-
-  <button class="logout-button" (click)="logout()">LOGOUT</button>
-    </ul>
-</nav>
-
+      <div class="logo">
+          <img src="img/logo.png" alt="logo">
+      </div>
+      <ul class="nav-links">
+          <li><a routerLink="/">Home</a></li>
+          <li><a href="#">Reservation</a></li>
+          <li><a href="#">Plan</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li><a routerLink="/searchDest">Explore</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <button class="signup" (click)="logout()">LOGOUT</button>
+      </div>
+  </nav>
 </header>
 
 
