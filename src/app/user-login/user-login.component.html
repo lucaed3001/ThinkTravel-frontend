@@ -1,24 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Modern App</title>
 
+</head>
 <body>
     <div class="login-container">
+        <!-- Hero Section (visible on larger screens) -->
+        <div class="hero-section">
+            <img src="https://images.pexels.com/photos/4356144/pexels-photo-4356144.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                 alt="Welcome illustration" 
+                 class="hero-image">
+        
+        </div>
+
+        <!-- Form Container -->
         <div class="form-container">
-          <div class="header">
-          <div>
-              <h1>WELCOME BACK ! </h1>
-              <p>Please enter your details </p>
-          </div>
-          <img src="img/logo.png" alt="Logo">
-      </div>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <input type="email" placeholder="Email" formControlName="email" >
-                <input type="password" placeholder="Password" formControlName="password" >
-                <button type="submit" [disabled]="loginForm.invalid" >LOGIN</button><!--routerLink="/homeUser" tolto per vedere se funziona nell'altro modo-->
-            </form>
-            <div class="signup">
-                Don’t have any account? Sign up like an <a  routerLink="/userSignUp">User</a> or <a routerLink="/orgSignUp">Organizator</a>
+            <img src="img/logo.png" alt="Logo" class="logo">
+            <div class="header">
+                <h1>WELCOME BACK!</h1>
+                <p>Please enter your details</p>
             </div>
-            <div class="signup">Back to the <a href="/">HOME</a></div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="input-group">
+                    <input type="email" id="email" formControlName="email" placeholder=" " required>
+                    <label for="email">Email</label>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="password" formControlName="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                </div>
+
+                <button type="submit" [disabled]="loginForm.invalid">
+                    <span>LOGIN</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </form>
+
+            <div class="signup-options">
+                <p class="signup">Don't have an account? 
+                    <a routerLink="/userSignUp" class="signup-link">Sign up as User</a> or 
+                    <a routerLink="/orgSignUp" class="signup-link">Organizer</a>
+                </p>
+                <p class="signup">
+                    Back to <a href="/" class="home-link">HOME</a>
+                </p>
+            </div>
         </div>
     </div>
 </body>
-
+</html>
