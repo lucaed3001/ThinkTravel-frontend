@@ -1,79 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+<body>
+  <header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div class="Body"></div>
     <nav class="navbar">
         <div class="logo">
             <img src="img/logo.png" alt="logo">
         </div>
         <ul class="nav-links">
-            <li><a routerLink="/">Home</a></li>
-            <li><a href="#">Reservation</a></li>
-            <li><a href="#">Plan</a></li>
-            <li><a href="#">Calendar</a></li>
-            <li><a routerLink="/searchDest">Explore</a></li>
+            <li><a (click)="returnToHome()">Home</a></li>
+            <li><a href="#">RESERVATION</a></li>
+            <li><a href="#">PLAN</a></li>
         </ul>
-        <div class="auth-buttons">
-          <a href="/login">LOGIN</a>
-            <button [routerLink]="['/userSignUp']" routerLinkActive="router-link-active" class="signup">SIGN UP</button>
-        </div>
+        <button class="signup"> LOGIN</button>
     </nav>
-<body>
-     <section class="hero">
-        <div class="hero-content">
-            <h1>Discover Your Next Adventure</h1>
-            <p>Explore the world's most beautiful destinations with our curated travel experiences</p>
-        </div>
-    </section>
 
-    <div class="search-container">
-        <form class="search-form">
-            <input type="text" id="destination" placeholder="Enter a city name" [(ngModel)]="searchQuery">
-            <button type="button" class="search-btn" (click)="searchDestination()">Search</button>
-        </form>
-    </div>
+  </header>
+  <div class="container search-container">
+      <input type="text" id="destination" placeholder="Enter a city name" [(ngModel)]="searchQuery" />
+      <button class="btn" (click)="searchDestination()">SEARCH</button>
+  </div>
 
-    <section class="destinations">
-        <div class="section-header">
-            <h2>Explore These Destinations</h2>
-            <p>Our selection of the most fascinating places to visit around the world</p>
-        </div>
+  <div *ngIf="!searchActive" class="citycontainer">
+      <h2>EXPLORE THESE DESTINATIONS</h2>
+      <div class="list-group">
+          <div *ngFor="let city of defaultCities" class="list-group-item" (click)="searchDestinationClick(city.name)">
+              <img [src]="city.photoUrl" [alt]="city.name" />
+              <div>
+                  <h5>{{ city.name }}</h5>
+                  <span>{{ city.country.name }} {{ city.country.flag }}</span>
+                  <p>{{ city.description }}</p>
+                  <small>
+                      Language: {{ city.language.name }} ({{ city.language.code }})<br />
+                      Currency: {{ city.country.currency }}
+                  </small>
+              </div>
+          </div>
+      </div>
+  </div>
 
-        <!-- Default Cities View -->
-        <div *ngIf="!searchActive" class="city-grid">
-            <!-- City cards will be generated automatically here -->
-            <div *ngFor="let city of defaultCities" class="city-card" (click)="searchDestinationClick(city.name)">
-                <img [src]="city.photoUrl" [alt]="city.name" class="city-image">
-                <div class="city-info">
-                    <h3>{{ city.name }}</h3>
-                    <div class="city-location">
-                        <span>{{ city.country.name }} {{ city.country.flag }}</span>
-                    </div>
-                    <p class="city-description">{{ city.description }}</p>
-                    <div class="city-details">
-                        <div>
-                            <div>Language: {{ city.language.name }} ({{ city.language.code }})</div>
-                            <div>Currency: {{ city.country.currency }}</div>
-                        </div>
+  <div *ngIf="searchActive" class="search-results">
+      <h2>SEARCH RESULTS FOR "{{ searchQuery }}"</h2>
+      <div class="list-group">
+          <div *ngFor="let city of searchResults" class="list-group-item">
+              <img [src]="city.photoUrl" [alt]="city.name" />
+              <div>
+                  <h5>{{ city.name }}</h5>
+                  <span>{{ city.address }}</span>
+                  <p>{{ city.description }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Search Results View -->
-        <div *ngIf="searchActive" class="city-grid">
-            <div *ngFor="let city of searchResults" class="city-card">
-                <img [src]="city.photoUrl" [alt]="city.name" class="city-image">
-                <div class="city-info">
-                    <h3>{{ city.name }}</h3>
-                    <div class="city-location">
-                        <span>{{ city.address }}</span>
-                    </div>
-                    <p class="city-description">{{ city.description }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer><app-footer></app-footer></footer>
 </body>
-
-</html>
