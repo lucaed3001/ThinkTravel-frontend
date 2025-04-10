@@ -1,30 +1,67 @@
+<!-- Assicurati di avere Font Awesome caricato -->
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
 <body>
   <div class="login-container">
-      <div class="form-container">
-        <div class="header">
-          <div>
-              <h1>REGISTER</h1>
-              <p>Please enter your details for create an organizator account</p>
-          </div>
-          <img src="img/logo.png" alt="Logo">
+    <div class="form-container">
+      <div class="header">
+        <img src="img/logo.png" alt="Travel Icon" class="travel-icon">
+        <div class="header-text">
+          <h1>Join Our Travel Community</h1>
+          <p>Create your organizer account</p>
+        </div>
       </div>
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <input type="email" placeholder="Email" formControlName="email" >
-        <input type="password" placeholder="Password" formControlName="password" >
-        <select formControlName="country">
-          <option *ngFor="let country of countries" [value]="country._id" >
-            {{ country.name }}
-          </option>
-        </select>
-          <input type="text" placeholder="Name" formControlName="name">
-          <input type="text" placeholder="IVA" formControlName="iva">
-          <input type="tel" placeholder="Phone" formControlName="phone" >
-          <button type="submit" [disabled]="loginForm.invalid">REGISTER</button>
+        <div class="input-group">
+          <i class="fas fa-envelope icon"></i>
+          <input type="email" placeholder="Email Address" formControlName="email">
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-lock icon"></i>
+          <input type="password" placeholder="Create Password" formControlName="password">
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-globe icon"></i>
+          <select formControlName="country">
+            <option value="" disabled selected>Select Your Country</option>
+            <option *ngFor="let country of countries" [value]="country._id">
+              {{ country.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-building icon"></i>
+          <input type="text" placeholder="Organization Name" formControlName="name">
+        </div>
+
+        <div class="form-row">
+          <div class="input-group half-width">
+            <i class="fas fa-id-card icon"></i>
+            <input type="text" placeholder="VAT Number" formControlName="iva">
+          </div>
+
+          <div class="input-group half-width">
+            <i class="fas fa-phone icon"></i>
+            <input type="tel" placeholder="Phone Number" formControlName="phone">
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="loginForm.invalid">
+          <span>Register Now</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
       </form>
+
       <div class="signup">
-          Do you have an account? <a routerLink="/login">Log In</a>
+        Already a member? <a routerLink="/login">Sign In</a>
       </div>
-      </div>
+
+    </div>
   </div>
 </body>
-

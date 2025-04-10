@@ -1,140 +1,174 @@
-body {
+:root {
+  --primary-color: #2563eb;
+  --accent-color: #3b82f6;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-focus-border: #2563eb;
+  --white: #ffffff;
+  --gray: #6b7280;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
-.login-container {
-  background: url('https://images.pexels.com/photos/18608911/pexels-photo-18608911/free-photo-of-mare-citta-oceano-edifici.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center;
-  background-size: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  color: #1f2937;
+}
 
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.register-container {
   position: relative;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.login-container::before {
-  content: "";
+.background-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Overlay nero con opacità */
-  z-index: 1; /* Assicura che l'overlay sia sopra lo sfondo */
+  background: url('https://images.pexels.com/photos/19337107/pexels-photo-19337107/free-photo-of-citta-edifici-alberi-italia.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center;
+  background-size: cover;
+  z-index: 0;
 }
 
-.form-container {
-  background: white;
-  border-radius: 10px;
-  padding: 30px;
-  width: 600px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 2; /* Per stare sopra l'overlay */
+.form-card {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 700px;
+  background-color: white;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.header h1 {
-  font-size: 40px;
-  color: #587676;
-  margin: 0;
+.logo {
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.form-header h1 {
+  color: black;
   font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 0.5rem;
 }
 
-.header img {
-  width: 200px;
-  height: auto;
+.form-header p {
+  color: black;
+  font-size: 15px;
 }
 
-.header p {
-  font-size: 14px;
-  color: #587676;
-  margin-top: 5px;
-}
-
-.form-container h1 {
-  font-size: 35px;
-  margin-bottom: 10px;
-  color: #1a6380;
-}
-
-.form-container p {
-  font-size: 20px;
-  color: #1a6380;
-  margin-bottom: 20px;
-}
-
-.form-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #ccc;
+.travel-form .input-field {
+  position: relative;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border: lightgray 2px solid;
   border-radius: 20px;
-  font-size: 20px;
 }
 
-.form-container button {
+.input-field input,
+.input-field select {
   width: 100%;
-  padding: 10px;
-  background: #1a6380;
+  padding: 1rem 1rem 1rem 2.5rem;
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  transition: var(--transition);
+}
+
+.input-field input:focus,
+.input-field select:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px rgba(79, 125, 223, 0.2);
+  border-radius: 20px;
+}
+
+.input-field label {
+  position: absolute;
+  left: 2.5rem;
+  top: 1rem;
+  pointer-events: none;
+  transition: var(--transition);
+  background: var(--white);
+  padding: 0 0.3rem;
+  font-size: 0.95rem;
+}
+
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label,
+.input-field select:focus + label,
+.input-field select:not(:placeholder-shown) + label {
+  transform: translateY(-1.7rem) translateX(-1.5rem) scale(0.85);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.input-field .material-icons-outlined {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  color: var(--gray);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: royalblue;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 20px;
+  border-radius: 20px;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
 }
 
-.form-container button:hover {
-  background: #0d445b;
+.submit-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  transform: translateY(-2px);
 }
 
-.form-container .signup {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #666;
+.auth-redirect {
   text-align: center;
+  margin-top: 1.5rem;
+  color: var(--gray);
+  font-size: 0.9rem;
 }
 
-.form-container .signup a {
-  color: #333;
+.auth-redirect a {
+  color: var(--primary-color);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-.form-container .signup a:hover {
+.auth-redirect a:hover {
   text-decoration: underline;
 }
-.form-container select {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  font-size: 20px;
-  background-color: white; /* Opzionale, per mantenere lo stile */
-}
-.form-container select option {
-  text-align: center; /* Centra il testo nelle opzioni */
+
+/* Responsive */
+@media (max-width: 480px) {
+  .form-card {
+    padding: 2rem 1rem;
+  }
 }
