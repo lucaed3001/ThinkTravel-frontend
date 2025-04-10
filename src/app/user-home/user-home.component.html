@@ -1,22 +1,48 @@
-
-<header>
-  <div class="Body"></div>
-  <nav class="navbar">
-      <div class="logo">
+<header class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">  
+      <div class="container-fluid">
+        <div class="logo">
           <img src="img/logo.png" alt="logo">
       </div>
-      <ul class="nav-links">
-          <li><a routerLink="/">Home</a></li>
-          <li><a href="#">Reservation</a></li>
-          <li><a href="#">Plan</a></li>
-          <li><a href="#">Calendar</a></li>
-          <li><a routerLink="/searchDest">Explore</a></li>
-      </ul>
-      <div class="auth-buttons">
-        <button class="signup" (click)="logout()">LOGOUT</button>
+        <button class="navbar-toggler" type="button" 
+                (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" 
+                aria-controls="navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/']" (click)="isCollapsed = true">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/']" (click)="isCollapsed = true">Reservation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/']" (click)="isCollapsed = true">Plan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/']" (click)="isCollapsed = true">Calendar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/searchDest']" (click)="isCollapsed = true">Explore</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">       
+            <li class="nav-item">
+              <i class="bi bi-person-circle nav-link text-secondary" 
+                 style="cursor: pointer; font-size: 25px;" 
+                 (click)="profileSidebar.openSidebar()" 
+                 aria-label="Profilo">
+              </i>
+            </li>
+          </ul>
+        </div>
       </div>
-  </nav>
-</header>
+    </nav>
+  </header>
+<app-side-bar #profileSidebar></app-side-bar>
 
 
   <!-- Hero Section -->

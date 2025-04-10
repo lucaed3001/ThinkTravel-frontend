@@ -13,6 +13,7 @@ import { CreateHotelPageComponent } from './create-hotel-page/create-hotel-page.
 import { UserExploreComponent } from './user-explore/user-explore.component';
 import { HotelPageComponent } from './hotel-page/hotel-page.component';
 import { DestinationPageComponent } from './destination-page/destination-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 export const routes: Routes = [
   {
     path: '',
@@ -57,6 +58,10 @@ component:UserExploreComponent,
 {
   path:'hotelPage',
 component:HotelPageComponent,
+},
+{
+  path:'userProfile',
+component:UserProfileComponent,
 },
 ];
 @NgModule({

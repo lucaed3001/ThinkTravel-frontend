@@ -1,21 +1,130 @@
-<header>
-    <div class="Body"></div>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="img/logo.png" alt="logo">
+<div class="profile-overlay" *ngIf="isVisible" (click)="closeProfile()">
+    <div class="profile-container" (click)="$event.stopPropagation()">
+      <button class="close-btn" routerLinkActive="router-link-active" >
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="profile-header">
+        <div class="avatar-container">
+            <img [src]="user.avatar || 'assets/default-avatar.jpg'" alt="Avatar" class="avatar" (click)="onAvatarClick()" id="avatar" />
+            <button class="edit-avatar-btn" (click)="onAvatarClick()">
+              <i class="fas fa-camera"></i>
+            </button>
+            <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput hidden>
+          </div>
+        <h2>{{ user.name }} {{ user.surname }}</h2>
+        <p class="member-since">Membro dal {{ user.joinDate | date:'MMMM y' }}</p>
+       
+      </div>
+  
+      <div class="profile-content">
+        <div class="profile-nav">
+          <button class="nav-btn active" (click)="setActiveTab('info')">
+            <i class="fas fa-user"></i> Informazioni
+          </button>
+          <button class="nav-btn" (click)="setActiveTab('trips')">
+            <i class="fas fa-suitcase-rolling"></i> I miei viaggi
+          </button>
+          <button class="nav-btn" (click)="setActiveTab('wishlist')">
+            <i class="fas fa-heart"></i> Wishlist
+          </button>
+          <button class="nav-btn" (click)="setActiveTab('settings')">
+            <i class="fas fa-cog"></i> Impostazioni
+          </button>
         </div>
-        <ul class="nav-links">
-            <li><a routerLink="/">Home</a></li>
-            <li><a href="#">Reservation</a></li>
-            <li><a href="#">Plan</a></li>
-            <li><a href="#">Calendar</a></li>
-            <li><a routerLink="/searchDest">Explore</a></li>
-        </ul>
-        <div class="auth-buttons">
-          <a href="/login">LOGIN</a>
-            <button [routerLink]="['/userSignUp']" routerLinkActive="router-link-active" class="signup">SIGN UP</button>
+  
+        <div class="profile-details">
+          <!-- Tab Informazioni -->
+          <div class="tab-content" *ngIf="activeTab === 'info'">
+            <div class="info-section">
+              <h3><i class="fas fa-info-circle"></i> Dettagli personali</h3>
+              <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ user.email }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Telefono:</span>
+                <span class="info-value">{{ user.phone || 'Non specificato' }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Data di nascita:</span>
+                <span class="info-value">{{ user.birthDate | date:'dd/MM/yyyy' }}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Paese:</span>
+                <span class="info-value">{{ user.country || 'Non specificato' }}</span>
+              </div>
+            </div>
+  
+            <div class="info-section">
+              <h3><i class="fas fa-plane"></i> Preferenze di viaggio</h3>
+              <div class="preferences">
+                <div class="pref-item" *ngFor="let pref of user.preferences">
+                  <i [class]="pref.icon"></i> {{ pref.text }}
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Tab Viaggi -->
+          <div class="tab-content" *ngIf="activeTab === 'trips'">
+            <div class="trips-list">
+              <div class="trip-card" *ngFor="let trip of user.trips">
+                <img [src]="trip.image" alt="{{ trip.destination }}">
+                <div class="trip-info">
+                  <h4>{{ trip.destination }}</h4>
+                  <p class="trip-date">{{ trip.startDate | date:'dd/MM/yyyy' }} - {{ trip.endDate | date:'dd/MM/yyyy' }}</p>
+                  <div class="trip-status" [ngClass]="trip.status">
+                    {{ trip.status | uppercase }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Tab Wishlist -->
+          <div class="tab-content" *ngIf="activeTab === 'wishlist'">
+            <div class="wishlist-grid">
+              <div class="wishlist-item" *ngFor="let item of user.wishlist">
+                <img [src]="item.image" alt="{{ item.destination }}">
+                <div class="wishlist-overlay">
+                  <h4>{{ item.destination }}</h4>
+                  <button class="btn-small">
+                    <i class="fas fa-plus"></i> Pianifica viaggio
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Tab Impostazioni -->
+          <div class="tab-content" *ngIf="activeTab === 'settings'">
+            <div class="settings-section">
+              <h3><i class="fas fa-bell"></i> Notifiche</h3>
+              <div class="setting-toggle">
+                <label>Email di promozione</label>
+                <label class="switch">
+                  <input type="checkbox" [(ngModel)]="user.settings.promoEmails">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="setting-toggle">
+                <label>Notifiche di viaggio</label>
+                <label class="switch">
+                  <input type="checkbox" [(ngModel)]="user.settings.tripNotifications">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+  
+            <div class="settings-section">
+              <h3><i class="fas fa-lock"></i> Sicurezza</h3>
+              <button class="btn-outline">
+                <i class="fas fa-key"></i> Cambia password
+              </button>
+            </div>
+          </div>
         </div>
-    </nav>
-  </header>
-
-
+      </div>
+    </div>
+  </div>

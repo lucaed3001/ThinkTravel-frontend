@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import {RouterOutlet, RouterLink} from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators,FormBuilder } from '@angular/forms';
 import {  OnInit } from '@angular/core';
@@ -7,10 +7,12 @@ import { FooterComponent } from '../footer/footer.component';
 import { FunzioniApiService } from '../services/search-api/funzioni-api.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SideBarComponent } from '../side-bar/side-bar.component';
 
 @Component({
   selector: 'app-user-home',
-  imports: [RouterOutlet, RouterLink,FooterComponent,ReactiveFormsModule,FormsModule,CommonModule],
+  imports: [RouterOutlet, RouterLink,FooterComponent,ReactiveFormsModule,FormsModule,CommonModule,NgbModule,SideBarComponent],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })
@@ -19,6 +21,9 @@ export class UserHomeComponent{
   searchQuery: string = '';
   submitted: boolean = false;
   cities: any[] = [];
+
+  @ViewChild('profileSidebar') profileSidebar!: SideBarComponent;
+  isCollapsed = true;
 
   constructor(private fb: FormBuilder,private router: Router,private funzioniApiService:FunzioniApiService) {  }
   async ngOnInit() {
