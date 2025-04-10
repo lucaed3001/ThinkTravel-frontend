@@ -2,18 +2,28 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef   } from 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { RouterLink } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-user-profile',
-  imports: [RouterLink,CommonModule,FormsModule],
+  imports: [RouterLink,CommonModule,FormsModule,NgbModule,CommonModule],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent {
+
+  userData:any;
+
+  async ngOnInit() {
+  const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati
+  if (userDataString) {
+    this.userData = JSON.parse(userDataString); // Converte in oggetto
+  }
+}
+
   @Input() isVisible: boolean = true;
   @Output() closed = new EventEmitter<void>();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-
   activeTab: string = 'info';
 
   user = {
@@ -72,9 +82,9 @@ export class UserProfileComponent {
     }
   };
 
-  closeProfile() {
+  closeProfile():void {
     this.closed.emit();
-    this.isVisible= false;
+    //this.isVisible= false;
     
   }
 

@@ -1,6 +1,6 @@
-<div class="profile-overlay" *ngIf="isVisible" (click)="closeProfile()">
+<div class="profile-overlay" *ngIf="isVisible" >
     <div class="profile-container" (click)="$event.stopPropagation()">
-      <button class="close-btn" routerLinkActive="router-link-active" >
+      <button class="close-btn" routerLinkActive="router-link-active"(click)="closeProfile()" >
         <i class="fas fa-times"></i>
       </button>
       
@@ -12,7 +12,7 @@
             </button>
             <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput hidden>
           </div>
-        <h2>{{ user.name }} {{ user.surname }}</h2>
+        <h2>{{ userData.name }} {{ userData.surname }}</h2>
         <p class="member-since">Membro dal {{ user.joinDate | date:'MMMM y' }}</p>
        
       </div>
@@ -40,7 +40,7 @@
               <h3><i class="fas fa-info-circle"></i> Dettagli personali</h3>
               <div class="info-row">
                 <span class="info-label">Email:</span>
-                <span class="info-value">{{ user.email }}</span>
+                <span class="info-value">{{ userData.email }}</span>
               </div>
               <div class="info-row">
                 <span class="info-label">Telefono:</span>

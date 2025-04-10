@@ -1,36 +1,10 @@
-/*.offcanvas-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: none;
-    transition: opacity 0.3s ease;
-    z-index: 999;
-  }
-  
-  .offcanvas-overlay.show {
-    display: block;
-  }
-  
-  .offcanvas {
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .offcanvas.show {
-    transform: translateX(0);
-  }
-  
-  button.animate__animated.animate__bounceIn {
-    animation-duration: 1s;
-  }*/
-  /* Aggiungi al tuo foglio di stile */
+
+  /* Aggiungi al tuo foglio di stile 
   .offcanvas-overlay {
     background: rgba(0,0,0,0.25);
     backdrop-filter: blur(3px);
     transition: opacity 0.3s ease;
-  }
+  }*/
   
   .hover-scale {
     transition: transform 0.2s ease, background-color 0.2s ease;
@@ -55,4 +29,40 @@
   .shadow-5 {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   }
-  
+
+/*-----------------------*/
+/* Overlay per sfocare lo sfondo */
+.offcanvas-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px); /* Effetto sfocatura */
+  background-color: rgba(0, 0, 0, 0.3); /* Sfondo semi-trasparente */
+  z-index: 1050; /* Overlay sopra la sidebar */
+}
+
+/* Profilo in primo piano */
+.profile-panel {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  width: 80%;
+  max-width: 600px;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  z-index: 1060; /* Profilo sopra l'overlay e la sidebar */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Sidebar (se non hai già un z-index definito, aggiungilo qui) */
+.offcanvas {
+  z-index: 1040; /* Sidebar sotto il profilo e l'overlay */
+}
+
+/* Optional: disabilita lo scroll mentre il profilo è aperto */
+body {
+  overflow: hidden;
+}
