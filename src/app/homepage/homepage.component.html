@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust - Travel Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
 <body>
   <header>
     <div class="Body"></div>
@@ -24,56 +33,50 @@
       <source src="video/Home.mp4" type="video/mp4">
     </video>
     <div class="hero-content">
-      <h1>BOOK YOUR NEXT TRIP!</h1>
-      <div class="search-bar">
-        <input type="text" id="destination" placeholder="City or destination" [(ngModel)]="searchQuery" >
-        <div
-        *ngIf="searchQuery.trim().length === 0 && submitted"
-        style="color: red; font-size: 1em;padding-bottom: 15px;"
-      >
-        Inserisci almeno un carattere per effettuare la ricerca.
-      </div>
-        <button class="button" (click)="search()">BOOK</button>
-      </div>
-    </div>
-  </section>
-  <h2 id="popularDest">POPULAR DESTINATION</h2>
-  <div class="cities-gallery">
-    <div *ngFor="let cit of citys" class="city-card">
-      <!-- Immagine della città -->
-      <img [src]="cit.photos" [alt]="cit.name" />
-
-      <!-- Nome della città -->
-      <h5 class="city-name">{{ cit.name }}</h5>
-    </div>
-  </div>
-
-  <!-- Best Selling Trips -->
-  <h2 id="h2MostRecommended">MOST RECOMENDED</h2>
-
-  <div class="citycontainer">
-    <div class="list-group">
-      <div *ngFor="let city of cities" class="list-group-item">
-        <!-- Immagine della città -->
-        <img [src]="city.photos" [alt]="city.name" />
-
-        <div>
-          <!-- Nome città e paese -->
-          <h5>{{ city.name }}</h5>
-          <span>{{ city.country.name }} {{ city.country.flag }}</span>
-
-          <!-- Descrizione della città -->
-          <p>{{ city.description }}</p>
-
-          <!-- Informazioni aggiuntive -->
-
+      <h1>Discover Your Next Adventure</h1>
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" 
+                 class="search-input" 
+                 placeholder="Search destination..."
+                 [(ngModel)]="searchQuery">
+          <button class="search-button" (click)="search()">
+            <i class="fas fa-search"></i> SEARCH
+          </button>
+        </div>
+        <div *ngIf="searchQuery.trim().length === 0 && submitted" class="error-message">
+          Please enter a destination to search
         </div>
       </div>
     </div>
+  </section>
+
+  <h2 class="section-title">Popular Destinations</h2>
+  <div class="destinations-grid">
+    <div *ngFor="let cit of citys" class="destination-card">
+      <img [src]="cit.photos" [alt]="cit.name">
+      <div class="city-name">{{ cit.name }}</div>
+    </div>
   </div>
 
+  <h2 class="section-title">Most Recommended</h2>
+  <div class="recommended-grid">
+    <div *ngFor="let city of cities" class="recommended-card">
+      <div class="card-image">
+        <img [src]="city.photos" [alt]="city.name">
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">{{ city.name }}</h3>
+        <div class="card-country">
+          <i class="fas fa-flag"></i> {{ city.country.name }} {{ city.country.flag }}
+        </div>
+        <p class="card-description">{{ city.description }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </body>
-
-<footer>
-  <app-footer></app-footer>
-</footer>
+</html>
