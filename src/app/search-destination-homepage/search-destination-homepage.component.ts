@@ -171,10 +171,12 @@ async returnToHome()
 
 }
 
-addPrenotation():void{
-  console.log(localStorage)
+addPrenotation(nome:string,address:string):void{
+  //console.log(nome)
   if(localStorage.getItem("userData")!=null){
-    this.router.navigate(['/']);
+    localStorage.setItem("hotelName",nome);
+    localStorage.setItem("hotelAddress",address);
+    this.router.navigate(['/prenotazioni']);
   }
   else{
     alert("You have to login to book a hotel");

@@ -1,0 +1,255 @@
+<div class="booking-container">
+    <div class="booking-header">
+      <div class="hotel-info">
+        <h1>{{ name }}</h1>
+        <div class="rating-location">
+          <div class="stars">
+            <i *ngFor="let star of getStars(hotel.rating)" [class]="star"></i>
+          </div>
+          <div class="location">
+            <i class="fas fa-map-marker-alt"></i>
+            {{ address }}
+          </div>
+        </div>
+      </div>
+      <div class="hotel-image" [style.backgroundImage]="'url(' + hotel.mainImage + ')'"></div>
+    </div>
+  
+    <div class="booking-steps">
+      <div class="step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+        <div class="step-number">1</div>
+        <div class="step-title">Seleziona camera</div>
+      </div>
+      <div class="step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
+        <div class="step-number">2</div>
+        <div class="step-title">Dettagli prenotazione</div>
+      </div>
+      <div class="step" [class.active]="currentStep === 3" [class.completed]="currentStep > 3">
+        <div class="step-number">3</div>
+        <div class="step-title">Pagamento</div>
+      </div>
+      <div class="step" [class.active]="currentStep === 4">
+        <div class="step-number">4</div>
+        <div class="step-title">Conferma</div>
+      </div>
+    </div>
+  
+    <!-- Step 1: Selezione Camera -->
+    <div class="booking-step-content" *ngIf="currentStep === 1">
+      <div class="room-options">
+        <div class="room-card" *ngFor="let room of hotel.rooms" [class.selected]="selectedRoom?.id === room.id" (click)="selectRoom(room)">
+          <div class="room-image" [style.backgroundImage]="'url(' + room.image + ')'"></div>
+          <div class="room-details">
+            <h3>{{ room.type }}</h3>
+            <div class="room-features">
+              <span *ngFor="let feature of room.features">
+                <i [class]="feature.icon"></i> {{ feature.text }}
+              </span>
+            </div>
+            <div class="room-price">
+              <span class="price">{{ room.price | currency:'EUR':'symbol':'1.0-0' }}</span>
+              <span class="per-night">a notte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="date-selection">
+        <h3>Seleziona le date</h3>
+        <div class="date-inputs">
+          <div class="date-input">
+            <label>Check-in</label>
+            <input type="date" [(ngModel)]="bookingData.checkIn" (change)="calculateNights()" [min]="today">
+          </div>
+          <div class="date-input">
+            <label>Check-out</label>
+            <input type="date" [(ngModel)]="bookingData.checkOut" (change)="calculateNights()" [min]="bookingData.checkIn || today">
+          </div>
+        </div>
+        <div class="nights-info" *ngIf="bookingData.nights > 0">
+          {{ bookingData.nights }} notti · {{ bookingData.totalPrice | currency:'EUR':'symbol':'1.0-0' }}
+        </div>
+      </div>
+  
+      <div class="action-buttons">
+        <button class="btn-next" (click)="nextStep()" [disabled]="!selectedRoom || !bookingData.checkIn || !bookingData.checkOut">
+          Continua
+        </button>
+      </div>
+    </div>
+  
+    <!-- Step 2: Dettagli Prenotazione -->
+    <div class="booking-step-content" *ngIf="currentStep === 2">
+      <div class="booking-summary">
+        <h3>Riepilogo prenotazione</h3>
+        <div class="summary-card">
+          <div class="summary-row">
+            <span>Camera</span>
+            <span>{{ selectedRoom.type }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Check-in</span>
+            <span>{{ bookingData.checkIn | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Check-out</span>
+            <span>{{ bookingData.checkOut | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Notti</span>
+            <span>{{ bookingData.nights }}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Totale</span>
+            <span>{{ bookingData.totalPrice | currency:'EUR':'symbol':'1.0-0' }}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="guest-details">
+        <h3>Informazioni ospite</h3>
+        <div class="form-group">
+          <label>Nome completo</label>
+          <input type="text" [(ngModel)]="bookingData.guestName" placeholder="Come appare sul documento">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" [(ngModel)]="bookingData.guestEmail" placeholder="Dove inviare la conferma">
+        </div>
+        <div class="form-group">
+          <label>Telefono</label>
+          <input type="tel" [(ngModel)]="bookingData.guestPhone" placeholder="Per eventuali comunicazioni">
+        </div>
+        <div class="form-group">
+          <label>Note speciali (opzionale)</label>
+          <textarea [(ngModel)]="bookingData.specialRequests" placeholder="Letti aggiuntivi, allergie, ecc."></textarea>
+        </div>
+      </div>
+  
+      <div class="action-buttons">
+        <button class="btn-back" (click)="prevStep()">Indietro</button>
+        <button class="btn-next" (click)="nextStep()" [disabled]="!bookingData.guestName || !bookingData.guestEmail || !bookingData.guestPhone">
+          Continua
+        </button>
+      </div>
+    </div>
+  
+    <!-- Step 3: Pagamento -->
+    <div class="booking-step-content" *ngIf="currentStep === 3">
+      <div class="payment-methods">
+        <h3>Metodo di pagamento</h3>
+        <div class="payment-options">
+          <div class="payment-card" *ngFor="let method of paymentMethods" 
+               [class.selected]="selectedPayment === method.id" 
+               (click)="selectPayment(method.id)">
+            <i [class]="method.icon"></i>
+            <span>{{ method.name }}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="credit-card-form" *ngIf="selectedPayment === 'creditCard'">
+        <div class="form-group">
+          <label>Numero carta</label>
+          <input type="text" [(ngModel)]="paymentData.cardNumber" placeholder="1234 5678 9012 3456">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Scadenza</label>
+            <input type="text" [(ngModel)]="paymentData.expiry" placeholder="MM/AA">
+          </div>
+          <div class="form-group">
+            <label>CVV</label>
+            <input type="text" [(ngModel)]="paymentData.cvv" placeholder="123">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nome sulla carta</label>
+          <input type="text" [(ngModel)]="paymentData.cardName" placeholder="Come appare sulla carta">
+        </div>
+      </div>
+  
+      <div class="payment-summary">
+        <div class="summary-row">
+          <span>Camera</span>
+          <span>{{ selectedRoom.type }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Notti</span>
+          <span>{{ bookingData.nights }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Prezzo camera</span>
+          <span>{{ selectedRoom.price | currency:'EUR':'symbol':'1.0-0' }} x {{ bookingData.nights }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Tasse</span>
+          <span>{{ bookingData.taxes | currency:'EUR':'symbol':'1.0-0' }}</span>
+        </div>
+        <div class="summary-row total">
+          <span>Totale</span>
+          <span>{{ bookingData.totalPrice | currency:'EUR':'symbol':'1.0-0' }}</span>
+        </div>
+      </div>
+  
+      <div class="terms-checkbox">
+        <input type="checkbox" id="terms" [(ngModel)]="acceptTerms">
+        <label for="terms">Accetto i <a href="#">Termini e condizioni</a> e l'<a href="#">Informativa sulla privacy</a></label>
+      </div>
+  
+      <div class="action-buttons">
+        <button class="btn-back" (click)="prevStep()">Indietro</button>
+        <button class="btn-confirm" (click)="nextStep()" [disabled]="!selectedPayment || (selectedPayment === 'creditCard' && (!paymentData.cardNumber || !paymentData.expiry || !paymentData.cvv || !paymentData.cardName)) || !acceptTerms">
+          Conferma prenotazione
+        </button>
+      </div>
+    </div>
+  
+    <!-- Step 4: Conferma -->
+    <div class="booking-step-content confirmation" *ngIf="currentStep === 4">
+      <div class="confirmation-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Prenotazione confermata!</h2>
+      <p>Abbiamo inviato i dettagli della prenotazione a <strong>{{ bookingData.guestEmail }}</strong></p>
+  
+      <div class="confirmation-details">
+        <div class="detail-card">
+          <h3>Codice prenotazione</h3>
+          <div class="booking-code">{{ bookingData.bookingCode }}</div>
+        </div>
+        <div class="detail-card">
+          <h3>Riepilogo</h3>
+          <div class="summary-row">
+            <span>Hotel</span>
+            <span>{{ hotel.name }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Camera</span>
+            <span>{{ selectedRoom.type }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Check-in</span>
+            <span>{{ bookingData.checkIn | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Check-out</span>
+            <span>{{ bookingData.checkOut | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Totale pagato</span>
+            <span>{{ bookingData.totalPrice | currency:'EUR':'symbol':'1.0-0' }}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="confirmation-actions">
+        <button class="btn-print" (click)="printConfirmation()">
+          <i class="fas fa-print"></i> Stampa conferma
+        </button>
+        <button class="btn-dashboard" (click)="goToDashboard()">
+          Vai alla dashboard
+        </button>
+      </div>
+    </div>
+  </div>

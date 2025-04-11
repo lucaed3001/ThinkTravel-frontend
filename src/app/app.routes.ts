@@ -14,6 +14,7 @@ import { UserExploreComponent } from './user-explore/user-explore.component';
 import { HotelPageComponent } from './hotel-page/hotel-page.component';
 import { DestinationPageComponent } from './destination-page/destination-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PrenotazionePageComponent } from './prenotazione-page/prenotazione-page.component';
 export const routes: Routes = [
   {
     path: '',
@@ -62,6 +63,10 @@ component:HotelPageComponent,
 {
   path:'userProfile',
 component:UserProfileComponent,
+},
+{
+  path:'prenotazioni',
+component:PrenotazionePageComponent,
 },
 ];
 @NgModule({

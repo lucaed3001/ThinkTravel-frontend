@@ -42,12 +42,14 @@
       <h2>SEARCH RESULTS FOR "{{ searchQuery }}"</h2>
       <div class="list-group">
           <div *ngFor="let city of searchResults" class="list-group-item">
+            <div (click)="addPrenotation(city.name,city.address)">
               <img [src]="city.photoUrl" [alt]="city.name" />
-              <div (click)="addPrenotation()">
-                  <h5>{{ city.name }}</h5>
+              <div  >
+                  <h5 >{{ city.name }}</h5>
                   <span>{{ city.address }}</span>
                   <p>{{ city.description }}</p>
               </div>
+            </div>
           </div>
       </div>
   </div>
