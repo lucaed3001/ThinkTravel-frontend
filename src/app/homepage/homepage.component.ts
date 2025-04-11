@@ -19,6 +19,8 @@ export class HomepageComponent {
   submitted: boolean = false;
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
+  localStorage.removeItem('userData');
+  console.log(localStorage);
   try {
 
     const responseCinque=await this.functionApi.getFiveCities(5);

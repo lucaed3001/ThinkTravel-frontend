@@ -171,5 +171,14 @@ async returnToHome()
 
 }
 
+addPrenotation():void{
+  console.log(localStorage)
+  if(localStorage.getItem("userData")!=null){
+    this.router.navigate(['/']);
+  }
+  else{
+    alert("You have to login to book a hotel");
+  }
+}
 
 }
