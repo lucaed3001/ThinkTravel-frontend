@@ -12,6 +12,7 @@ export class PrenotazionePageComponent implements OnInit {
 
   name=localStorage.getItem("hotelName");
   address=localStorage.getItem("hotelAddress");
+  url=localStorage.getItem("hotelUrl");
   currentStep: number = 1;
   today: string = new Date().toISOString().split('T')[0];
   selectedRoom: any = null;
