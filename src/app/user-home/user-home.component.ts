@@ -105,6 +105,7 @@ private mapCities(cities: any[]): any[] {
     localStorage.setItem('searchCity', this.searchQuery.trim());
     localStorage.setItem('type',"user");
     // Naviga alla pagina "searchDest"
+    console.log(localStorage.getItem('type'))
     this.router.navigate(['/searchDest']);
   }
 
