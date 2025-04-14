@@ -1,199 +1,155 @@
 
-:root {
-    --primary: #2563eb;
-    --primary-light: #3b82f6;
-    --primary-dark: #1d4ed8;
-    --white: #ffffff;
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-400: #9ca3af;
-    --gray-600: #4b5563;
-    --gray-900: #111827;
-    --radius-lg: 24px;
-    --radius-md: 16px;
-    --radius-sm: 12px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--white);
-    color: var(--gray-900);
-    line-height: 1.5;
-}
-
-.login-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-}
-
-/* Photo Gallery Section - Nuova Layout */
-.photo-gallery {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: var(--gray-50);
-    overflow: hidden;
+.full-screen {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 
 
-
-.bottom-photo {
-    height: 95vh; /* Altezza maggiore per la foto inferiore */
-}
-
-.photo-frame {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-}
-
-.photo-frame:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
-.photo-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.photo-frame:hover img {
-    transform: scale(1.03);
-}
-
-.photo-frame::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
-    opacity: 0;
-    transition: var(--transition);
-}
-
-.photo-frame:hover::after {
-    opacity: 1;
-}
-
-/* Form Section */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-    max-width: 700px;
-    margin: 0 auto;
-    width: 100%;
+.left-panel {
+  width: 50%;
+  background: url('https://images.pexels.com/photos/29319307/pexels-photo-29319307/free-photo-of-facciata-della-basilica-di-san-pietro-in-citta-del-vaticano.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  padding: 20px;
 }
 
 
-.header h1 {
-    font-size: 35px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--gray-900);
-    text-transform: uppercase;
-    text-align: center;
+.right-panel {
+  width: 50%;
+  background-color: #fff;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
-.header p {
-    font-size: 15px;
-    color: var(--gray-600);
-    margin-bottom: 32px;
-    text-align: center;
+.plane-icon {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 24px;
+  color: #3b82f6;
 }
 
-.input-group {
-    margin-bottom: 20px;
+.right-panel h2 {
+  font-size: 36px;
+  color: #3b82f6;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.input-group label {
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    color: black;
-    margin-bottom: 8px;
+.right-panel p {
+  text-align: center;
+  color: #6b7280;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid grey;
-
-    font-size: 15px;
-    background-color: white;
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.input-group input:focus {
-    outline: none;
-    border-color: var(--primary-light);
-    box-shadow: 0 0 0 3px #5f94ea;
+.form-group input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.form-group i {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+.forgot {
+  text-align: right;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  color: #6b7280;
 }
 
 .btn {
-    width: 100%;
-    padding: 14px;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    margin-top: 8px;
+  width: 100%;
+  padding: 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.3s ease;
 }
 
 .btn:hover {
-    background-color:#0a61ec ;
-    box-shadow: var(--shadow-md);
+  background-color: #2563eb;
 }
 
-.signup-options {
-    margin-top: 32px;
-    text-align: center;
-    font-size: 14px;
-    color: var(--gray-600);
+.or {
+  text-align: center;
+  margin: 10px 0;
+  color: #6b7280;
 }
 
-.signup-link {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.signup-link:hover {
-    text-decoration: underline;
+.social-icons img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .login-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .photo-gallery {
-        display: none;
-    }
-    
-    .form-container {
-        padding: 40px 24px;
-    }
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+.register {
+  text-align: center;
+  font-size: 14px;
+}
+
+.register a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .full-screen {
+    flex-direction: column;
+  }
+
+  .left-panel, .right-panel {
+    width: 100%;
+    height: 50%;
+  }
+
+  .right-panel {
+    padding: 40px;
+  }
 }
