@@ -1,74 +1,61 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Register Travel</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travelista Tours Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
-  <div class="register-container">
-    <div class="background-image"></div>
+  <div class="full-screen">
+    <!-- Left: image + quote -->
+    <div class="left-panel">
 
-    <div class="form-card">
-      <div class="form-header">
-        <img src="img/logo.png" alt="Travel Logo" class="logo">
-        <h1>Join Our Travel Community</h1>
-        <p>Create your account to unlock exclusive travel deals and experiences</p>
-      </div>
-      
-      <form class="travel-form">
-        <div class="input-field">
-          <input type="text" placeholder=" " id="name">
-          <label for="name">Name</label>
-          <span class="material-icons-outlined">person</span>
+    </div>
+
+    <!-- Right: login -->
+    <div class="right-panel">
+      <div class="plane-icon"><a href="">✈️</a></div>
+      <h2>Join out travel community</h2>
+      <p>Create your account to unlock exclusive travel deals and experiences</p>
+      <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <i class="fas fa-person icon"></i>
+          <input type="text" placeholder="Enter your name" formControlName="name">
         </div>
-
-        <div class="input-field">
-          <input type="text" placeholder=" " id="surname">
-          <label for="surname">Surname</label>
-          <span class="material-icons-outlined">person</span>
+        <div class="form-group">
+          <i class="fas fa-person icon"></i>
+          <input type="text" placeholder="Enter your surname" formControlName="surname">
         </div>
-
-        <div class="input-field">
-          <input type="email" placeholder=" " id="email">
-          <label for="email">Email Address</label>
-          <span class="material-icons-outlined">email</span>
-        </div>
-
-        <div class="input-field">
-          <input type="password" placeholder=" " id="password">
-          <label for="password">Password</label>
-          <span class="material-icons-outlined">lock</span>
-        </div>
-
-        <div class="input-field select-field">
-          <select formControlName="country" id="country">
-            <option value="" disabled selected></option>
-            <option *ngFor="let country of countries" [value]="country._id">
-              {{ country.name }}
-            </option>
-          </select>
-          <label for="country">Country</label>
-          <span class="material-icons-outlined">public</span>
+        <div class="form-group">
+          <div class="input-group half-width">
+            <i class="fas fa-envelope icon"></i>
+            <input type="email" placeholder="Enter your email" formControlName="email">
           </div>
-      
-
-        <button type="submit" class="submit-btn">
-          <span>REGISTER</span>
-          <svg width="24" height="24" viewBox="0 0 24 24">
-            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" formControlName="password" required placeholder="Enter your password">
+            </div>
+          </div>
+          <div class="form-group">
+            <i class="fas fa-globe icon"></i>
+            <select formControlName="country">
+              <option value="" disabled selected>Select Your Country</option>
+              <option *ngFor="let country of countries" [value]="country._id">
+                {{ country.name }}
+              </option>
+            </select>
+          </div>
+        <button class="btn" [disabled]="loginForm.invalid">REGISTER</button>
       </form>
 
-      <div class="auth-redirect">
-        Already have an account? <a href="login">Sign In</a>
-      </div>
-      <div class="auth-redirect">
-       Return to <a href="">Home</a>
+      <div class="or">OR</div>
+
+      <div class="register">
+        Do you have already an account? <a href="login">Login</a>
       </div>
     </div>
   </div>
