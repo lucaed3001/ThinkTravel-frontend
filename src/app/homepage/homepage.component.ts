@@ -15,12 +15,14 @@ import { Router } from '@angular/router';
 export class HomepageComponent {
   cities: any[] = [];
   citys:any[]=[];
+  today: string='';
   searchQuery: string = '';
   submitted: boolean = false;
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
-  localStorage.removeItem('userData');
-  console.log(localStorage);
+  
+  const now = new Date();
+  this.today = now.toISOString().split('T')[0]; // formato 'YYYY-MM-DD'
   try {
 
     const responseCinque=await this.functionApi.getFiveCities(5);
@@ -86,22 +88,6 @@ search() {
   this.router.navigate(['/searchDest']);
 }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

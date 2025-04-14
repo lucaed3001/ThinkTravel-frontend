@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wanderlust - Travel Booking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <header>
@@ -36,14 +37,27 @@
       <h1>Discover Your Next Adventure</h1>
       <div class="search-container">
         <div class="search-box">
-          <input type="text" 
-                 class="search-input" 
-                 placeholder="Search destination..."
-                 [(ngModel)]="searchQuery">
-          <button class="search-button" (click)="search()">
-            <i class="fas fa-search"></i> SEARCH
-          </button>
-        </div>
+  <input id="destination" 
+         type="text" 
+         class="search-input" 
+         placeholder="Destination"
+         [(ngModel)]="searchQuery">
+  <input id="start-date" 
+         type="date" 
+         [min]="today"
+         class="search-input">
+  <input id="end-date" 
+         type="date" 
+         [min]="today"
+         class="search-input">
+
+  <input id="guests" 
+         type="number" min="0"
+         class="search-input"
+         placeholder="Guests">
+
+  <button class="search-button" (click)="search()">SEARCH</button>
+</div>
         <div *ngIf="searchQuery.trim().length === 0 && submitted" class="error-message">
           Please enter a destination to search
         </div>
