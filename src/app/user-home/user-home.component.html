@@ -49,84 +49,79 @@
 
 
   <!-- Hero Section -->
-  <div class="container">
-    <!-- Sezione Sinistra -->
-    <div class="left-section">
-        <h1>WELCOME BACK</h1>
-        <h2>{{ userName }}</h2>
-        <div class="form-group">
-          <label for="destination">Destination</label>
-          <input type="text" id="destination" placeholder="City or destination" [(ngModel)]="searchQuery" >
-      </div>
-      <div
-  *ngIf="searchQuery.trim().length === 0 && submitted"
-  style="color: red; font-size: 1em;padding-bottom: 15px;"
->
-  Inserisci almeno un carattere per effettuare la ricerca.
-</div>
-      <button class="button"  (click)="search()" >Search</button>
+<!-- Hero Section Moderna -->
+<div class="hero-container">
+  <div class="hero-content">
+    <div class="welcome-text">
+      <h1 class="greeting">WELCOME BACK</h1>
+      <h2 class="username">{{ userName }}</h2>
     </div>
-    <div class="right-section"></div>
-    </div>
-
-
-    <h2 id="h2MostRecommended">MOST RECOMENDED</h2>
-
-    <div class="citycontainer">
-      <div class="list-group">
-        <div *ngFor="let city of cities" class="list-group-item">
-          <!-- Immagine della città -->
-          <img [src]="city.photos" [alt]="city.name" />
-
-          <div>
-            <!-- Nome città e paese -->
-            <h5>{{ city.name }}</h5>
-            <span>{{ city.country.name }} {{ city.country.flag }}</span>
-
-            <!-- Descrizione della città -->
-            <p>{{ city.description }}</p>
-
-            <!-- Informazioni aggiuntive -->
-
-          </div>
+    
+    <div class="search-container">
+      <div class="form-group">
+        <label for="destination">Where to next?</label>
+        <div class="input-wrapper">
+          <input type="text" id="destination" placeholder="Insert a city" [(ngModel)]="searchQuery">
+          <button class="search-btn" (click)="search()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
         </div>
       </div>
-    </div>
-<!--
-<div class="yourcountrycontainer">
-<h2>POPULAR DESTINATIONS</h2>
-  <div class="list-group">
-    <div class="list-group-item">
-      <img src="img/st.Peter.jpg" alt="Vatican City" />
-      <div>
-        <h5>St. Peter's Basilica</h5>
-        <span>Rome, Italy</span>
-      </div>
-    </div>
-    <div class="list-group-item">
-      <img src="img/SidneyOperaHouse.jpg" alt="SidneyOperaHouse" />
-      <div>
-        <h5>Sidney Opera House </h5>
-        <span>Sidney, Australia</span>
-      </div>
-    </div>
-    <div class="list-group-item">
-      <img src="img/WinterPalace.jpg" alt="WinterPalace" />
-      <div>
-        <h5>Winter Palace</h5>
-        <span>Moscow, Russia</span>
-      </div>
-    </div>
-    <div class="list-group-item">
-      <img src="img/TajMahal.jpg" alt="TajMahal" />
-      <div>
-        <h5>Taj Mahal</h5>
-        <span>Agra, India</span>
+      
+      <div *ngIf="searchQuery.trim().length === 0 && submitted" class="error-message">
+        Please enter at least one character to search.
       </div>
     </div>
   </div>
+  
+  <div class="hero-image">
+    <div class="image-overlay"></div>
+  </div>
 </div>
--->
 
+  <!--End Hero Section-->
+<!-- In your country-->
+<section class="recommended-section">
+  <div class="section-header">
+    <h2 class="section-title">MOST RECOMMENDED</h2>
+    <p class="section-subtitle">Discover the top travel destinations in your country</p>
+  </div>
+
+  <div class="cities-grid">
+    <div *ngFor="let city of cities" class="city-card">
+      <div class="card-image">
+        <img [src]="city.photos" [alt]="city.name" class="city-image" />
+        <div class="image-overlay"></div>
+        <span class="rating-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="gold" stroke="gold" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          TOP RATED
+        </span>
+      </div>
+      
+      <div class="card-content">
+        <div class="location-info">
+          <h3 class="city-name">{{ city.name }}</h3>
+          <div class="country">
+            <span class="flag">{{ city.country.flag }}</span>
+            <span class="country-name">{{ city.country.name }}</span>
+          </div>
+        </div>
+        
+        <p class="city-description">{{ city.description }}</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--End in your country-->
+
+<footer>
 <app-footer></app-footer>
+</footer>
 
