@@ -65,7 +65,9 @@
     </div>
   </section>
 
-  <h2 class="section-title">Popular Destinations</h2>
+  <div class="section-header">
+    <h2 class="section-title">MOST RECOMMENDED</h2>
+    </div>
   <div class="destinations-grid">
     <div *ngFor="let cit of citys" class="destination-card">
       <img [src]="cit.photos" [alt]="cit.name">
@@ -73,7 +75,9 @@
     </div>
   </div>
 
+  <div class="section-header">
   <h2 class="section-title">Most Recommended</h2>
+  </div>
   <div class="recommended-grid">
     <div *ngFor="let city of cities" class="recommended-card">
       <div class="card-image">

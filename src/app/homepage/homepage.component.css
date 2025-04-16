@@ -71,7 +71,8 @@ body {
 
 .signup {
   padding: 12px 25px;
-  background:#007bff;
+  /*background:#007bff;*/
+  background: linear-gradient(90deg, #3a7bd5 0%, #03a4c8 100%);
   color: white;
   border: none;
   border-radius: 20px;
@@ -163,7 +164,7 @@ body {
 
 .search-button {
   padding: 1rem 2rem;
-  background: #007bff;
+  background: linear-gradient(90deg, #3a7bd5 0%, #03a4c8 100%);
   color: white;
   border: none;
   cursor: pointer;
@@ -174,7 +175,7 @@ body {
 }
 
 .search-button:hover {
-  background: #0056b3;
+  background: linear-gradient(90deg, #29589a 0%, #0995b5 100%);
 }
 
 
@@ -197,14 +198,38 @@ body {
 }
 
 /* Popular Destinations */
-.section-title {
+.section-header {
   text-align: center;
-  padding: 5rem 0 3rem;
-  font-size: 40px;
-  font-weight: bold;
-  color: var(--primary);
-  text-transform: uppercase;
+  margin-bottom: 40px;
 }
+
+.section-title {
+  font-size: 40px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #3a7bd5 0%, #02b0d6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 15px;
+  position: relative;
+  text-transform: uppercase;
+  margin:20px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3a7bd5 0%, #00d2ff 100%);
+  border-radius: 2px;
+}
+
 
 .destinations-grid {
   display: grid;
