@@ -1,30 +1,66 @@
+<header class="container-fluid px-0">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">  
+    <div class="container-fluid">
+      <div class="logo">
+        <img src="img/logo.png" alt="logo">
+    </div>
+     
 
-<header>
-  <div class="logo">
-      <img src="img/logo.png" alt="Thynk Travel Logo">
-
-  </div>
-  <nav>
-      <a routerLink="/">HOME</a>
-      <a href="#">RESERVATION</a>
-      <a href="#">PLAN</a>
-      <a href="/calendar">CALENDAR</a>
-      <a (click)="explore()">EXPLORE</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <ul class="navbar-nav mx-auto"> -->
+          <div class="w-100 d-flex justify-content-center">
+            <ul class="navbar-nav d-flex flex-row gap-4">
+          <li class="nav-item">
+            <a class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']" >Reservation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']" >Plan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']" >Calendar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"   (click)="explore()">Explore</a>
+          </li>
+        </ul>
+        </div>
+      </div>
+    </div>
   </nav>
-  <button class="logout-button" routerLink="/">LOGOUT</button>
 </header>
 
-
-
   <!-- Hero Section -->
-  <div class="container">
-    <!-- Sezione Sinistra -->
-    <div class="left-section">
-        <h1>WELCOME BACK</h1>
-        <h2>{{ orgName }}</h2>
+  <!-- Modern Hero Section -->
+<section class="hero-container">
+  <div class="hero-content">
+    <div class="welcome-message">
+      <h1 class="hero-title">WELCOME BACK</h1>
+      <h2 class="org-name">{{ orgName }}</h2>
     </div>
-    <div class="right-section"></div>
+    
+    <div class="cta-buttons">
+      <button class="primary-btn">
+       <a href="Addhotel"> Add an hotel </a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+      </button>
     </div>
+  </div>
+  
+  <div class="hero-image">
+    <div class="image-overlay"></div>
+    <div class="floating-elements">
+  
+  
+    </div>
+  </div>
+</section>
+ 
+  <!--End Hero Section-->
 
 
 
