@@ -27,6 +27,7 @@ export class UserHomeComponent{
 
   constructor(private fb: FormBuilder,private router: Router,private funzioniApiService:FunzioniApiService) {  }
   async ngOnInit() {
+    console.log(localStorage.getItem("type"))
     const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati
     if (userDataString) {
       const userData = JSON.parse(userDataString); // Converte in oggetto
@@ -80,6 +81,7 @@ private mapCities(cities: any[]): any[] {
 }
   logout() {
     localStorage.removeItem('userData'); // Rimuove i dati dell'utente dalla localStorage
+    console.log(localStorage.getItem("type"))
     const userData = localStorage.getItem('userData');
     if (!userData) {
       console.log("User data removed successfully!"); // Successo
