@@ -25,7 +25,9 @@ export class UserLoginComponent {
     if (this.loginForm.valid) {
       try {
         const { email, password } = this.loginForm.value;
-        const response = await this.loginApiService.login(email, password);
+        //const response = await this.loginApiService.login(email, password);
+        //prova nuova api
+        const response=await this.loginApiService.testToken(email, password);
 
         if (response.success) {
           console.log("Login avvenuto con successo");

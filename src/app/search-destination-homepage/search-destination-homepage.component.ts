@@ -24,7 +24,8 @@ async ngOnInit() {
 
   this.searchQuery = city || "";
 
-  if(!this.searchQuery){
+  // vecchio città default
+ /* if(!this.searchQuery){
   try {
     const response = await this.functionApi.getCities();
     console.log('Città recuperate:', response);
@@ -61,8 +62,50 @@ async ngOnInit() {
   localStorage.removeItem('searchCity');
   console.log("Rimosso searchCity dalla LocalStorage")
 }
-}
+*/
+//-------------------------
+//nuovo cittò default
 
+
+if(!this.searchQuery){
+  try {
+    const responseNew = await this.functionApi.getCityNew();
+    console.log("Nuove città: ", responseNew);
+  
+    this.defaultCities = await Promise.all(responseNew.map(async (city: any) => {
+      try {
+        const imageNames = await this.functionApi.getImgCity(city.id);
+    
+        const imageUrl = imageNames.length > 0
+          ? `http://localhost:8000/images/${imageNames[0]}`
+          : '';
+    
+        return {
+          ...city,
+          photoUrl: imageUrl
+        };
+      } catch (error) {
+        console.error(`Errore nel recupero immagine per ${city.name}:`, error);
+        return {
+          ...city,
+          photoUrl: ''
+        };
+      }
+    }));
+  
+  } catch (error) {
+    console.error('Errore durante il recupero delle città:', error);
+  }
+  
+}else {
+  this.searchDestination();
+  localStorage.removeItem('searchCity');
+  console.log("Rimosso searchCity dalla LocalStorage")
+}
+console.log("ciao "+this.defaultCities[1].name);
+
+//-----------------------------
+}
 
 async searchDestination() {
   if (!this.searchQuery) {

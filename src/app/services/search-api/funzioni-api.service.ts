@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class FunzioniApiService {
   private baseUrl:string = "http://localhost:8081";
   private urlCity = this.baseUrl + '/cities';
 
-  constructor() {}
+  constructor(private router:Router) {}
 
   async getCities(): Promise<
   {
@@ -43,6 +44,61 @@ export class FunzioniApiService {
     return [];
   }
 }
+
+//recupera città nuovo
+async getCityNew(): Promise<any> {
+
+  const token = localStorage.getItem('token');
+console.log(token);
+  try {
+    const response = await fetch('http://localhost:8000/locations/cities/', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Token non valido o errore nella richiesta');
+    }
+
+    const citta = await response.json();
+    console.log(citta);
+    return citta;
+
+  } catch (error) {
+    console.error('Errore nel recupero dati utente:', error);
+    return null;
+  }
+}
+//recupero immagine citta by id
+async getImgCity(id:number): Promise<any> {
+  const token = localStorage.getItem('token');
+console.log(token);
+  try {
+    const response = await fetch('http://localhost:8000/locations/cities/images/'+id, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Token non valido o errore nella richiesta');
+    }
+
+    const img = await response.json();
+    console.log(img);
+    return img;
+
+  } catch (error) {
+    console.error('Errore nel recupero dati utente:', error);
+    return null;
+  }
+}
+
+
+
 async getFiveCities(c:number): Promise<
   {
     _id: string;
@@ -97,6 +153,56 @@ async searchAnnoucement(s:string): Promise<any[]>{
   } catch (error) {
     console.error('Errore nel recupero delle città:', error);
     return [];
+  }
+}
+
+
+// PROVA PRENDERE MIEI DATI ---------------------
+async getUserData(): Promise<any> {
+  const token = localStorage.getItem('token');
+console.log(token);
+  try {
+    const response = await fetch('http://localhost:8000/auth/user/me', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Token non valido o errore nella richiesta');
+    }
+
+    const userData = await response.json();
+    console.log(userData);
+    return userData;
+
+  } catch (error) {
+    console.error('Errore nel recupero dati utente:', error);
+    return null;
+  }
+}
+
+//prova per controllo token 
+isTokenValid(): boolean {
+  const token = localStorage.getItem('token');
+  if (!token) return false;
+
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const exp = payload.exp;
+    const now = Math.floor(Date.now() / 1000);
+    return exp > now;
+  } catch (err) {
+    return false;
+  }
+}
+
+ensureAuthenticated(): void {
+  if (!this.isTokenValid()) {
+    localStorage.removeItem('token');
+    //localStorage.removeItem('userData');
+    this.router.navigate(['/login']);
   }
 }
 }

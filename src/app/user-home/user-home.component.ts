@@ -1,7 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
 import {RouterOutlet, RouterLink} from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators,FormBuilder } from '@angular/forms';
-import {  OnInit } from '@angular/core';
+import {  OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { FunzioniApiService } from '../services/search-api/funzioni-api.service';
@@ -24,14 +24,32 @@ export class UserHomeComponent{
 
   @ViewChild('profileSidebar') profileSidebar!: SideBarComponent;
   isCollapsed = true;
+  private tokenCheckInterval: any;
 
   constructor(private fb: FormBuilder,private router: Router,private funzioniApiService:FunzioniApiService) {  }
+
   async ngOnInit() {
+
+//controllo token
+// Controllo immediato all'avvio
+this.funzioniApiService.ensureAuthenticated();
+// Controllo ogni 30 secondi
+this.tokenCheckInterval = setInterval(() => {
+  this.funzioniApiService.ensureAuthenticated();
+}, 30000); // 30000 ms = 30 secondi
+
+//------------
+
     console.log(localStorage.getItem("type"))
-    const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati
-    if (userDataString) {
-      const userData = JSON.parse(userDataString); // Converte in oggetto
-      this.userName = userData.name; // Estrae il campo "name"
+
+    const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati --> posso poi toglierlo
+
+    const provaMeData=await this.funzioniApiService.getUserData();//recupero dati utente
+    console.log("prova me: "+provaMeData.name);
+    
+    if (provaMeData) {
+      //const userData = JSON.parse(userDataString); // Converte in oggetto
+      this.userName = provaMeData.name; // Estrae il campo "name"
     }
     try {
 
@@ -111,4 +129,10 @@ private mapCities(cities: any[]): any[] {
     this.router.navigate(['/searchDest']);
   }
 
+//pulisce l'intervallo 
+ngOnDestroy(): void {
+  if (this.tokenCheckInterval) {
+    clearInterval(this.tokenCheckInterval);
+  }
+}
 }

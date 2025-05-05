@@ -20,12 +20,16 @@ export class UserExploreComponent {
   searchResults: any[] = []; // Risultati della ricerca
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
+
   const city=localStorage.getItem('searchCity');
   this.searchQuery = city || "";
   if(!this.searchQuery){
   try {
     const response = await this.functionApi.getCities();
-    console.log('Città recuperate:', response);
+    console.log('Città vecchie recuperate:', response);
+//prova nuovo getcity
+    const responseNew= await this.functionApi.getCityNew();
+    console.log("nuove città: ", responseNew);
 
     // Mappa le città con il controllo sul base64 e prendendo solo la prima immagine
     this.defaultCities = response.map((city: any) => {
