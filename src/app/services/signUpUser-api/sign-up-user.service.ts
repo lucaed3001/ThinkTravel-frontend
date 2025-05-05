@@ -136,4 +136,32 @@ console.log(JSON.stringify(userData))
       return [];
     }
   }
+
+  //-------------------------------------------
+  // get countriesNew
+  async getCountriesNew(): Promise<any> {
+
+    const token = localStorage.getItem('token');
+  console.log(token);
+    try {
+      const response = await fetch('http://localhost:8000/locations/countries/', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error('Token non valido o errore nella richiesta');
+      }
+  
+      const countries = await response.json();
+      console.log(countries);
+      return countries;
+  
+    } catch (error) {
+      console.error('Errore nel recupero dati utente:', error);
+      return null;
+    }
+  }
 }

@@ -20,6 +20,7 @@ export class UserSignUpComponent {
 
   errorMessage = ''; // Per gestire errori
   successMessage = ''; // Per gestire successo
+  
   // probabile variabile per capire tipo registrazione
   constructor(private fb: FormBuilder, private signUpUserService: SignUpUserService,private router: Router) {
     // Crea il form con controlli e validatori
@@ -33,7 +34,9 @@ export class UserSignUpComponent {
   }
   //prende le country ---------------  DEVO CONTROLLARE
   async ngOnInit() {
-    try {
+   
+   //get country vecchio
+    /* try {
       // Ottieni i paesi tramite il servizio
       this.countries = await this.signUpUserService.getCountries();
       console.log(this.countries);
@@ -45,7 +48,24 @@ export class UserSignUpComponent {
       }
     } catch (error) {
       console.error('Errore durante il recupero dei paesi:', error);
-    }
+    }*/
+
+      //country nuovooo
+      try {
+        // Ottieni i paesi tramite il servizio
+        this.countries = await this.signUpUserService.getCountriesNew();
+        //console.log("prova "+this.countries);
+        // imposto il primo paese come valore di default
+        if (this.countries.length > 0) {
+          this.loginForm.patchValue({
+            country: this.countries[0]._id
+          });
+        }
+      } catch (error) {
+        console.error('Errore durante il recupero dei paesi:', error);
+      }
+
+  //--------------
   }
   //inizio prova registrazione user
   async onSubmit() {

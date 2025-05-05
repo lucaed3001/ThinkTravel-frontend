@@ -35,8 +35,8 @@ export class OrganizatorSignUpComponent {
   async ngOnInit() {
     try {
       // Ottieni i paesi tramite il servizio
-      this.countries = await this.signUpUserService.getCountries();
-      console.log(this.countries);
+      this.countries = await this.signUpUserService.getCountriesNew();
+      //console.log("prova "+this.countries);
       // imposto il primo paese come valore di default
       if (this.countries.length > 0) {
         this.loginForm.patchValue({

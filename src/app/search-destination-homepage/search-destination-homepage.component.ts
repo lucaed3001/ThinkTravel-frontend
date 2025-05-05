@@ -73,6 +73,7 @@ if(!this.searchQuery){
     console.log("Nuove città: ", responseNew);
   
     this.defaultCities = await Promise.all(responseNew.map(async (city: any) => {
+      console.log('CITY:', city);
       try {
         const imageNames = await this.functionApi.getImgCity(city.id);
     

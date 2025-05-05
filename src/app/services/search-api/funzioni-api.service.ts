@@ -88,7 +88,7 @@ console.log(token);
     }
 
     const img = await response.json();
-    console.log(img);
+    //console.log(img);
     return img;
 
   } catch (error) {
