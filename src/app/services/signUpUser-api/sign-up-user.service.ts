@@ -20,10 +20,12 @@ export class SignUpUserService {
     name: string,
     surname: string
   ): Promise<boolean> {
-    const userData = { email, password, country, name, surname };
+    const countryAsNumber = parseInt(country);
+    const userData = { email, password, countryAsNumber, name, surname };
 console.log(JSON.stringify(userData))
+
     try {
-      const response = await fetch(this.apiUrl, {
+      const response = await fetch("http://localhost:8000/auth/user/register", {//this.apiUrl
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

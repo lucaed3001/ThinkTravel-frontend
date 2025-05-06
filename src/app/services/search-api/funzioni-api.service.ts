@@ -199,6 +199,7 @@ isTokenValid(): boolean {
 }
 
 ensureAuthenticated(): void {
+  console.log("ciao");
   if (!this.isTokenValid()) {
     localStorage.removeItem('token');
     //localStorage.removeItem('userData');

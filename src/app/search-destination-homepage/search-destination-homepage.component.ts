@@ -78,7 +78,7 @@ if(!this.searchQuery){
         const imageNames = await this.functionApi.getImgCity(city.id);
     
         const imageUrl = imageNames.length > 0
-          ? `http://localhost:8000/images/${imageNames[0]}`
+          ? `http://localhost:8000/images/cities/${imageNames[0]}`
           : '';
     
         return {

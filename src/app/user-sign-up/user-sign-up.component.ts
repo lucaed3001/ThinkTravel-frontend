@@ -23,6 +23,7 @@ export class UserSignUpComponent {
   
   // probabile variabile per capire tipo registrazione
   constructor(private fb: FormBuilder, private signUpUserService: SignUpUserService,private router: Router) {
+    
     // Crea il form con controlli e validatori
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

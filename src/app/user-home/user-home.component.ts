@@ -29,17 +29,6 @@ export class UserHomeComponent{
   constructor(private fb: FormBuilder,private router: Router,private funzioniApiService:FunzioniApiService) {  }
 
   async ngOnInit() {
-
-//controllo token
-// Controllo immediato all'avvio
-this.funzioniApiService.ensureAuthenticated();
-// Controllo ogni 30 secondi
-this.tokenCheckInterval = setInterval(() => {
-  this.funzioniApiService.ensureAuthenticated();
-}, 30000); // 30000 ms = 30 secondi
-
-//------------
-
     console.log(localStorage.getItem("type"))
 
     const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati --> posso poi toglierlo
@@ -129,6 +118,11 @@ private mapCities(cities: any[]): any[] {
     this.router.navigate(['/searchDest']);
   }
 
+  //controllo token valido
+  controlloToken(){
+    this.funzioniApiService.ensureAuthenticated();
+    
+  }
 //pulisce l'intervallo 
 ngOnDestroy(): void {
   if (this.tokenCheckInterval) {
