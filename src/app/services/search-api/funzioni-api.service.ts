@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class FunzioniApiService {
-  private baseUrl:string = "http://localhost:8081";
+  private baseUrl:string = "http://localhost:8000";
+  private baseUrlNew:string = "http://thinktravel.ddns.net:8000";
   private urlCity = this.baseUrl + '/cities';
 
   constructor(private router:Router) {}
@@ -51,7 +52,7 @@ async getCityNew(): Promise<any> {
   const token = localStorage.getItem('token');
 console.log(token);
   try {
-    const response = await fetch('http://localhost:8000/locations/cities/', {
+    const response = await fetch(this.baseUrlNew+'/locations/cities/', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -76,7 +77,7 @@ async getImgCity(id:number): Promise<any> {
   const token = localStorage.getItem('token');
 console.log(token);
   try {
-    const response = await fetch('http://localhost:8000/locations/cities/images/'+id, {
+    const response = await fetch(this.baseUrlNew+'/locations/cities/images/'+id, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -133,7 +134,32 @@ async getFiveCities(c:number): Promise<
     return [];
   }
 }
-
+//random city nuovo
+async getRandomCities(c:number): Promise<
+  {
+    _id: string;
+    name: string;
+    country: {
+      name: string;
+      id: string;
+    };
+    description: string;
+  }[]
+> {
+  try {
+    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response);
+    return await response.json();
+  } catch (error) {
+    console.error('Errore nel recupero delle città:', error);
+    return [];
+  }
+}
 
 async searchAnnoucement(s:string): Promise<any[]>{
   try {
@@ -162,7 +188,7 @@ async getUserData(): Promise<any> {
   const token = localStorage.getItem('token');
 console.log(token);
   try {
-    const response = await fetch('http://localhost:8000/auth/user/me', {
+    const response = await fetch(this.baseUrlNew+'/auth/user/me', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`

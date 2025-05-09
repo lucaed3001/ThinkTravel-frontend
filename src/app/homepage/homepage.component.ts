@@ -27,6 +27,7 @@ async ngOnInit() {
 
     const responseCinque=await this.functionApi.getFiveCities(5);
     const responseQuattro=await this.functionApi.getFiveCities(4);
+
     console.log('5 Città recuperate:', responseCinque);
 // Mappatura delle liste ricevute dal server
 this.citys = this.mapCities(responseCinque); // Per "Popular Destinations"
@@ -39,8 +40,37 @@ console.log('Most Recommended:', this.cities);
   }
   console.log(this.citys);
 console.log(this.cities);
-}
 
+
+
+// nuvoo prendi 5 citta random
+
+const responseNew = await this.functionApi.getRandomCities(5);
+console.log("città random: ", responseNew);
+
+this.citys = await Promise.all(responseNew.map(async (citta: any) => {
+ // console.log('CITTA :', citta.id);
+  try {
+    const imageNames = await this.functionApi.getImgCity(citta.id);
+console.log(imageNames)
+    const imageUrl = imageNames.length > 0
+      ? `http://localhost:8000/images/cities/${imageNames[0]}`
+      : '';
+
+    return {
+      ...citta,
+      photoUrl: imageUrl
+    };
+  } catch (error) {
+    console.error(`Errore nel recupero immagine per ${citta.name}:`, error);
+    return {
+      ...citta,
+      photoUrl: ''
+    };
+  }
+}));
+}
+//------------------------
 // Metodo per mappare le città e gestire il Base64
 private mapCities(cities: any[]): any[] {
   return cities.map((city: any) => {

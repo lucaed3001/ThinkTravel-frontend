@@ -18,6 +18,7 @@ export class SearchDestinationHomepageComponent {
   searchActive: boolean = false; // Variabile di stato per mostrare/nascondere i contenitori
   defaultCities: any[] = []; // Città di default (esplora destinazioni)
   searchResults: any[] = []; // Risultati della ricerca
+  urlDNS:string = "http://thinktravel.ddns.net:8000";
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
   const city=localStorage.getItem('searchCity');
@@ -78,7 +79,7 @@ if(!this.searchQuery){
         const imageNames = await this.functionApi.getImgCity(city.id);
     
         const imageUrl = imageNames.length > 0
-          ? `http://localhost:8000/images/cities/${imageNames[0]}`
+          ? this.urlDNS+`/images/cities/${imageNames[0]}`
           : '';
     
         return {

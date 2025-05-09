@@ -6,7 +6,7 @@ import * as crypto from 'crypto-js';
 export class LoginApiService {
 
   private baseUrl:string = "http://localhost:8081";
-  private baseUrlNew:string = "http://localhost:8000";
+  private baseUrlNew:string = "http://thinktravel.ddns.net:8000";
 
   private usrUrlNew=this.baseUrlNew+'/auth/user/login'
   private userUrl = this.baseUrl+'/user/login';
@@ -101,10 +101,11 @@ export class LoginApiService {
       return {success:false};
     }
   }
-  ///////// prova---------------
-  async testToken(email: string, password: string): Promise<{ success: boolean, userType?: string }> {
-    const hashedPassword = crypto.SHA512(password).toString();
 
+
+  ///////// prova--------------- login
+  async newLogin(email: string, password: string): Promise<{ success: boolean, userType?: string }> {
+    const hashedPassword = crypto.SHA512(password).toString();
     //body
     const body = new URLSearchParams();
   body.append('grant_type', 'password');
