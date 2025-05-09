@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { FunzioniApiService } from '../services/search-api/funzioni-api.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -14,12 +15,13 @@ export class SideBarComponent {
   user: any = { name: 'Nome Utente', email: 'utente@email.com', image: '' };
    userData:any;
 
+constructor(private funzioniApiService:FunzioniApiService) {  }
   async ngOnInit() {
-  const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati
-  console.log(userDataString);
-  if (userDataString) {
-    this.userData = JSON.parse(userDataString); // Converte in oggetto
-  }
+
+    //recupero dati utente 
+  this.userData = await this.funzioniApiService.getUserData();
+  console.log("dati utente side bar "+this.userData);
+
 }
 
   openSidebar() {
