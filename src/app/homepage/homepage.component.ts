@@ -21,9 +21,9 @@ const LANGUAGES: Language[] = [
   { id: 'nl', name: 'Nederlands', flagUrl: 'https://flagcdn.com/w20/nl.png' },
   { id: 'eg', name: 'مصري', flagUrl: 'https://flagcdn.com/w20/eg.png' },
   { id: 'in', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
-  { id: 'pl', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
-  { id: 'sa', name: 'عربي', flagUrl: 'https://flagcdn.com/w20/sa.png' },
-  { id: 'cn', name: '中國人', flagUrl: 'https://flagcdn.com/w20/cn.png' },
+  { id: 'po', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
+  { id: 'ar', name: 'عربي', flagUrl: 'https://flagcdn.com/w20/sa.png' },
+  { id: 'zh-cn', name: '中國人', flagUrl: 'https://flagcdn.com/w20/cn.png' },
 ];
 
 @Component({
