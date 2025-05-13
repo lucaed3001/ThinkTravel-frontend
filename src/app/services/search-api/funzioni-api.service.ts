@@ -9,7 +9,7 @@ export class FunzioniApiService {
   private baseUrlNew:string = "http://thinktravel.ddns.net:8000";
   private urlCity = this.baseUrl + '/cities';
 
-  //private lang=localStorage.getItem("");
+  private lang=localStorage.getItem("lang");
 
   constructor(private router:Router) {}
 
@@ -53,8 +53,9 @@ async getCityNew(): Promise<any> {
 
   const token = localStorage.getItem('token');
 console.log(token);
+console.log(this.lang);
   try {
-    const response = await fetch(this.baseUrlNew+'/locations/cities/', {
+    const response = await fetch(this.baseUrlNew+'/locations/cities/?lang='+this.lang, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -150,7 +151,7 @@ async getRandomCities(c:number): Promise<
   }[]
 > {
   try {
-    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c, {
+    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

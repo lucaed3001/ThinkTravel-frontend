@@ -47,7 +47,11 @@ export class HomepageComponent {
   selectedLanguage: Language = this.languages[0]; // Imposta 'English' come predefinito
   isOpen = false;
 
-constructor( private functionApi: FunzioniApiService,private router: Router) {  }
+constructor( private functionApi: FunzioniApiService,private router: Router ) {
+  const savedLangId = localStorage.getItem('lang');
+    const langFromStorage = this.languages.find(lang => lang.id === savedLangId);
+    this.selectedLanguage = langFromStorage || this.languages[0]; // default: Italiano
+  }
 async ngOnInit() {
   
   const now = new Date();
@@ -152,6 +156,8 @@ search() {
   // Naviga alla pagina "searchDest"
   this.router.navigate(['/searchDest']);
 }
+
+
   // Metodi per il language selector
   toggleDropdown(): void {
     this.isOpen = !this.isOpen;}
@@ -159,6 +165,10 @@ search() {
       this.selectedLanguage = lang;
       this.isOpen = false;
       console.log('Lingua selezionata:', lang.id);
+      localStorage.setItem("lang",lang.id);
+      console.log(localStorage.getItem("lang"));
+
+      window.location.reload();
       // Qui puoi aggiungere la logica per cambiare lingua nell'app
     }
 }
