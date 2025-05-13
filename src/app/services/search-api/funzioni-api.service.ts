@@ -9,6 +9,8 @@ export class FunzioniApiService {
   private baseUrlNew:string = "http://thinktravel.ddns.net:8000";
   private urlCity = this.baseUrl + '/cities';
 
+  //private lang=localStorage.getItem("");
+
   constructor(private router:Router) {}
 
   async getCities(): Promise<
@@ -72,6 +74,7 @@ console.log(token);
     return null;
   }
 }
+
 //recupero immagine citta by id
 async getImgCity(id:number): Promise<any> {
   const token = localStorage.getItem('token');
@@ -160,6 +163,54 @@ async getRandomCities(c:number): Promise<
     return [];
   }
 }
+
+//hotel random
+
+async getRandomHotel(c:number): Promise<
+  {
+    id: number;
+    name: string;
+    address: string;
+    city: {
+      id: number;
+      name: string;
+      country: {
+        id: number;
+        name: string;
+      };
+      description: string;
+    };
+    description: string;
+    graduation: number;
+    organizer: {
+      id: number;
+      name: string;
+      address: string;
+      city: number;
+      phone: string;
+      email: string;
+      vat: string;
+      token: string;
+    };
+    star_number: number;
+  }[]
+> {
+  try {
+    const response = await fetch(this.baseUrlNew+"/locations/hotels/suggested/"+c, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response);
+    return await response.json();
+  } catch (error) {
+    console.error('Errore nel recupero delle città:', error);
+    return [];
+  }
+}
+
+
 
 async searchAnnoucement(s:string): Promise<any[]>{
   try {

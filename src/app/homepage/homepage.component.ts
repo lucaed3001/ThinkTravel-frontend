@@ -74,10 +74,15 @@ console.log(this.cities);
 
 // nuvoo prendi 5 citta random
 
-const responseNew = await this.functionApi.getRandomCities(5);
-console.log("città random: ", responseNew);
+const rndCities = await this.functionApi.getRandomCities(5);
+console.log("città random: ", rndCities);
 
-this.citys = await Promise.all(responseNew.map(async (citta: any) => {
+//random hotel
+const rndHotel = await this.functionApi.getRandomHotel(5);
+console.log("hotel random: ", rndHotel);
+
+
+this.citys = await Promise.all(rndCities.map(async (citta: any) => {
  // console.log('CITTA :', citta.id);
   try {
     const imageNames = await this.functionApi.getImgCity(citta.id);
@@ -99,6 +104,7 @@ console.log(imageNames)
   }
 }));
 }
+
 //------------------------
 // Metodo per mappare le città e gestire il Base64
 private mapCities(cities: any[]): any[] {

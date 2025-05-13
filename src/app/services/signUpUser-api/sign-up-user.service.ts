@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class SignUpUserService {
 
-  private baseUrl:string = "http://localhost:8081";
+  private baseUrl:string = "http://thinktravel.ddns.net:8000";
 
-  private apiUrl = this.baseUrl+'/user/register';
-  private apiUrlOrg = this.baseUrl+'/org/register';
-  private countriesApiUrl = this.baseUrl+'/countries';
+  private apiUrl = this.baseUrl+'/auth/user/register';
+  private apiUrlOrg = this.baseUrl+'/auth/org/register';
+  private countriesApiUrl = this.baseUrl+'/locations/countries';
 
   constructor() { }
 
@@ -21,22 +21,22 @@ export class SignUpUserService {
     surname: string
   ): Promise<boolean> {
     const countryAsNumber = parseInt(country);
-    const userData = { email, password, countryAsNumber, name, surname };
+  const userData = { 
+    "email":email,
+    "password": password,
+    "country": country,
+    "name": name,
+    "surname": surname };
+
 console.log(JSON.stringify(userData))
 
     try {
-      const response = await fetch("http://localhost:8000/auth/user/register", {//this.apiUrl
+      const response = await fetch(this.apiUrl, {//this.apiUrl
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({//(userData),
-        email,
-        password,
-        name,
-        surname,
-        country
-        }),
+        body: JSON.stringify(userData)
       });
 
       if (!response.ok) {
@@ -143,27 +143,25 @@ console.log(JSON.stringify(userData))
   // get countriesNew
   async getCountriesNew(): Promise<any> {
 
-    const token = localStorage.getItem('token');
-  console.log(token);
     try {
-      const response = await fetch('http://localhost:8000/locations/countries/', {
+      const response = await fetch(this.countriesApiUrl, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Content-Type': 'application/json',
         }
       });
-  
+      
       if (!response.ok) {
-        throw new Error('Token non valido o errore nella richiesta');
+        throw new Error(`Errore HTTP: ${response.status}`);
       }
-  
+      console.log(response);
       const countries = await response.json();
       console.log(countries);
       return countries;
   
-    } catch (error) {
-      console.error('Errore nel recupero dati utente:', error);
-      return null;
+    }  catch (error) {
+      console.error('Errore nel recupero dei paesi:', error);
+      return [];
     }
   }
 }
