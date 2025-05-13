@@ -5,12 +5,35 @@ import { FunzioniApiService } from '../services/search-api/funzioni-api.service'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
+interface Language {
+  id: string;
+  name: string;
+  flagUrl: string;
+}
+const LANGUAGES: Language[] = [
+  { id: 'en', name: 'English', flagUrl: 'https://flagcdn.com/w20/gb.png' },
+  { id: 'fr', name: 'Français', flagUrl: 'https://flagcdn.com/w20/fr.png' },
+  { id: 'it', name: 'Italiano', flagUrl: 'https://flagcdn.com/w20/it.png' },
+  { id: 'de', name: 'Deutsch', flagUrl: 'https://flagcdn.com/w20/de.png' },
+  { id: 'es', name: 'Español', flagUrl: 'https://flagcdn.com/w20/es.png' },
+  { id: 'hu', name: 'Magyar', flagUrl: 'https://flagcdn.com/w20/hu.png' },
+  { id: 'nl', name: 'Nederlands', flagUrl: 'https://flagcdn.com/w20/nl.png' },
+  { id: 'eg', name: 'مصري', flagUrl: 'https://flagcdn.com/w20/eg.png' },
+  { id: 'in', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
+  { id: 'pl', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
+  { id: 'sa', name: 'عربي', flagUrl: 'https://flagcdn.com/w20/sa.png' },
+  { id: 'cn', name: '中國人', flagUrl: 'https://flagcdn.com/w20/cn.png' },
+];
+
 @Component({
   selector: 'app-homepage',
   imports: [RouterOutlet, RouterLink,FooterComponent,CommonModule,FormsModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
+
+
 
 export class HomepageComponent {
   cities: any[] = [];
@@ -19,6 +42,10 @@ export class HomepageComponent {
   searchQuery: string = '';
   submitted: boolean = false;
   baseUrlNew:string = "http://thinktravel.ddns.net:8000";
+
+  languages = LANGUAGES;
+  selectedLanguage: Language = this.languages[0]; // Imposta 'English' come predefinito
+  isOpen = false;
 
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
@@ -125,6 +152,15 @@ search() {
   // Naviga alla pagina "searchDest"
   this.router.navigate(['/searchDest']);
 }
+  // Metodi per il language selector
+  toggleDropdown(): void {
+    this.isOpen = !this.isOpen;}
+    selectLanguage(lang: Language): void {
+      this.selectedLanguage = lang;
+      this.isOpen = false;
+      console.log('Lingua selezionata:', lang.id);
+      // Qui puoi aggiungere la logica per cambiare lingua nell'app
+    }
 }
 
 

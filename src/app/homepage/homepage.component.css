@@ -17,6 +17,80 @@ body {
   background-color: #f9f9f9;
   color: var(--dark);
 }
+/*LANGUAGE SELECTOR PART  */
+
+.language-selector {
+  width: 300px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative; /* Necessario per il menu a tendina */
+}
+
+/* Mostra le opzioni al passaggio del mouse */
+.language-selector:hover .options {
+  max-height: 600px; /* Altezza massima per mostrare tutto */
+}
+
+.options {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  z-index: 10; /* Assicura che il menu sia sopra altri elementi */
+}
+
+
+.selected-language {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.flag-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.option.selected {
+  background-color: #e0e0e0;
+}
+
+.option span {
+  flex-grow: 1;
+}
+
+@media (max-width: 600px) {
+  .language-selector {
+      width: 100%;
+  }
+}
+
+/* END LANGUAGE SELECTOR PART*/
+
 
 /* Navbar */
 body {
