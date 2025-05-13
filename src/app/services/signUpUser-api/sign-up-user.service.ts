@@ -9,7 +9,7 @@ export class SignUpUserService {
 
   private apiUrl = this.baseUrl+'/auth/user/register';
   private apiUrlOrg = this.baseUrl+'/auth/org/register';
-  private countriesApiUrl = this.baseUrl+'/locations/countries';
+  private countriesApiUrl = this.baseUrl+'/locations/countries/names';
 
   constructor() { }
 
@@ -24,7 +24,7 @@ export class SignUpUserService {
   const userData = { 
     "email":email,
     "password": password,
-    "country": country,
+    "country": countryAsNumber,
     "name": name,
     "surname": surname };
 
@@ -40,14 +40,18 @@ console.log(JSON.stringify(userData))
       });
 
       if (!response.ok) {
-         if(response.status==409){
-          console.log('Utente già registrato');
-          return false;
-        }else if(response.status==500){
-          console.log('Errore interno');
-          return false;
-        }
-      }
+  if (response.status === 409) {
+    console.log('Utente già registrato');
+    return false;
+  } else if (response.status === 422) {
+    const errData = await response.json();
+    console.error('Errore 422 - Dati non validi:', errData);
+    return false;
+  } else if (response.status === 500) {
+    console.log('Errore interno');
+    return false;
+  }
+}
 
       const responseJSON = await response.json();
 
@@ -141,7 +145,7 @@ console.log(JSON.stringify(userData))
 
   //-------------------------------------------
   // get countriesNew
-  async getCountriesNew(): Promise<any> {
+  async getCountriesNew(): Promise<{ name: string; _id: string }[]> {
 
     try {
       const response = await fetch(this.countriesApiUrl, {
@@ -150,7 +154,7 @@ console.log(JSON.stringify(userData))
           'Content-Type': 'application/json',
         }
       });
-      
+
       if (!response.ok) {
         throw new Error(`Errore HTTP: ${response.status}`);
       }
