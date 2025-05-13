@@ -51,11 +51,14 @@ export class UserSignUpComponent {
       console.error('Errore durante il recupero dei paesi:', error);
     }*/
 
+
+
       //country nuovooo
       try {
         // Ottieni i paesi tramite il servizio
         this.countries = await this.signUpUserService.getCountriesNew();
-        //console.log("prova "+this.countries);
+        console.log("prova "+this.countries);
+
         // imposto il primo paese come valore di default
         if (this.countries.length > 0) {
           this.loginForm.patchValue({
@@ -68,6 +71,7 @@ export class UserSignUpComponent {
 
   //--------------
   }
+  
   //inizio prova registrazione user
   async onSubmit() {
     if (this.loginForm.valid) {
