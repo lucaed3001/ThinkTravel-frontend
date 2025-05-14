@@ -102,20 +102,19 @@
   <div class="section-header">
   <h2 class="section-title">recommended hotels</h2>
   </div>
+
   <div class="recommended-grid">
-    <div *ngFor="let hotel of hotels" class="recommended-card">
-      <div class="card-image">
-        <img [src]="hotel.photos" [alt]="hotel.name">
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">{{ hotel.name }}</h3>
-        <div class="card-country">
-          <i class="fas fa-flag"></i> {{ hotel.country.name }} {{ hotel.country.flag }}
-        </div>
-        <p class="card-description">{{ hotel.description }}</p>
+    <div class="hotel-card" *ngFor="let hotel of hotels">
+      <img [src]="hotel.photoUrl" alt="{{ hotel.name }}" class="hotel-image" />
+  
+      <div class="hotel-info">
+        <h3 class="hotel-name">{{ hotel.name }}</h3>
+        <p class="hotel-country">{{ hotel.city.country.name }}</p>
+        <p class="hotel-description">{{ hotel.description }}</p>
       </div>
     </div>
   </div>
+  
   
   <footer>
     <app-footer></app-footer>

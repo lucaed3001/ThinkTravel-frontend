@@ -103,6 +103,34 @@ console.log(token);
 }
 
 
+//recupero immagine citta by id
+async getImgHotel(id:number): Promise<any> {
+  const token = localStorage.getItem('token');
+console.log(token);
+  try {
+    const response = await fetch(this.baseUrlNew+'/locations/hotels/images/'+id, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Token non valido o errore nella richiesta');
+    }
+
+    const img = await response.json();
+    //console.log(img);
+    return img;
+
+  } catch (error) {
+    console.error('Errore nel recupero dati utente:', error);
+    return null;
+  }
+}
+
+
+
 
 async getFiveCities(c:number): Promise<
   {
@@ -206,7 +234,7 @@ async getRandomHotel(c:number): Promise<
     console.log(response);
     return await response.json();
   } catch (error) {
-    console.error('Errore nel recupero delle città:', error);
+    console.error('Errore nel recupero degli hotel :', error);
     return [];
   }
 }

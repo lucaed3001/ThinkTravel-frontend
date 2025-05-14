@@ -82,40 +82,68 @@ const rndCities = await this.functionApi.getRandomCities(5);
 console.log("città random: ", rndCities);
 
 //random hotel
-const rndHotel = await this.functionApi.getRandomHotel(4);
-console.log("hotel random: ", rndHotel);
-
+const rndHotel = await this.functionApi.getRandomHotel(5);
+console.log("Hotel suggeriti:", rndHotel);
 //random hotel 
 /*----------*/
-
+this.citys = await Promise.all(rndCities.map(async (citta: any) => {
+  // console.log('CITTA :', citta.id);
+   try {
+     const imageNames = await this.functionApi.getImgCity(citta.id);
+ console.log(imageNames)
+     const imageUrl = imageNames.length > 0
+       ? this.baseUrlNew+`/images/cities/${imageNames[0]}`
+       : '';
+ 
+     return {
+       ...citta,
+       photoUrl: imageUrl
+     };
+   } catch (error) {
+     console.error(`Errore nel recupero immagine per ${citta.name}:`, error);
+     return {
+       ...citta,
+       photoUrl: ''
+     };
+   }
+ }));
+ 
 
 
 /*----------*/
 
 
+//random hotel 
+this.hotels = await Promise.all(
+  rndHotel.map(async (hotel: any) => {
+    try {
+      console.log(`Hotel: ${hotel.name}, ID: ${hotel.id}`);
 
-this.citys = await Promise.all(rndCities.map(async (citta: any) => {
- // console.log('CITTA :', citta.id);
-  try {
-    const imageNames = await this.functionApi.getImgCity(citta.id);
-console.log(imageNames)
-    const imageUrl = imageNames.length > 0
-      ? this.baseUrlNew+`/images/cities/${imageNames[0]}`
-      : '';
+      const imageNames = await this.functionApi.getImgHotel(hotel.id);
+      console.log(`Immagini per ${hotel.name}:`, imageNames);
 
-    return {
-      ...citta,
-      photoUrl: imageUrl
-    };
-  } catch (error) {
-    console.error(`Errore nel recupero immagine per ${citta.name}:`, error);
-    return {
-      ...citta,
-      photoUrl: ''
-    };
-  }
-}));
+      const imageUrl = imageNames.length > 0
+        ? this.baseUrlNew + `/images/hotels/${imageNames[0]}`
+        : 'assets/img/hotel-placeholder.jpg';  // Placeholder di default
+
+      console.log(`URL immagine per ${hotel.name}:`, imageUrl);
+
+      return {
+        ...hotel,
+        photoUrl: imageUrl
+      };
+
+    } catch (error) {
+      console.error(`Errore nel recupero immagine hotel per ${hotel.name}:`, error);
+      return {
+        ...hotel,
+        photoUrl: 'assets/img/hotel-placeholder.jpg'  // Fallback anche in caso di errore
+      };
+    }
+  })
+);
 }
+/*----------*/
 
 //------------------------
 // Metodo per mappare le città e gestire il Base64
