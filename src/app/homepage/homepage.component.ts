@@ -82,8 +82,10 @@ const rndCities = await this.functionApi.getRandomCities(5);
 console.log("città random: ", rndCities);
 
 //random hotel
-const rndHotel = await this.functionApi.getRandomHotel(5);
+const rndHotel = await this.functionApi.getRandomHotel(4);
 console.log("hotel random: ", rndHotel);
+
+
 
 
 this.citys = await Promise.all(rndCities.map(async (citta: any) => {
