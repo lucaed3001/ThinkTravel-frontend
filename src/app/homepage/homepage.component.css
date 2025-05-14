@@ -309,7 +309,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 2rem;
-  max-width: 1500px;  
+  max-width: 1800px;  
   padding:20px;
   margin: 0 auto;
 }

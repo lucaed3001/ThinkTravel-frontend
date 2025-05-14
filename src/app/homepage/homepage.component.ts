@@ -19,7 +19,6 @@ const LANGUAGES: Language[] = [
   { id: 'es', name: 'Español', flagUrl: 'https://flagcdn.com/w20/es.png' },
   { id: 'hu', name: 'Magyar', flagUrl: 'https://flagcdn.com/w20/hu.png' },
   { id: 'nl', name: 'Nederlands', flagUrl: 'https://flagcdn.com/w20/nl.png' },
-  { id: 'eg', name: 'مصري', flagUrl: 'https://flagcdn.com/w20/eg.png' },
   { id: 'in', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
   { id: 'po', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
   { id: 'ar', name: 'عربي', flagUrl: 'https://flagcdn.com/w20/sa.png' },
@@ -86,6 +85,12 @@ console.log("città random: ", rndCities);
 const rndHotel = await this.functionApi.getRandomHotel(4);
 console.log("hotel random: ", rndHotel);
 
+//random hotel 
+/*----------*/
+
+
+
+/*----------*/
 
 
 
