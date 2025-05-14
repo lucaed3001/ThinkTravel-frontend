@@ -19,8 +19,8 @@ const LANGUAGES: Language[] = [
   { id: 'es', name: 'Español', flagUrl: 'https://flagcdn.com/w20/es.png' },
   { id: 'hu', name: 'Magyar', flagUrl: 'https://flagcdn.com/w20/hu.png' },
   { id: 'nl', name: 'Nederlands', flagUrl: 'https://flagcdn.com/w20/nl.png' },
-  { id: 'in', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
-  { id: 'po', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
+  { id: 'hi ', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
+  { id: 'pl', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
   { id: 'ar', name: 'عربي', flagUrl: 'https://flagcdn.com/w20/sa.png' },
   { id: 'zh-cn', name: '中國人', flagUrl: 'https://flagcdn.com/w20/cn.png' },
 ];
