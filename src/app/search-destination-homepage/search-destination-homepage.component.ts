@@ -123,7 +123,32 @@ async searchDestination() {
     console.log('Risultati della ricerca:', response);
 
     // Aggiorna i risultati visualizzati
-    this.searchResults = response.map((city: any) => {
+    this.searchResults =
+    
+    await Promise.all(response.map(async (city: any) => {
+      console.log('CITY:', city);
+      try {
+        const imageNames = await this.functionApi.getImgCity(city.id);
+    
+        const imageUrl = imageNames.length > 0
+          ? this.urlDNS+`/images/cities/${imageNames[0]}`
+          : '';
+    
+        return {
+          ...city,
+          photoUrl: imageUrl
+        };
+      } catch (error) {
+        console.error(`Errore nel recupero immagine per ${city.name}:`, error);
+        return {
+          ...city,
+          photoUrl: ''
+        };
+      }
+    }));
+    
+    
+    /*response.map((city: any) => {
       if (city.photos && city.photos.length > 0) {
         let firstPhotoBase64 = city.photos[0];
 
@@ -145,11 +170,18 @@ async searchDestination() {
         };
       }
     });
+
+*/
+
+
+
+
     this.searchActive = true;
   } catch (error) {
     console.error('Errore durante la ricerca della città:', error);
   }
-}//
+}
+//
 async searchDestinationClick(nome:string) {
 this.searchQuery=nome;
 
@@ -183,6 +215,7 @@ this.searchQuery=nome;
         };
       }
     });
+    
     this.searchActive = true;
   } catch (error) {
     console.error('Errore durante la ricerca della città:', error);

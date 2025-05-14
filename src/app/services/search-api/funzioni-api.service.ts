@@ -244,7 +244,7 @@ async getRandomHotel(c:number): Promise<
 async searchAnnoucement(s:string): Promise<any[]>{
   try {
     console.log(this.urlCity+"/suggested?c=1");
-    const response = await fetch(this.baseUrl+"/hotels/search?c="+s+"&p="+1, {
+    const response = await fetch(this.baseUrlNew+'/locations/cities/?q='+s+'&lang='+this.lang, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
