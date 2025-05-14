@@ -123,9 +123,7 @@ async searchDestination() {
     console.log('Risultati della ricerca:', response);
 
     // Aggiorna i risultati visualizzati
-    this.searchResults =
-    
-    await Promise.all(response.map(async (city: any) => {
+    this.searchResults =await Promise.all(response.map(async (city: any) => {
       console.log('CITY:', city);
       try {
         const imageNames = await this.functionApi.getImgCity(city.id);
@@ -193,28 +191,27 @@ this.searchQuery=nome;
     console.log('Risultati della ricerca:', response);
 
     // Aggiorna i risultati visualizzati
-    this.searchResults = response.map((city: any) => {
-      if (city.photos && city.photos.length > 0) {
-        let firstPhotoBase64 = city.photos[0];
-
-        // Controlla e rimuove eventuali prefissi se presenti
-        if (typeof firstPhotoBase64 === 'string' && firstPhotoBase64.startsWith('data:')) {
-          const base64Index = firstPhotoBase64.indexOf('base64,') + 'base64,'.length;
-          firstPhotoBase64 = firstPhotoBase64.substring(base64Index);
-        }
-
+   this.searchResults =await Promise.all(response.map(async (city: any) => {
+      console.log('CITY:', city);
+      try {
+        const imageNames = await this.functionApi.getImgCity(city.id);
+    
+        const imageUrl = imageNames.length > 0
+          ? this.urlDNS+`/images/cities/${imageNames[0]}`
+          : '';
+    
         return {
           ...city,
-          photoUrl: `data:image/jpeg;base64,${firstPhotoBase64}` // Usa solo la prima immagine
+          photoUrl: imageUrl
         };
-      } else {
-        console.warn(`Nessuna foto disponibile per la città: ${city.name}`);
+      } catch (error) {
+        console.error(`Errore nel recupero immagine per ${city.name}:`, error);
         return {
           ...city,
-          photoUrl: '' // Foto vuota se non ci sono immagini disponibili
+          photoUrl: ''
         };
       }
-    });
+    }));
     
     this.searchActive = true;
   } catch (error) {
