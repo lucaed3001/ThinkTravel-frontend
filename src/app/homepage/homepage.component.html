@@ -103,16 +103,16 @@
   <h2 class="section-title">Most Recommended</h2>
   </div>
   <div class="recommended-grid">
-    <div *ngFor="let city of cities" class="recommended-card">
+    <div *ngFor="let hotel of hotels" class="recommended-card">
       <div class="card-image">
-        <img [src]="city.photos" [alt]="city.name">
+        <img [src]="hotel.photos" [alt]="hotel.name">
       </div>
       <div class="card-content">
-        <h3 class="card-title">{{ city.name }}</h3>
+        <h3 class="card-title">{{ hotel.name }}</h3>
         <div class="card-country">
-          <i class="fas fa-flag"></i> {{ city.country.name }} {{ city.country.flag }}
+          <i class="fas fa-flag"></i> {{ hotel.country.name }} {{ hotel.country.flag }}
         </div>
-        <p class="card-description">{{ city.description }}</p>
+        <p class="card-description">{{ hotel.description }}</p>
       </div>
     </div>
   </div>

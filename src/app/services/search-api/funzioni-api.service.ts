@@ -197,7 +197,7 @@ async getRandomHotel(c:number): Promise<
   }[]
 > {
   try {
-    const response = await fetch(this.baseUrlNew+"/locations/hotels/suggested/"+c, {
+    const response = await fetch(this.baseUrlNew+"/locations/hotels/suggested/"+c+"?lang="+this.lang, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

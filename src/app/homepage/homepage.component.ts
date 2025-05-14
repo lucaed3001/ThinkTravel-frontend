@@ -38,6 +38,7 @@ const LANGUAGES: Language[] = [
 export class HomepageComponent {
   cities: any[] = [];
   citys:any[]=[];
+  hotels:any[]=[];
   today: string='';
   searchQuery: string = '';
   submitted: boolean = false;
