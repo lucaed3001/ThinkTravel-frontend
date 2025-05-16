@@ -91,16 +91,25 @@
 
   <div class="section-header">
     <h2 class="section-title">recommended destinations</h2>
+    <div class="w-full max-w-md mx-auto">
+      <label class="block text-sm font-medium text-gray-700 mb-1">
+        Select a country
+      </label>
+      <div class="relative">
+        <select
+          formControlName="country"
+          class="pl-10 pr-4 py-2 w-full rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+        >
+          <option value="" disabled selected>Select Your Country</option>
+          <option *ngFor="let country of countries" [value]="country._id">
+            {{ country.name }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div class="form-group">
-      <i class="fas fa-globe icon"></i>
-      <select formControlName="country">
-        <option value="" disabled selected>Select Your Country</option>
-        <option *ngFor="let country of countries" [value]="country._id">
-          {{ country.name }}
-        </option>
-      </select>
     </div>
+    
+    
   <div class="destinations-grid">
     <div *ngFor="let cit of citys" class="destination-card">
       <img [src]="cit.photoUrl" [alt]="cit.name">
