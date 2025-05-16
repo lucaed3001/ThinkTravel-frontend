@@ -261,6 +261,26 @@ async searchAnnoucement(s:string): Promise<any[]>{
     return [];
   }
 }
+async searchHotelCity(id:string): Promise<any[]>{
+  try {
+    console.log(this.urlCity+"/suggested?c=1");
+    const response = await fetch(this.baseUrlNew+'/locations/hotels/?lang='+this.lang+'&cid='+id, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    /*if (!response.ok) {
+      throw new Error(`Errore HTTP: ${response.status}`);
+    }*/
+
+    return await response.json();
+  } catch (error) {
+    console.error('Errore nel recupero delle città:', error);
+    return [];
+  }
+}
 
 
 // PROVA PRENDERE MIEI DATI ---------------------

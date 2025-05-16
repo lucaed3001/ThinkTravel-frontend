@@ -18,6 +18,7 @@ export class SearchDestinationHomepageComponent {
   searchActive: boolean = false; // Variabile di stato per mostrare/nascondere i contenitori
   defaultCities: any[] = []; // Città di default (esplora destinazioni)
   searchResults: any[] = []; // Risultati della ricerca
+  hotels: any[] = [];
   urlDNS:string = "http://thinktravel.ddns.net:8000";
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
@@ -25,46 +26,6 @@ async ngOnInit() {
 
   this.searchQuery = city || "";
 
-  // vecchio città default
- /* if(!this.searchQuery){
-  try {
-    const response = await this.functionApi.getCities();
-    console.log('Città recuperate:', response);
-
-    // Mappa le città con il controllo sul base64 e prendendo solo la prima immagine
-    this.defaultCities = response.map((city: any) => {
-      if (city.photos && city.photos.length > 0) {
-        let firstPhotoBase64 = city.photos[0];
-
-        // Controlla e rimuove eventuali prefissi se presenti
-        if (typeof firstPhotoBase64 === 'string' && firstPhotoBase64.startsWith('data:')) {
-          const base64Index = firstPhotoBase64.indexOf('base64,') + 'base64,'.length;
-          firstPhotoBase64 = firstPhotoBase64.substring(base64Index);
-        }
-
-        return {
-          ...city,
-          photoUrl: `data:image/jpeg;base64,${firstPhotoBase64}` // Usa solo la prima immagine
-        };
-      } else {
-        console.warn(`Nessuna foto disponibile per la città: ${city.name}`);
-        return {
-          ...city,
-          photoUrl: '' // Foto vuota se non ci sono immagini disponibili
-        };
-      }
-    });
-
-  } catch (error) {
-    console.error('Errore durante il recupero delle città:', error);
-  }
-}else {
-  this.searchDestination();
-  localStorage.removeItem('searchCity');
-  console.log("Rimosso searchCity dalla LocalStorage")
-}
-*/
-//-------------------------
 //nuovo cittò default
 
 
@@ -74,7 +35,7 @@ if(!this.searchQuery){
     console.log("Nuove città: ", responseNew);
   
     this.defaultCities = await Promise.all(responseNew.map(async (city: any) => {
-      console.log('CITY:', city);
+     // console.log('CITY:', city);
       try {
         const imageNames = await this.functionApi.getImgCity(city.id);
     
@@ -112,7 +73,7 @@ console.log("ciao "+this.defaultCities[1].name);
 async searchDestination() {
   if (!this.searchQuery) {
     console.warn('Inserire una destinazione per effettuare la ricerca.');
-    return;
+    //return;
   }
 
   try {
@@ -124,7 +85,7 @@ async searchDestination() {
 
     // Aggiorna i risultati visualizzati
     this.searchResults =await Promise.all(response.map(async (city: any) => {
-      console.log('CITY:', city);
+      //console.log('CITY:', city);
       try {
         const imageNames = await this.functionApi.getImgCity(city.id);
     
@@ -143,35 +104,7 @@ async searchDestination() {
           photoUrl: ''
         };
       }
-    }));
-    
-    
-    /*response.map((city: any) => {
-      if (city.photos && city.photos.length > 0) {
-        let firstPhotoBase64 = city.photos[0];
-
-        // Controlla e rimuove eventuali prefissi se presenti
-        if (typeof firstPhotoBase64 === 'string' && firstPhotoBase64.startsWith('data:')) {
-          const base64Index = firstPhotoBase64.indexOf('base64,') + 'base64,'.length;
-          firstPhotoBase64 = firstPhotoBase64.substring(base64Index);
-        }
-
-        return {
-          ...city,
-          photoUrl: `data:image/jpeg;base64,${firstPhotoBase64}` // Usa solo la prima immagine
-        };
-      } else {
-        console.warn(`Nessuna foto disponibile per la città: ${city.name}`);
-        return {
-          ...city,
-          photoUrl: '' // Foto vuota se non ci sono immagini disponibili
-        };
-      }
-    });
-
-*/
-
-
+    })); 
 
 
     this.searchActive = true;
@@ -179,25 +112,25 @@ async searchDestination() {
     console.error('Errore durante la ricerca della città:', error);
   }
 }
-//
-async searchDestinationClick(nome:string) {
+//con il click del plsante della card 
+async searchDestinationClick(id:string,nome:string) {
 this.searchQuery=nome;
 
   try {
     console.log('Effettuando ricerca per:', this.searchQuery);
 
     // Chiama la funzione del servizio per cercare città
-    const response = await this.functionApi.searchAnnoucement(nome);
+    const response = await this.functionApi.searchHotelCity(id);
     console.log('Risultati della ricerca:', response);
 
     // Aggiorna i risultati visualizzati
-   this.searchResults =await Promise.all(response.map(async (city: any) => {
-      console.log('CITY:', city);
+   this.hotels =await Promise.all(response.map(async (city: any) => {
+      console.log('hotel:', city);
       try {
         const imageNames = await this.functionApi.getImgCity(city.id);
     
         const imageUrl = imageNames.length > 0
-          ? this.urlDNS+`/images/cities/${imageNames[0]}`
+          ? this.urlDNS+`/images/hotels/${imageNames[0]}`
           : '';
     
         return {
@@ -245,7 +178,7 @@ async returnToHome()
 
 
 }
-
+//va alla pag per prenotare
 addPrenotation(nome:string,address:string,url:string):void{
   //console.log(nome)
   if(localStorage.getItem("userData")!=null){

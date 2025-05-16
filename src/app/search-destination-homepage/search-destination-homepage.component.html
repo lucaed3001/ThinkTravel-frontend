@@ -50,7 +50,7 @@
   <!-- dove appaiono gli hotel TUTTI-->
       <div class="destinations-grid">
         <div *ngFor="let city of defaultCities" class="destination-card" 
-             (click)="searchDestinationClick(city.name)">
+             (click)="searchDestinationClick(city.id,city.name)">
           <div class="card-media">
             <img [src]="city.photoUrl" [alt]="city.name" class="city-image" />
             <div class="card-badge">
@@ -60,7 +60,7 @@
             <div class="image-overlay"></div>
           </div>
           
-          <div class="card-content">
+          <div class="card-content" id="{{city.id}}">
             <h3 class="city-name">{{ city.name }}</h3>
             <p class="city-description">{{ city.description }}</p>
             
@@ -79,6 +79,12 @@
                 </svg>
                <!-- {{ city.language.name }}--> 
               </div>
+              <button class="explore-btn" (click)="addPrenotation(city.name, city.address, city.photoUrl)">
+              Explore Destination
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
             </div>
           </div>
         </div>
@@ -93,13 +99,13 @@
       </div>
   
       <div class="search-results-grid">
-        <div *ngFor="let city of searchResults" class="result-card">
-          <div class="result-media" (click)="addPrenotation(city.name, city.address, city.photoUrl)">
+        <div *ngFor="let city of searchResults" class="result-card"  (click)="searchDestinationClick(city.id,city.name)">
+          <div class="result-media">
             <img [src]="city.photoUrl" [alt]="city.name" class="result-image" />
             <div class="quick-book">Quick Book</div>
           </div>
           
-          <div class="result-content">
+          <div class="result-content" id="{{city.id}}">
             <h3 class="result-title">{{ city.name }}</h3>
             <div class="result-address">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
