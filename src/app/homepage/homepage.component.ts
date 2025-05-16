@@ -56,25 +56,8 @@ async ngOnInit() {
   
   const now = new Date();
   this.today = now.toISOString().split('T')[0]; // formato 'YYYY-MM-DD'
-  try {
-
-   /* const responseCinque=await this.functionApi.getFiveCities(5);
-    const responseQuattro=await this.functionApi.getFiveCities(4);
-
-    console.log('5 Città recuperate:', responseCinque);
-// Mappatura delle liste ricevute dal server
-this.citys = this.mapCities(responseCinque); // Per "Popular Destinations"
-this.cities = this.mapCities(responseQuattro); // Per "Most Recommended"
-*/
-console.log('Popular Destinations:', this.citys);
-console.log('Most Recommended:', this.cities);
-} catch (error) {
-  console.error('Errore durante il recupero delle città:', error);
-  }
   console.log(this.citys);
 console.log(this.cities);
-
-
 
 // nuvoo prendi 5 citta random
 
@@ -146,39 +129,6 @@ this.hotels = await Promise.all(
 /*----------*/
 
 //------------------------
-// Metodo per mappare le città e gestire il Base64
-private mapCities(cities: any[]): any[] {
-  return cities.map((city: any) => {
-    if (city.photos && city.photos.length > 0) {
-      let firstPhotoBase64 = city.photos[0];
-
-      // Controlla e rimuove eventuali prefissi se presenti
-      if (typeof firstPhotoBase64 === 'string' && firstPhotoBase64.startsWith('data:')) {
-        const base64Index = firstPhotoBase64.indexOf('base64,') + 'base64,'.length;
-        firstPhotoBase64 = firstPhotoBase64.substring(base64Index);
-      } if (city.photos && city.photos.length > 0) {
-        let firstPhotoBase64 = city.photos[0];
-
-        return {
-          ...city,
-          photoUrl: `data:image/jpeg;base64,${firstPhotoBase64}` // Usa solo la prima immagine
-        };
-      } else {
-        console.warn(`Nessuna foto disponibile per la città: ${city.name}`);
-        return {
-          ...city,
-          photoUrl: '' // Foto vuota se non ci sono immagini disponibili
-        };
-      }
-    } else {
-      console.warn(`Nessuna foto disponibile per la città: ${city.name}`);
-      return {
-        ...city,
-        photoUrl: '' // Foto vuota se non ci sono immagini disponibili
-      };
-    }
-  });
-}
 
 search() {
   if (this.searchQuery.trim().length === 0) {
