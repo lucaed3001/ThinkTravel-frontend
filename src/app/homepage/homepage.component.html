@@ -10,12 +10,18 @@
 </head>
 <body>
   <header>
-    <div class="Body"></div>
     <nav class="navbar">
       <div class="logo">
         <img src="img/logo.png" alt="logo">
       </div>
-      <ul class="nav-links">
+  
+      <!-- HAMBURGER (visibile solo su mobile) -->
+      <div class="hamburger" (click)="isMobileMenuOpen = !isMobileMenuOpen">
+        ☰
+      </div>
+  
+      <!-- DESKTOP NAVIGATION -->
+      <ul class="nav-links desktop">
         <li><a routerLink="/">Home</a></li>
         <li><a href="#">Reservation</a></li>
         <li><a href="#">Plan</a></li>
@@ -23,34 +29,63 @@
         <li><a routerLink="/searchDest">Explore</a></li>
       </ul>
   
-      <!-- Language Selector -->
-      <div class="language-selector">
-        <div class="selected-language" (click)="toggleDropdown()">
+      <!-- LANGUAGE SELECTOR (desktop) -->
+      <div class="language-selector desktop">
+        <div class="selected-language" (click)="isDropdownOpen = !isDropdownOpen">
           <img [src]="selectedLanguage.flagUrl" [alt]="selectedLanguage.name + ' flag'" class="flag-icon">
           <span>{{ selectedLanguage.name }}</span>
-         
         </div>
-
-  <div class="options" [class.open]="isOpen">
-    <div *ngFor="let lang of languages" 
-         class="option" 
-         [class.selected]="lang.id === selectedLanguage.id"
-         (click)="selectLanguage(lang)">
-      <img [src]="lang.flagUrl" [alt]="lang.name + ' flag'" class="flag-icon">
-      <span>{{ lang.name }}</span>
-    </div>
-  </div>
-      
-        
+        <div class="options" [ngClass]="{ 'open': isDropdownOpen }">
+          <div *ngFor="let lang of languages" 
+               class="option" 
+               [class.selected]="lang.id === selectedLanguage.id"
+               (click)="selectLanguage(lang)">
+            <img [src]="lang.flagUrl" [alt]="lang.name + ' flag'" class="flag-icon">
+            <span>{{ lang.name }}</span>
+          </div>
+        </div>
       </div>
-      <!-- End Language Selector -->
   
-      <div class="auth-buttons">
+      <!-- AUTH BUTTONS (desktop) -->
+      <div class="auth-buttons desktop">
         <a href="/login">LOGIN</a>
-        <button [routerLink]="['/userSignUp']" routerLinkActive="router-link-active" class="signup">SIGN UP</button>
+        <button [routerLink]="['/userSignUp']" class="signup">SIGN UP</button>
+      </div>
+  
+      <!-- MOBILE MENU -->
+      <div class="mobile-menu" *ngIf="isMobileMenuOpen">
+        <ul class="nav-links">
+          <li><a routerLink="/">Home</a></li>
+          <li><a href="#">Reservation</a></li>
+          <li><a href="#">Plan</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li><a routerLink="/searchDest">Explore</a></li>
+        </ul>
+  
+        <div class="language-selector">
+          <div class="selected-language" (click)="isDropdownOpen = !isDropdownOpen">
+            <img [src]="selectedLanguage.flagUrl" [alt]="selectedLanguage.name + ' flag'" class="flag-icon">
+            <span>{{ selectedLanguage.name }}</span>
+          </div>
+          <div class="options" [ngClass]="{ 'open': isDropdownOpen }">
+            <div *ngFor="let lang of languages" 
+                 class="option" 
+                 [class.selected]="lang.id === selectedLanguage.id"
+                 (click)="selectLanguage(lang)">
+              <img [src]="lang.flagUrl" [alt]="lang.name + ' flag'" class="flag-icon">
+              <span>{{ lang.name }}</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="auth-buttons">
+          <a href="/login">LOGIN</a>
+          <button [routerLink]="['/userSignUp']" class="signup">SIGN UP</button>
+        </div>
       </div>
     </nav>
   </header>
+  
   
 
   <section class="hero">

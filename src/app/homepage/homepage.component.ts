@@ -44,6 +44,8 @@ export class HomepageComponent {
   countries: { name: string; _id: string }[] = [];// Array per la dropdown
   submitted: boolean = false;
   baseUrlNew:string = "http://thinktravel.ddns.net:8000";
+  isMobileMenuOpen = false;
+  isDropdownOpen = false;
 
   languages = LANGUAGES;
   selectedLanguage: Language = this.languages[0]; // Imposta 'English' come predefinito
