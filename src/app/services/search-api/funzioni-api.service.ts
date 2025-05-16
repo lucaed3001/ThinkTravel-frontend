@@ -8,6 +8,7 @@ export class FunzioniApiService {
   private baseUrl:string = "http://localhost:8000";
   private baseUrlNew:string = "http://thinktravel.ddns.net:8000";
   private urlCity = this.baseUrl + '/cities';
+  private countriesApiUrl = this.baseUrl+'/locations/countries/names';
 
   private lang=localStorage.getItem("lang");
 
@@ -286,6 +287,29 @@ console.log(token);
   } catch (error) {
     console.error('Errore nel recupero dati utente:', error);
     return null;
+  }
+}
+async getCountriesNew(): Promise<{ name: string; _id: string }[]> {
+
+  try {
+    const response = await fetch(this.countriesApiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Errore HTTP: ${response.status}`);
+    }
+    console.log(response);
+    const countries = await response.json();
+    console.log(countries);
+    return countries;
+
+  }  catch (error) {
+    console.error('Errore nel recupero dei paesi:', error);
+    return [];
   }
 }
 
