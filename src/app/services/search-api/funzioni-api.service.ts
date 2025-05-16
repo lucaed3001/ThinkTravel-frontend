@@ -8,7 +8,7 @@ export class FunzioniApiService {
   private baseUrl:string = "http://localhost:8000";
   private baseUrlNew:string = "http://thinktravel.ddns.net:8000";
   private urlCity = this.baseUrl + '/cities';
-  private countriesApiUrl = this.baseUrl+'/locations/countries/names';
+  private countriesApiUrl = this.baseUrlNew+'/locations/countries/names';
 
   private lang=localStorage.getItem("lang");
 
@@ -108,6 +108,7 @@ console.log(token);
 async getImgHotel(id:number): Promise<any> {
   const token = localStorage.getItem('token');
 console.log(token);
+
   try {
     const response = await fetch(this.baseUrlNew+'/locations/hotels/images/'+id, {
       method: 'GET',

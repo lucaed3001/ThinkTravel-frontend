@@ -92,6 +92,15 @@
   <div class="section-header">
     <h2 class="section-title">recommended destinations</h2>
     </div>
+    <div class="form-group">
+      <i class="fas fa-globe icon"></i>
+      <select formControlName="country">
+        <option value="" disabled selected>Select Your Country</option>
+        <option *ngFor="let country of countries" [value]="country._id">
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
   <div class="destinations-grid">
     <div *ngFor="let cit of citys" class="destination-card">
       <img [src]="cit.photoUrl" [alt]="cit.name">

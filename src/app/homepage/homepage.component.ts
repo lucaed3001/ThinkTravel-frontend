@@ -2,6 +2,7 @@ import { Component, provideAppInitializer } from '@angular/core';
 import {RouterOutlet, RouterLink} from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { FunzioniApiService } from '../services/search-api/funzioni-api.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators,FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,7 +28,7 @@ const LANGUAGES: Language[] = [
 
 @Component({
   selector: 'app-homepage',
-  imports: [RouterOutlet, RouterLink,FooterComponent,CommonModule,FormsModule],
+  imports: [RouterOutlet, RouterLink,FooterComponent,CommonModule,FormsModule,ReactiveFormsModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
@@ -40,6 +41,7 @@ export class HomepageComponent {
   hotels:any[]=[];
   today: string='';
   searchQuery: string = '';
+  countries: { name: string; _id: string }[] = [];// Array per la dropdown
   submitted: boolean = false;
   baseUrlNew:string = "http://thinktravel.ddns.net:8000";
 
@@ -58,6 +60,15 @@ async ngOnInit() {
   this.today = now.toISOString().split('T')[0]; // formato 'YYYY-MM-DD'
   console.log(this.citys);
 console.log(this.cities);
+
+try {
+  // Ottieni i paesi tramite il servizio
+  this.countries = await this.functionApi.getCountriesNew();
+  console.log(this.countries);
+  
+} catch (error) {
+  console.error('Errore durante il recupero dei paesi:', error);
+}
 
 // nuvoo prendi 5 citta random
 
