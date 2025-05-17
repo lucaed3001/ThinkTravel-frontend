@@ -185,12 +185,16 @@ body {
   .auth-buttons {
     flex-direction: column;
     gap: 10px;
-    color:red;
   }
 
   .language-selector {
     width: 100%;
   }
+}
+#login
+{
+  text-decoration: none;
+  margin:20px;
 }
 
 /* Hero Section */

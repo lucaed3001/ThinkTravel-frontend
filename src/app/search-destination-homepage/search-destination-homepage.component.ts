@@ -114,41 +114,38 @@ async searchDestination() {
 }
 //con il click del plsante della card 
 async searchDestinationClick(id:string,nome:string) {
-this.searchQuery=nome;
+  this.searchQuery = nome;
 
   try {
-    console.log('Effettuando ricerca per:', this.searchQuery);
-
-    // Chiama la funzione del servizio per cercare città
+    console.log('Effettuando ricerca hotel per:', this.searchQuery);
     const response = await this.functionApi.searchHotelCity(id);
-    console.log('Risultati della ricerca:', response);
+    console.log('Risultati hotel:', response);
 
-    // Aggiorna i risultati visualizzati
-   this.hotels =await Promise.all(response.map(async (city: any) => {
-      console.log('hotel:', city);
+    // Pulisci i risultati città
+    this.searchResults = [];
+
+    this.hotels = await Promise.all(response.map(async (hotel: any) => {
       try {
-        const imageNames = await this.functionApi.getImgCity(city.id);
-    
+        const imageNames = await this.functionApi.getImgHotel(hotel.id); // Usa funzione corretta
         const imageUrl = imageNames.length > 0
-          ? this.urlDNS+`/images/hotels/${imageNames[0]}`
-          : '';
-    
+          ? this.urlDNS + `/images/hotels/${imageNames[0]}`
+          : 'assets/default-hotel.jpg';
         return {
-          ...city,
+          ...hotel,
           photoUrl: imageUrl
         };
       } catch (error) {
-        console.error(`Errore nel recupero immagine per ${city.name}:`, error);
+        console.error(`Errore immagine hotel per ${hotel.name}:`, error);
         return {
-          ...city,
-          photoUrl: ''
+          ...hotel,
+          photoUrl: 'assets/default-hotel.jpg'
         };
       }
     }));
-    
+
     this.searchActive = true;
   } catch (error) {
-    console.error('Errore durante la ricerca della città:', error);
+    console.error('Errore ricerca hotel:', error);
   }
 }
 async returnToHome()

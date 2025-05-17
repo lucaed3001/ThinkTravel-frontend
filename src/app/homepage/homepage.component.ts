@@ -54,7 +54,7 @@ export class HomepageComponent {
 constructor( private functionApi: FunzioniApiService,private router: Router ) {
   const savedLangId = localStorage.getItem('lang');
     const langFromStorage = this.languages.find(lang => lang.id === savedLangId);
-    this.selectedLanguage = langFromStorage || this.languages[0]; // default: Italiano
+    this.selectedLanguage = langFromStorage || this.languages[0]; 
   }
 async ngOnInit() {
   

@@ -181,7 +181,7 @@ async getRandomCities(c:number): Promise<
   }[]
 > {
   try {
-    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang, {
+    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang,{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -273,9 +273,9 @@ async searchHotelCity(id:string): Promise<any[]>{
       },
     });
 
-    /*if (!response.ok) {
+    if (!response.ok) {
       throw new Error(`Errore HTTP: ${response.status}`);
-    }*/
+    }
 
     return await response.json();
   } catch (error) {
