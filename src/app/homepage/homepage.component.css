@@ -73,7 +73,7 @@ body {
 }
 
 .signup:hover {
-  background: #0056b3;
+  background: linear-gradient(90deg, #1c4277 0%, #015a6d 100%);
 }
 
 /* LANGUAGE SELECTOR */
@@ -185,6 +185,7 @@ body {
   .auth-buttons {
     flex-direction: column;
     gap: 10px;
+    color:red;
   }
 
   .language-selector {
