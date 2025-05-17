@@ -19,6 +19,8 @@ export class SearchDestinationHomepageComponent {
   defaultCities: any[] = []; // Città di default (esplora destinazioni)
   searchResults: any[] = []; // Risultati della ricerca
   hotels: any[] = [];
+  selectedCityName = '';
+  selectedCityDescription = '';
   urlDNS:string = "http://thinktravel.ddns.net:8000";
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
@@ -73,8 +75,13 @@ console.log("ciao "+this.defaultCities[1].name);
 async searchDestination() {
   if (!this.searchQuery) {
     console.warn('Inserire una destinazione per effettuare la ricerca.');
-    //return;
+    return;
   }
+
+  // Pulisce gli hotel e dettagli precedenti
+  this.hotels = [];
+  this.selectedCityName = '';
+  this.selectedCityDescription = '';
 
   try {
     console.log('Effettuando ricerca per:', this.searchQuery);
@@ -83,16 +90,12 @@ async searchDestination() {
     const response = await this.functionApi.searchAnnoucement(this.searchQuery);
     console.log('Risultati della ricerca:', response);
 
-    // Aggiorna i risultati visualizzati
-    this.searchResults =await Promise.all(response.map(async (city: any) => {
-      //console.log('CITY:', city);
+    this.searchResults = await Promise.all(response.map(async (city: any) => {
       try {
         const imageNames = await this.functionApi.getImgCity(city.id);
-    
         const imageUrl = imageNames.length > 0
-          ? this.urlDNS+`/images/cities/${imageNames[0]}`
+          ? this.urlDNS + `/images/cities/${imageNames[0]}`
           : '';
-    
         return {
           ...city,
           photoUrl: imageUrl
@@ -104,14 +107,14 @@ async searchDestination() {
           photoUrl: ''
         };
       }
-    })); 
-
+    }));
 
     this.searchActive = true;
   } catch (error) {
     console.error('Errore durante la ricerca della città:', error);
   }
 }
+
 //con il click del plsante della card 
 async searchDestinationClick(id:string,nome:string) {
   this.searchQuery = nome;
