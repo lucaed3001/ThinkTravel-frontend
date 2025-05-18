@@ -159,17 +159,27 @@ search() {
 
   // Metodi per il language selector
   toggleDropdown(): void {
-    this.isOpen = !this.isOpen;}
+    this.isOpen = !this.isOpen;
+    this.dropdownOpen = !this.dropdownOpen;}
     selectLanguage(lang: Language): void {
       this.selectedLanguage = lang;
       this.isOpen = false;
       console.log('Lingua selezionata:', lang.id);
       localStorage.setItem("lang",lang.id);
       console.log(localStorage.getItem("lang"));
+ 
 
       window.location.reload();
+
       // Qui puoi aggiungere la logica per cambiare lingua nell'app
     }
+    dropdownOpen = false;
+selectedCountry: any = null;
+
+    selectCountry(country: any) {
+      this.selectedCountry = country;
+      this.dropdownOpen = false;
+}
 }
 
 

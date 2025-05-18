@@ -19,6 +19,10 @@ export class SearchDestinationHomepageComponent {
   defaultCities: any[] = []; // Città di default (esplora destinazioni)
   searchResults: any[] = []; // Risultati della ricerca
   hotels: any[] = [];
+
+  cityImages: string[] = [];
+  
+
   selectedCityName = '';
   selectedCityDescription = '';
   urlDNS:string = "http://thinktravel.ddns.net:8000";

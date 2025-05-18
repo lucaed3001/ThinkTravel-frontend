@@ -311,9 +311,34 @@ body {
 
 /* Popular Destinations */
 .section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   text-align: center;
-  margin-bottom: 40px;
 }
+
+
+.custom-dropdown {
+  position: relative;
+}
+
+.selected-option {
+  transition: box-shadow 0.2s ease;
+}
+
+.selected-option:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-list {
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 
 .section-title {
   font-size: 40px;
@@ -499,3 +524,65 @@ body {
 
 
 
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.selected-option {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.selected-option .flag-icon {
+  width: 24px;
+  height: 16px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+
+.chevron-icon {
+  margin-left: auto;
+  color: #666;
+}
+
+.dropdown-list {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.dropdown-list li {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-list li .flag-icon {
+  width: 24px;
+  height: 16px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
