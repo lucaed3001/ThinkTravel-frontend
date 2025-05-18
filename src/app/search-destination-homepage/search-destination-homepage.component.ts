@@ -135,7 +135,8 @@ async searchDestinationClick(id:string,nome:string) {
           : 'assets/default-hotel.jpg';
         return {
           ...hotel,
-          photoUrl: imageUrl
+          photoUrl: imageUrl,
+          description: hotel.description
         };
       } catch (error) {
         console.error(`Errore immagine hotel per ${hotel.name}:`, error);
@@ -179,12 +180,13 @@ async returnToHome()
 
 }
 //va alla pag per prenotare
-addPrenotation(nome:string,address:string,url:string):void{
+addPrenotation(nome:string,address:string,url:string,description:string):void{
   //console.log(nome)
   if(localStorage.getItem("userData")!=null){
     localStorage.setItem("hotelName",nome);
     localStorage.setItem("hotelAddress",address);
     localStorage.setItem("hotelUrl",url);
+    localStorage.setItem("hotelDescription", description); 
     this.router.navigate(['/prenotazioni']);
   }
   else{
