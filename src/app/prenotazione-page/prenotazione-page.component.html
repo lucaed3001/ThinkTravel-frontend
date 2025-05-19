@@ -14,8 +14,13 @@
         <div class="location">
           <p class="hotel-description">{{ description }}</p>
         </div>
+        <div style="width: 100%;">
+          <button (click)="goToOtherHotels()">See other hotels</button>
+        </div>
       </div>
+
     </div>
+
   
     <!-- Card Immagine -->
     <div class="hotel-image-panel" [style.backgroundImage]="'url(' + url + ')'"></div>

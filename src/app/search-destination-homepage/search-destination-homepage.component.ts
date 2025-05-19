@@ -19,12 +19,10 @@ export class SearchDestinationHomepageComponent {
   defaultCities: any[] = []; // Città di default (esplora destinazioni)
   searchResults: any[] = []; // Risultati della ricerca
   hotels: any[] = [];
-
+  selectedCityName: string = '';
+  selectedCityDescription: string = '';
   cityImages: string[] = [];
   
-
-  selectedCityName = '';
-  selectedCityDescription = '';
   urlDNS:string = "http://thinktravel.ddns.net:8000";
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
 async ngOnInit() {
