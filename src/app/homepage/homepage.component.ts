@@ -6,6 +6,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators,FormBuilder } f
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 interface Language {
   id: string;
@@ -34,7 +36,6 @@ const LANGUAGES: Language[] = [
 })
 
 
-
 export class HomepageComponent {
   cities: any[] = [];
   citys:any[]=[];
@@ -51,13 +52,12 @@ export class HomepageComponent {
   selectedLanguage: Language = this.languages[0]; // Imposta 'English' come predefinito
   isOpen = false;
 
-constructor( private functionApi: FunzioniApiService,private router: Router ) {
+constructor( private functionApi: FunzioniApiService,private router: Router,private cdr: ChangeDetectorRef ) {
   const savedLangId = localStorage.getItem('lang');
     const langFromStorage = this.languages.find(lang => lang.id === savedLangId);
     this.selectedLanguage = langFromStorage || this.languages[0]; 
   }
 async ngOnInit() {
-  
   const now = new Date();
   this.today = now.toISOString().split('T')[0]; // formato 'YYYY-MM-DD'
   console.log(this.citys);
@@ -76,12 +76,6 @@ try {
 
 const rndCities = await this.functionApi.getRandomCities(5);
 console.log("città random: ", rndCities);
-
-//random hotel
-const rndHotel = await this.functionApi.getRandomHotel(5);
-console.log("Hotel suggeriti:", rndHotel);
-//random hotel 
-/*----------*/
 this.citys = await Promise.all(rndCities.map(async (citta: any) => {
   // console.log('CITTA :', citta.id);
    try {
@@ -103,13 +97,10 @@ this.citys = await Promise.all(rndCities.map(async (citta: any) => {
      };
    }
  }));
- 
 
-
-/*----------*/
-
-
-//random hotel 
+//random hotel
+const rndHotel = await this.functionApi.getRandomHotel(5);
+console.log("Hotel suggeriti:", rndHotel);
 this.hotels = await Promise.all(
   rndHotel.map(async (hotel: any) => {
     try {
@@ -167,8 +158,6 @@ search() {
       console.log('Lingua selezionata:', lang.id);
       localStorage.setItem("lang",lang.id);
       console.log(localStorage.getItem("lang"));
- 
-
       window.location.reload();
 
       // Qui puoi aggiungere la logica per cambiare lingua nell'app
@@ -178,7 +167,48 @@ selectedCountry: any = null;
 
     selectCountry(country: any) {
       this.selectedCountry = country;
-      this.dropdownOpen = false;
+      console.log(this.selectedCountry)
+      localStorage.setItem("country_id",this.selectedCountry.id);
+      console.log(localStorage.getItem("country_id"));
+      this.loadRandomCities()
+    
+}
+async loadRandomCities() {
+  console.log("Funzione chiamata")
+  try {
+    // 1. Ottieni città random
+    const random = await this.functionApi.getRandomCities(5);
+    console.log("Città random:", random);
+
+    // 2. Ottieni immagini e costruisci oggetti città con foto
+    this.citys = await Promise.all(
+      random.map(async (citta: any) => {
+        try {
+          const imageNames = await this.functionApi.getImgCity(citta.id);
+          const imageUrl = imageNames.length > 0
+            ? this.baseUrlNew + `/images/cities/${imageNames[0]}`
+            : '';
+
+          return {
+            ...citta,
+            photoUrl: imageUrl
+          };
+        } catch (error) {
+          console.error(`Errore nel recupero immagine per ${citta.name}:`, error);
+          return {
+            ...citta,
+            photoUrl: ''
+          };
+        }
+      })
+    );
+    this.citys = [...this.citys]; 
+  this.dropdownOpen = false;
+  this.cdr.detectChanges();
+  } catch (error) {
+    console.error("Errore nel caricamento delle città random:", error);
+  }
+   
 }
 }
 

@@ -11,6 +11,7 @@ export class FunzioniApiService {
   private countriesApiUrl = this.baseUrlNew+'/locations/countries/names';
 
   private lang=localStorage.getItem("lang");
+  
 
   constructor(private router:Router) {}
 
@@ -180,8 +181,9 @@ async getRandomCities(c:number): Promise<
     description: string;
   }[]
 > {
+  const country_id_rnd=localStorage.getItem("country_id");
   try {
-    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang,{
+    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang+"&country_id="+country_id_rnd,{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
