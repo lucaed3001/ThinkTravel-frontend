@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { LanguageSelectorComponent } from '../language-selector/language-selector.component';
 import { HomepageComponent } from './homepage.component';
+
+
 
 describe('HomepageComponent', () => {
   let component: HomepageComponent;
@@ -8,7 +10,7 @@ describe('HomepageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomepageComponent]
+      imports: [HomepageComponent,LanguageSelectorComponent]
     })
     .compileComponents();
 
