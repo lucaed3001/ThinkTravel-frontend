@@ -58,6 +58,8 @@ constructor( private functionApi: FunzioniApiService,private router: Router,priv
     this.selectedLanguage = langFromStorage || this.languages[0]; 
   }
 async ngOnInit() {
+localStorage.setItem("country_id","");
+
   const now = new Date();
   this.today = now.toISOString().split('T')[0]; // formato 'YYYY-MM-DD'
   console.log(this.citys);

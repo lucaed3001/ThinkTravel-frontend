@@ -183,7 +183,14 @@ async getRandomCities(c:number): Promise<
 > {
   const country_id_rnd=localStorage.getItem("country_id");
   try {
-    const response = await fetch(this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang+"&country_id="+country_id_rnd,{
+    let URL:string="";
+    if(country_id_rnd!=""){
+      URL=this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang+"&country_id="+country_id_rnd;
+    }
+    else{
+      URL=this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang;
+    }
+    const response = await fetch(URL,{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
