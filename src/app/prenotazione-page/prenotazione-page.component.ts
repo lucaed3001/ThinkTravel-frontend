@@ -2,13 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-prenotazione-page',
   imports: [CommonModule,FormsModule],
   templateUrl: './prenotazione-page.component.html',
   styleUrl: './prenotazione-page.component.css'
+
 })
+
+
+
+
 export class PrenotazionePageComponent implements OnInit {
+  
 
   name=localStorage.getItem("hotelName");
   address=localStorage.getItem("hotelAddress");
@@ -97,7 +105,17 @@ export class PrenotazionePageComponent implements OnInit {
     cardName: ''
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private location: Location) {}
+  goToOtherHotels(): void {
+    const destination = localStorage.getItem('destination');
+  
+    if (destination) {
+      this.router.navigate(['/searchDest'], { queryParams: { city: destination } });
+    } else {
+      // Fallback se non c'è la destinazione salvata
+      this.router.navigate(['/searchDest']);
+    }
+  }
 
   ngOnInit(): void {
     this.generateBookingCode();
@@ -178,6 +196,8 @@ export class PrenotazionePageComponent implements OnInit {
     this.bookingData.bookingCode = result;
   }
 
+
+  
   printConfirmation(): void {
     window.print();
   }
@@ -186,3 +206,7 @@ export class PrenotazionePageComponent implements OnInit {
     this.router.navigate(['/']);
   }
 }
+
+
+
+

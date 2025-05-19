@@ -635,3 +635,18 @@
     text-align: left !important;
   }
 }
+
+
+button {
+  display: block;
+  padding: 12px 25px;
+  background: linear-gradient(90deg, #3a7bd5 0%, #03a4c8 100%);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: linear-gradient(90deg, #1c4277 0%, #015a6d 100%);
+}
