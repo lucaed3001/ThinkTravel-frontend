@@ -22,6 +22,8 @@ export class SearchDestinationHomepageComponent {
   selectedCityName: string = '';
   selectedCityDescription: string = '';
   cityImages: string[] = [];
+  selectedCityPhotoUrl: string = '';
+
   
   urlDNS:string = "http://thinktravel.ddns.net:8000";
 constructor( private functionApi: FunzioniApiService,private router: Router) {  }
@@ -118,7 +120,7 @@ async searchDestination() {
 }
 
 //con il click del plsante della card 
-async searchDestinationClick(id:string,nome:string) {
+async searchDestinationClick(id: string, nome: string) {
   this.searchQuery = nome;
 
   try {
@@ -129,9 +131,16 @@ async searchDestinationClick(id:string,nome:string) {
     // Pulisci i risultati città
     this.searchResults = [];
 
+    // Trova la descrizione della città selezionata
+    const city = [...this.defaultCities, ...this.searchResults].find(c => c.id === id);
+    this.selectedCityName = nome;
+    this.selectedCityDescription = city?.description || '';
+    this.selectedCityPhotoUrl = city?.photoUrl || 'assets/default-city.jpg';
+    
+
     this.hotels = await Promise.all(response.map(async (hotel: any) => {
       try {
-        const imageNames = await this.functionApi.getImgHotel(hotel.id); // Usa funzione corretta
+        const imageNames = await this.functionApi.getImgHotel(hotel.id);
         const imageUrl = imageNames.length > 0
           ? this.urlDNS + `/images/hotels/${imageNames[0]}`
           : 'assets/default-hotel.jpg';
@@ -154,6 +163,7 @@ async searchDestinationClick(id:string,nome:string) {
     console.error('Errore ricerca hotel:', error);
   }
 }
+
 async returnToHome()
 {
   const typeUt=localStorage.getItem('type');

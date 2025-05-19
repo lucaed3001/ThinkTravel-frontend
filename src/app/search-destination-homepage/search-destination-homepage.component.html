@@ -95,10 +95,26 @@
   <!-- Hotel results: show hotels of selected city -->
   
   <div *ngIf="hotels.length > 0" class="search-view">
-    <div class="section-header">
-      <h2 class="section-title">Hotels in "{{ searchQuery }}"</h2>
-      <p class="result-count">{{ hotels.length }} hotel(s) found</p>
-    </div>
+    <div *ngIf="hotels.length > 0" class="search-view">
+      <div class="city-info-wrapper">
+        <!-- Info card sinistra -->
+        <div class="city-info-card">
+          <h2 class="city-title">{{ selectedCityName }}</h2>
+          <p class="city-description">{{ selectedCityDescription }}</p>
+         
+        </div>
+      
+        <!-- Immagini a destra -->
+        <div class="city-images">
+          <img [src]="selectedCityPhotoUrl" [alt]="selectedCityName" class="city-photo" />
+          <img [src]="selectedCityPhotoUrl" [alt]="selectedCityName" class="city-photo" />
+        </div>
+      </div>
+      <h2 class="hotel">{{ hotels.length }} hotels found in {{selectedCityName}}</h2>
+      
+      </div>
+      
+    
 
     <div class="search-results-grid">
       <div *ngFor="let hotel of hotels" class="result-card">
