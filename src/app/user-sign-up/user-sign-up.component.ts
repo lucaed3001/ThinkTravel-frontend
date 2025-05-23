@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class UserSignUpComponent {
   loginForm: FormGroup;
 
-  countries: { name: string; _id: string }[] = [];// Array per la dropdown
+  countries: any[] = [];// Array per la dropdown
 
   errorMessage = ''; // Per gestire errori
   successMessage = ''; // Per gestire successo
@@ -33,7 +33,7 @@ export class UserSignUpComponent {
       country:['', Validators.required]
     });
   }
-  //prende le country ---------------  DEVO CONTROLLARE
+
   async ngOnInit() {
    
       //country nuovooo
@@ -44,7 +44,7 @@ export class UserSignUpComponent {
         // imposto il primo paese come valore di default
         if (this.countries.length > 0) {
           this.loginForm.patchValue({
-            country: this.countries[0]._id
+            country: this.countries[0].id.toString()
           });
         }
       } catch (error) {
@@ -56,15 +56,18 @@ export class UserSignUpComponent {
 
   //inizio prova registrazione user
   async onSubmit() {
+    
     if (this.loginForm.valid) {
    try {
     const { email, password, name, surname, country } = this.loginForm.value; // ottengo i dati
+    console.log('Valore di country:', country);
+    console.log('È un numero?', !isNaN(parseInt(country)));
 
-      const hashedPassword = CryptoJS.SHA512(password).toString(); // crypto la password
+      //const hashedPassword = CryptoJS.SHA512(password).toString(); // crypto la password
         // Invia i dati al servizio di registrazione
         const success = await this.signUpUserService.registerUser(
           email,
-          hashedPassword,
+          password,
           country,
           name,
           surname

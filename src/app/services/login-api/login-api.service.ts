@@ -17,7 +17,7 @@ export class LoginApiService {
   constructor() { }
 
   async newLogin(email: string, password: string): Promise<{ success: boolean, userType?: string }> {
-    const hashedPassword = crypto.SHA512(password).toString();
+    //const hashedPassword = crypto.SHA512(password).toString();
 
   const orgBody = JSON.stringify({
     email,

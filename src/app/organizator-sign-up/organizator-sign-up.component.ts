@@ -56,7 +56,7 @@ export class OrganizatorSignUpComponent {
             // Invia i dati al servizio di registrazione
             const success = await this.signUpUserService.registerOrg(
               email,
-              hashedPassword,
+              password,
               country,
               name,
               iva,

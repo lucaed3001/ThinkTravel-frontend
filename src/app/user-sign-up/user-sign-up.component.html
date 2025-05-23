@@ -44,7 +44,7 @@
             <i class="fas fa-globe icon"></i>
             <select formControlName="country">
               <option value="" disabled selected>Select Your Country</option>
-              <option *ngFor="let country of countries" [value]="country._id">
+              <option *ngFor="let country of countries" [value]="country.id">
                 {{ country.name }}
               </option>
             </select>

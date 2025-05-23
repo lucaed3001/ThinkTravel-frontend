@@ -20,7 +20,14 @@ export class SignUpUserService {
     name: string,
     surname: string
   ): Promise<boolean> {
+
     const countryAsNumber = parseInt(country);
+    console.log(countryAsNumber)
+
+     if (isNaN(countryAsNumber)) {
+        console.error('Paese non valido:', country);
+        return false;
+    }
   const userData = { 
     "email":email,
     "password": password,
@@ -31,13 +38,14 @@ export class SignUpUserService {
 console.log(JSON.stringify(userData))
 
     try {
-      const response = await fetch(this.apiUrl, {//this.apiUrl
+      const response = await fetch(this.apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData)
       });
+      console.log(userData)
 
       if (!response.ok) {
   if (response.status === 409) {
@@ -53,17 +61,23 @@ console.log(JSON.stringify(userData))
   }
 }
 
-      const responseJSON = await response.json();
+      const dataUser = await response.json();
 
-      if (response.status==201) {
-        console.log('Registrazione riuscita:', responseJSON);
-        localStorage.setItem('userData', JSON.stringify(responseJSON));
+      if (response.status===200) {
+        console.log('Registrazione riuscita:', dataUser);
+        //localStorage.setItem('userData', JSON.stringify(responseJSON));
+         if (dataUser.access_token) {
+      localStorage.setItem('token', dataUser.token);
+    }
+
+    localStorage.setItem('userData', JSON.stringify(dataUser.user));
+
         return true;
       } else {
         throw new Error('Registrazione fallita');
       }
     } catch (error) {
-      //console.error('Errore durante la registrazione:', error);
+      console.error('Errore durante la registrazione:', error);
       return false;
     }
   }
@@ -119,8 +133,6 @@ console.log(JSON.stringify(userData))
       return false;
     }
   }
-   //-------------------------------------------
-
   //-------------------------------------------
   // get countriesNew
   async getCountriesNew(): Promise<{ name: string; _id: string }[]> {
