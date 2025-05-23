@@ -21,7 +21,7 @@ export class LoginApiService {
 
   const orgBody = JSON.stringify({
     email,
-    password: hashedPassword,
+    password: password,
   });
 
   try {

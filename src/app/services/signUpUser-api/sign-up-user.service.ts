@@ -121,28 +121,6 @@ console.log(JSON.stringify(userData))
   }
    //-------------------------------------------
 
-
-   async getCountries(): Promise<{ name: string; _id: string }[]> {
-    try {
-      console.log(this.countriesApiUrl)
-      const response = await fetch(this.countriesApiUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Errore HTTP: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Errore nel recupero dei paesi:', error);
-      return [];
-    }
-  }
-
   //-------------------------------------------
   // get countriesNew
   async getCountriesNew(): Promise<{ name: string; _id: string }[]> {

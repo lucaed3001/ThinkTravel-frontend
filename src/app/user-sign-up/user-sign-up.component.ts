@@ -36,23 +36,6 @@ export class UserSignUpComponent {
   //prende le country ---------------  DEVO CONTROLLARE
   async ngOnInit() {
    
-   //get country vecchio
-    /* try {
-      // Ottieni i paesi tramite il servizio
-      this.countries = await this.signUpUserService.getCountries();
-      console.log(this.countries);
-      // imposto il primo paese come valore di default
-      if (this.countries.length > 0) {
-        this.loginForm.patchValue({
-          country: this.countries[0]._id
-        });
-      }
-    } catch (error) {
-      console.error('Errore durante il recupero dei paesi:', error);
-    }*/
-
-
-
       //country nuovooo
       try {
         // Ottieni i paesi tramite il servizio
