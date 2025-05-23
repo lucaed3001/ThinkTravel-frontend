@@ -10,7 +10,6 @@ import { OrganizatorHomeComponent } from './organizator-home/organizator-home.co
 import { DestinationPageComponent } from './destination-page/destination-page.component';
 import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
-import { SearchDestinationHomepageComponent } from './search-destination-homepage/search-destination-homepage.component';
 
 @Component({
   selector: 'app-root',
