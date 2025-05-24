@@ -77,10 +77,10 @@ console.log("ciao "+this.defaultCities[1].name);
 }
 
 async searchDestination() {
-  if (!this.searchQuery) {
-    console.warn('Inserire una destinazione per effettuare la ricerca.');
-    return;
-  }
+    if (this.searchQuery.trim().length > 0) {
+    this.searchActive = true;
+
+  } 
 
   // Pulisce gli hotel e dettagli precedenti
   this.hotels = [];
