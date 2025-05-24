@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class FunzioniApiService {
   private baseUrl:string = "http://localhost:8000";
-  private baseUrlNew:string = "http://thinktravel.ddns.net:8000";
+  public baseUrlNew:string = "http://thinktravel.ddns.net:8000";
   private urlCity = this.baseUrl + '/cities';
   private countriesApiUrl = this.baseUrlNew+'/locations/countries/names';
 
@@ -102,6 +102,7 @@ console.log(token);
     console.error('Errore nel recupero dati utente:', error);
     return null;
   }
+  
 }
 
 
@@ -170,39 +171,32 @@ async getFiveCities(c:number): Promise<
   }
 }
 //random city nuovo
-async getRandomCities(c:number): Promise<
-  {
-    _id: string;
-    name: string;
-    country: {
-      name: string;
-      id: string;
-    };
-    description: string;
-  }[]
-> {
-  const country_id_rnd=localStorage.getItem("country_id");
+async getRandomCities(c: number, countryId?: string | number): Promise<any[]> {
   try {
-    let URL:string="";
-    if(country_id_rnd!=""){
-      URL=this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang+"&country_id="+country_id_rnd;
+    let URL = `${this.baseUrlNew}/locations/cities/suggested/${c}?lang=${this.lang}`;
+    if (countryId !== undefined && countryId !== null) {
+      URL += `&country_id=${countryId}`;
     }
-    else{
-      URL=this.baseUrlNew+"/locations/cities/suggested/"+c+"?lang="+this.lang;
-    }
-    const response = await fetch(URL,{
+
+    const response = await fetch(URL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    console.log(response);
+
+    if (!response.ok) {
+      throw new Error('Errore HTTP: ' + response.status);
+    }
     return await response.json();
   } catch (error) {
     console.error('Errore nel recupero delle città:', error);
     return [];
   }
 }
+
+
+
 
 //hotel random
 

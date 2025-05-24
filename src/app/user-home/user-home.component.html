@@ -88,35 +88,23 @@
   <div class="section-header">
     <h2 class="section-title">MOST RECOMMENDED</h2>
     <p class="section-subtitle">Discover the top travel destinations in your country</p>
+    
   </div>
-
-  <div class="cities-grid">
-    <div *ngFor="let city of cities" class="city-card">
-      <div class="card-image">
-        <img [src]="city.photos" [alt]="city.name" class="city-image" />
-        <div class="image-overlay"></div>
-        <span class="rating-badge">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="gold" stroke="gold" stroke-width="2">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-          </svg>
-          TOP RATED
-        </span>
+  <div class="destinations-grid">
+    <div *ngFor="let cit of cities" class="destination-card">
+      <div class="image-container">
+        <img *ngIf="cit.photoUrl" [src]="cit.photoUrl" [alt]="cit.name" />
       </div>
-      
       <div class="card-content">
-        <div class="location-info">
-          <h3 class="city-name">{{ city.name }}</h3>
-          <div class="country">
-            <span class="flag">{{ city.country.flag }}</span>
-            <span class="country-name">{{ city.country.name }}</span>
-          </div>
-        </div>
-        
-        <p class="city-description">{{ city.description }}</p>
-
+        <h3 class="city-name">{{ cit.name }}</h3>
+        <p class="city-description">{{ cit.description }}</p>
       </div>
     </div>
   </div>
+  
+  
+  
+  
 </section>
 
 <!--End in your country-->

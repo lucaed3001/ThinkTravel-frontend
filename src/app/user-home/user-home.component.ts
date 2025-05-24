@@ -21,6 +21,7 @@ export class UserHomeComponent{
   searchQuery: string = '';
   submitted: boolean = false;
   cities: any[] = [];
+   baseUrlNew:string = "http://thinktravel.ddns.net:8000";
 
   @ViewChild('profileSidebar') profileSidebar!: SideBarComponent;
   isCollapsed = true;
@@ -29,63 +30,64 @@ export class UserHomeComponent{
   constructor(private fb: FormBuilder,private router: Router,private funzioniApiService:FunzioniApiService) {  }
 
   async ngOnInit() {
-    console.log(localStorage.getItem("type"))
-
-    const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati --> posso poi toglierlo
-
-    const provaMeData=await this.funzioniApiService.getUserData();//recupero dati utente
-    console.log("prova me: "+provaMeData.name);
-    
-    if (provaMeData) {
-      //const userData = JSON.parse(userDataString); // Converte in oggetto
-      this.userName = provaMeData.name; // Estrae il campo "name"
-    }
+    const userData = await this.funzioniApiService.getUserData();
+    this.userName = userData?.name || '';
+    console.log("User country ID:", userData?.country);
+  
     try {
-
-      const responseQuattro=await this.funzioniApiService.getFiveCities(4);
-  // Mappatura delle liste ricevute dal server
-
-  this.cities = this.mapCities(responseQuattro); // Per "Most Recommended"
-
-  console.log('Most Recommended:', this.cities);
-  } catch (error) {
-    console.error('Errore durante il recupero delle città:', error);
+      const nationId = userData?.country;
+  
+      // Passa nationId come secondo argomento
+      const responseCities = await this.funzioniApiService.getRandomCities(5, nationId);
+  
+      // Per ogni città recupera l'immagine vera
+      this.cities = await Promise.all(
+        responseCities.map(async (citta: any) => {
+          try {
+            const imageNames = await this.funzioniApiService.getImgCity(citta.id);
+            const imageUrl = (imageNames.length > 0)
+              ? this.funzioniApiService.baseUrlNew + `/images/cities/${imageNames[0]}`
+              : '';
+  
+            return {
+              ...citta,
+              photoUrl: imageUrl,
+              description: citta.description || 'Nessuna descrizione disponibile',
+              countryName: citta.country?.name || 'Nazione sconosciuta'
+            };
+          } catch (error) {
+            console.error(`Errore nel recupero immagine per ${citta.name}:`, error);
+            return {
+              ...citta,
+              photoUrl: '',
+              description: citta.description || 'Nessuna descrizione disponibile',
+              countryName: citta.country?.name || 'Nazione sconosciuta'
+            };
+          }
+        })
+      );
+  
+    } catch (error) {
+      console.error('Errore durante il recupero delle città:', error);
     }
-  console.log(this.cities);
   }
+  
   // Metodo per mappare le città e gestire il Base64
-private mapCities(cities: any[]): any[] {
-  return cities.map((city: any) => {
-    if (city.photos && city.photos.length > 0) {
-      let firstPhotoBase64 = city.photos[0];
 
-      // Controlla e rimuove eventuali prefissi se presenti
-      if (typeof firstPhotoBase64 === 'string' && firstPhotoBase64.startsWith('data:')) {
-        const base64Index = firstPhotoBase64.indexOf('base64,') + 'base64,'.length;
-        firstPhotoBase64 = firstPhotoBase64.substring(base64Index);
-      } if (city.photos && city.photos.length > 0) {
-        let firstPhotoBase64 = city.photos[0];
-
-        return {
-          ...city,
-          photoUrl: `data:image/jpeg;base64,${firstPhotoBase64}` // Usa solo la prima immagine
-        };
-      } else {
-        console.warn(`Nessuna foto disponibile per la città: ${city.name}`);
-        return {
-          ...city,
-          photoUrl: '' // Foto vuota se non ci sono immagini disponibili
-        };
-      }
-    } else {
-      console.warn(`Nessuna foto disponibile per la città: ${city.name}`);
+  private mapCities(cities: any[]): any[] {
+    return cities.map((city: any) => {
+      console.log('photos:', city.photos);
       return {
         ...city,
-        photoUrl: '' // Foto vuota se non ci sono immagini disponibili
+        photoUrl: city.photos && city.photos.length > 0 ? city.photos[0] : null,
+        description: city.description || 'Nessuna descrizione disponibile',
+        countryName: city.country?.name || 'Nazione sconosciuta'
       };
-    }
-  });
-}
+    });
+  }
+  
+  
+
   logout() {
     localStorage.removeItem('userData'); // Rimuove i dati dell'utente dalla localStorage
     console.log(localStorage.getItem("type"))
@@ -107,6 +109,7 @@ private mapCities(cities: any[]): any[] {
     // Salva il valore della città nel localStorage
     localStorage.setItem('searchCity', this.searchQuery.trim());
     localStorage.setItem('type',"user");
+    
     // Naviga alla pagina "searchDest"
     this.router.navigate(['/searchDest']);
   }
