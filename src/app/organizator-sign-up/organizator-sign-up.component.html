@@ -2,55 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Travelista Tours Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Travelista Tours - Organizator Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 </head>
 <body>
   <div class="full-screen">
-    <!-- Left: image + quote -->
+    <!-- Left panel with background image and quote -->
     <div class="left-panel">
-
+      
     </div>
 
-    <!-- Right: login -->
-    <div class="right-panel">
-      <div class="plane-icon"><a href="">🏠</a></div>
-      <h2>Join out travel community</h2>
-      <p>create your organizator account</p>
-      <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!-- Right panel with form -->
+    <div class="right-panel" style="position: relative;">
+      <div class="home-icon">
+        <a href="/">
+          <i class="fas fa-home"></i>
+        </a>
+      </div>
+      
+
+      <h2>Join our travel community</h2>
+      <p>Create your organizator account</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <i class="fas fa-envelope"></i>
-          <input type="email" id="email" formControlName="email" required placeholder="Enter your email">
+          <input type="email" id="email" formControlName="email" required placeholder="Enter your email" />
         </div>
         <div class="form-group">
           <i class="fas fa-lock"></i>
-          <input type="password" id="password" formControlName="password" required placeholder="Enter your password">
+          <input type="password" id="password" formControlName="password" required placeholder="Enter your password" />
         </div>
         <div class="form-group">
           <i class="fas fa-globe icon"></i>
-          <select formControlName="country">
+          <select formControlName="country" required>
             <option value="" disabled selected>Select Your Country</option>
-            <option *ngFor="let country of countries" [value]="country._id">
-              {{ country.name }}
-            </option>
+            <!-- ngFor countries here -->
+            <option *ngFor="let country of countries" [value]="country._id">{{ country.name }}</option>
           </select>
         </div>
         <div class="form-group">
           <i class="fas fa-building icon"></i>
-          <input type="text" placeholder="Organization Name" formControlName="name">
+          <input type="text" placeholder="Organization Name" formControlName="name" />
         </div>
         <div class="form-group">
-          <div class="input-group half-width">
-            <i class="fas fa-id-card icon"></i>
-            <input type="text" placeholder="VAT Number" formControlName="iva">
-          </div>
-          </div>
-          <div class="form-group">
-            <i class="fas fa-phone icon"></i>
-            <input type="tel" placeholder="Phone Number" formControlName="phone">
-          </div>
+          <i class="fas fa-id-card icon"></i>
+          <input type="text" placeholder="VAT Number" formControlName="iva" />
+        </div>
+        <div class="form-group">
+          <i class="fas fa-phone icon"></i>
+          <input type="tel" placeholder="Phone Number" formControlName="phone" />
+        </div>
+
         <button class="btn" [disabled]="loginForm.invalid">REGISTER</button>
       </form>
 
@@ -61,5 +67,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>

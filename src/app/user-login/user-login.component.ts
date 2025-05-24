@@ -46,6 +46,10 @@ export class UserLoginComponent {
       console.log('Il form non è valido');
     }
   }
+  goBack(): void {
+    window.history.back();
+  }
+  
 }
 
 
