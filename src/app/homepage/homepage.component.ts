@@ -178,11 +178,17 @@ selectedCountry: any = null;
 async loadRandomCities() {
   console.log("Funzione chiamata")
   try {
-    // 1. Ottieni città random
-    const random = await this.functionApi.getRandomCities(5);
+    // Prendi l'id della nazione selezionata oppure null
+    const nationId = this.selectedCountry ? this.selectedCountry.id : null;
+
+    // Passa nationId solo se esiste
+    const random = nationId
+      ? await this.functionApi.getRandomCities(5, nationId)
+      : await this.functionApi.getRandomCities(5);
+
     console.log("Città random:", random);
 
-    // 2. Ottieni immagini e costruisci oggetti città con foto
+    // Ottieni immagini e costruisci oggetti città con foto
     this.citys = await Promise.all(
       random.map(async (citta: any) => {
         try {
@@ -205,13 +211,13 @@ async loadRandomCities() {
       })
     );
     this.citys = [...this.citys]; 
-  this.dropdownOpen = false;
-  this.cdr.detectChanges();
+    this.dropdownOpen = false;
+    this.cdr.detectChanges();
   } catch (error) {
     console.error("Errore nel caricamento delle città random:", error);
   }
-   
 }
+
 }
 
 
