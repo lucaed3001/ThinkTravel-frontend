@@ -100,51 +100,57 @@
   
   <div *ngIf="hotels.length > 0" class="search-view">
     <div *ngIf="hotels.length > 0" class="search-view">
-      <div class="city-info-wrapper">
-        <!-- Info card sinistra -->
-        <div class="city-info-card">
-          <h2 class="city-title">{{ selectedCityName }}</h2>
+      <!-- Hero Section -->
+      <section class="city-hero">
+        <div class="hero-content">
+          <h1 class="city-title">{{ selectedCityName }}</h1>
           <p class="city-description">{{ selectedCityDescription }}</p>
-         
+          <div class="hotel-count">
+            <span class="count-badge">{{ hotels.length }}</span>
+            <span class="count-label">hotels available</span>
+          </div>
         </div>
-      
-        <!-- Immagini a destra -->
-        <div class="city-images">
-          <img [src]="selectedCityPhotoUrl" [alt]="selectedCityName" class="city-photo" />
-          <img [src]="selectedCityPhotoUrl" [alt]="selectedCityName" class="city-photo" />
-        </div>
-      </div>
-      <h2 class="hotel">{{ hotels.length }} hotels found in {{selectedCityName}}</h2>
-      
-      </div>
-      
     
-
-    <div class="search-results-grid">
-      <div *ngFor="let hotel of hotels" class="result-card">
-        <div class="result-media">
-          <img [src]="hotel.photoUrl" [alt]="hotel.name" class="result-image" />
-          <div class="quick-book">Quick Book</div>
+        <div class="hero-gallery">
+          <div class="gallery-main">
+            <img [src]="selectedCityPhotoUrl" [alt]="selectedCityName" class="city-photo" />
+           </div>
         </div>
-        <div class="result-content">
-          <h3 class="result-title">{{ hotel.name }}</h3>
-          <div class="result-address">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-              viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2">
+        
+      </section>
+    
+      <!-- Hotel Listing Header -->
+      <div class="section-header">
+        <h2 class="section-title">Explore {{ selectedCityName }}</h2>
+        <p class="section-subtitle">Find the perfect accommodation for your trip</p>
+      </div>
+    </div>
+    
+      
+    <div class="hotel-grid">
+      <div *ngFor="let hotel of hotels" class="hotel-card">
+        <div class="hotel-image-wrapper">
+          <img [src]="hotel.photoUrl" [alt]="hotel.name" class="hotel-image" />
+        </div>
+        <div class="hotel-content">
+          <h3 class="hotel-name">{{ hotel.name }}</h3>
+          <div class="hotel-address">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
             {{ hotel.address }}
           </div>
-          <p class="result-description">{{ hotel.description }}</p>
-          <button class="explore-btn"
-            (click)="addPrenotation(hotel.name, hotel.address, hotel.photoUrl,hotel.description)">
-            Book Now
+          <p class="hotel-description">{{ hotel.description }}</p>
+          <button class="hotel-book-btn"
+            (click)="addPrenotation(hotel.name, hotel.address, hotel.photoUrl, hotel.description)">
+            <span>Book Now</span>
           </button>
         </div>
       </div>
     </div>
+
   </div>
 
 </section>
