@@ -154,30 +154,86 @@ form {
   background-color: #005bb5;
 }
 
-.or {
+.register-container {
   text-align: center;
-  margin: 2rem 0 1.5rem;
-  color: #999;
+  margin-top: 2.5rem;
+  font-family: 'Poppins', sans-serif;
+  color: #e0e0ff; /* testo chiaro in tema */
+}
+
+.register-text {
+  font-size: 1.3rem;
   font-weight: 600;
+  margin-bottom: 1.3rem;
 }
 
-.register {
-  font-size: 0.95rem;
-  color: #555;
-  text-align: center;
-  max-width: 400px;
+/* Bottoni affiancati */
+.register-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
 }
 
-.register a {
-  color: #0077ff;
+/* Stile base bottone */
+/* Base bottone */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
   text-decoration: none;
-  font-weight: 600;
-  margin: 0 0.3rem;
-  transition: color 0.3s ease;
+  user-select: none;
+  background-color: #0077ff; /* blu ThinkTravel */
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 119, 255, 0.3);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  min-width: 160px;
+  text-align: center;
+  position: relative;
 }
 
-.register a:hover {
-  color: #005bb5;
+/* Icona nel bottone */
+.btn i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effetto */
+.btn:hover {
+  box-shadow: 0 8px 20px rgba(0, 119, 255, 0.5);
+  transform: translateY(-3px);
+}
+
+/* Hover icona animata */
+.btn:hover i {
+  transform: translateX(5px);
+}
+
+/* Bottone organizer e user identici, solo testo differente */
+.btn-organizator, .btn-user {
+  background-color: #0077ff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .register-buttons {
+    gap: 0.8rem;
+  }
+  .btn {
+    min-width: 140px;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+  }
+  .btn i {
+    font-size: 1.1rem;
+  }
 }
 
 /* RESPONSIVE */
