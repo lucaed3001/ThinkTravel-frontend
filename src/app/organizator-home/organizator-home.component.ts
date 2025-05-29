@@ -3,6 +3,7 @@ import {RouterOutlet, RouterLink} from '@angular/router';
 import {  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
+import { FunzioniApiService } from '../services/search-api/funzioni-api.service';
 
 @Component({
   selector: 'app-organizator-home',
@@ -12,7 +13,7 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class OrganizatorHomeComponent{
   orgName: string | null = ''; // Per salvare il nome dell'utente
-  constructor(private router: Router) {}
+  constructor(private router: Router,private funzioniApiService:FunzioniApiService) {}
   ngOnInit() {
     const orgDataString = localStorage.getItem('orgData'); // Recupera i dati salvati
     if (orgDataString) {
@@ -36,5 +37,11 @@ export class OrganizatorHomeComponent{
     localStorage.setItem('type',"org");
     // Naviga alla pagina "searchDest"
     this.router.navigate(['/searchDest']);
+  }
+
+    //controllo token valido
+  controlloToken(){
+    this.funzioniApiService.ensureAuthenticated();
+    
   }
 }

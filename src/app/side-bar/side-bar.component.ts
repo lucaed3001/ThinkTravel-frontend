@@ -20,7 +20,7 @@ constructor(private funzioniApiService:FunzioniApiService) {  }
 
     //recupero dati utente 
   this.userData = await this.funzioniApiService.getUserData();
-  console.log("dati utente side bar "+this.userData);
+  console.log("dati utente side bar "+this.userData.name);
 
 }
 

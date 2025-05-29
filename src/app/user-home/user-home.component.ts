@@ -72,21 +72,6 @@ export class UserHomeComponent{
     }
   }
   
-  // Metodo per mappare le città e gestire il Base64
-
-  private mapCities(cities: any[]): any[] {
-    return cities.map((city: any) => {
-      console.log('photos:', city.photos);
-      return {
-        ...city,
-        photoUrl: city.photos && city.photos.length > 0 ? city.photos[0] : null,
-        description: city.description || 'Nessuna descrizione disponibile',
-        countryName: city.country?.name || 'Nazione sconosciuta'
-      };
-    });
-  }
-  
-  
 
   logout() {
     localStorage.removeItem('userData'); // Rimuove i dati dell'utente dalla localStorage

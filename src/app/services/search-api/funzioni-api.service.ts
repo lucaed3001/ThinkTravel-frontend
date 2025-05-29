@@ -9,6 +9,9 @@ export class FunzioniApiService {
   public baseUrlNew:string = "http://thinktravel.ddns.net:8000";
   private urlCity = this.baseUrl + '/cities';
   private countriesApiUrl = this.baseUrlNew+'/locations/countries/names';
+  private countryIdApi = this.baseUrlNew+'/locations/countries';
+  private userImgApi=this.baseUrlNew+'/auth/user/image';
+  private uploadImgUserApi=this.baseUrlNew+'/auth/user/upload-image';
 
   private lang=localStorage.getItem("lang");
   
@@ -313,6 +316,8 @@ console.log(token);
     return null;
   }
 }
+
+//GET COUNTRY NEW
 async getCountriesNew(): Promise<{ name: string; _id: string }[]> {
 
   try {
@@ -337,7 +342,97 @@ async getCountriesNew(): Promise<{ name: string; _id: string }[]> {
   }
 }
 
-//prova per controllo token 
+// GET COUNTRY ID
+async getCountry(id:number): Promise<{id: string }[]> {
+
+  try {
+    const response = await fetch(this.countryIdApi+"/"+id+"?lang="+this.lang, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Errore HTTP: ${response.status}`);
+    }
+    console.log("paese"+response);
+    const country = await response.json();
+    console.log(country);
+    return country;
+
+  }  catch (error) {
+    console.error('Errore nel recupero del paese:', error);
+    return [];
+  }
+}
+
+//GET USER IMAGE
+async getUserImg(): Promise<Blob | null> {//string
+  const token = localStorage.getItem('token');
+  console.log("img token:", token);
+
+  try {
+    const response = await fetch(this.userImgApi, {
+      method: 'GET',
+       mode: 'cors',
+      headers: {
+        'Authorization': `Bearer ${token}` 
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Errore HTTP ${response.status}`);
+    }
+
+
+      const blob = await response.blob();
+    /*let imageUrl = URL.createObjectURL(blob);
+
+    console.log("URL temporaneo immagine:", imageUrl);
+    return imageUrl;*/
+    console.log(blob)
+    return blob;
+
+
+  } catch (error) {
+    console.error("Errore nel recupero dell'immagine:", error);
+    return null;
+  }
+}
+
+
+//UPLOAD USER IMAGE
+async uploadUserImg(file: File): Promise<any> {
+  const token = localStorage.getItem('token');
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await fetch(this.uploadImgUserApi, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Errore durante l\'upload dell\'immagine');
+    }
+
+    const result = await response.json(); // il backend restituisce JSON
+    console.log("Risposta upload:", result);
+
+    return result;
+
+  } catch (error) {
+    console.error('Errore nel caricamento immagine:', error);
+    return null;
+  }
+}
+
+//CONTROLLO TOKEN 
 isTokenValid(): boolean {
   const token = localStorage.getItem('token');
   if (!token) return false;

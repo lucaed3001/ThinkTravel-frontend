@@ -29,7 +29,8 @@ export class OrganizatorSignUpComponent {
       name:['', Validators.required],
       country:['', Validators.required],
       iva:['', Validators.required],
-      phone:['', Validators.required]
+      phone:['', Validators.required],
+      address:['',Validators.required]
     });
   }
   async ngOnInit() {
@@ -50,7 +51,7 @@ export class OrganizatorSignUpComponent {
     async onSubmit() {
         if (this.loginForm.valid) {
        try {
-        const { email, password, name, iva, country,phone } = this.loginForm.value; // ottengo i dati
+        const { email, password, name, iva, country,phone,address } = this.loginForm.value; // ottengo i dati
 
           const hashedPassword = CryptoJS.SHA512(password).toString(); // crypto la password
             // Invia i dati al servizio di registrazione
@@ -60,7 +61,8 @@ export class OrganizatorSignUpComponent {
               country,
               name,
               iva,
-              phone
+              phone,
+              address
             );
 
             if (success) {

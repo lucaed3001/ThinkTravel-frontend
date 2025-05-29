@@ -6,7 +6,7 @@
       
       <div class="profile-header">
         <div class="avatar-container">
-            <img [src]="user.avatar || 'assets/default-avatar.jpg'" alt="Avatar" class="avatar" (click)="onAvatarClick()" id="avatar" />
+            <img [attr.src]="userImg" alt="Avatar" class="avatar" (click)="onAvatarClick()" id="avatar" />
             <button class="edit-avatar-btn" (click)="onAvatarClick()">
               <i class="fas fa-camera"></i>
             </button>
@@ -44,15 +44,15 @@
               </div>
               <div class="info-row">
                 <span class="info-label">Telefono:</span>
-                <span class="info-value">{{ user.phone || 'Non specificato' }}</span>
+                <span class="info-value">{{ userData.phone || 'Non specificato' }}</span>
               </div>
               <div class="info-row">
                 <span class="info-label">Data di nascita:</span>
-                <span class="info-value">{{ user.birthDate | date:'dd/MM/yyyy' }}</span>
+                <span class="info-value">{{ userData.birthDate || 'Non specificato' }}</span>
               </div>
               <div class="info-row">
                 <span class="info-label">Paese:</span>
-                <span class="info-value">{{ user.country || 'Non specificato' }}</span>
+                <span class="info-value">{{ country.name || 'Non specificato' }}</span>
               </div>
             </div>
   

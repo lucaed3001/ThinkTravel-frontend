@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { RouterLink } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FunzioniApiService } from '../services/search-api/funzioni-api.service';
 @Component({
   selector: 'app-user-profile',
   imports: [RouterLink,CommonModule,FormsModule,NgbModule,CommonModule],
@@ -12,13 +13,33 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 export class UserProfileComponent {
 
   userData:any;
+  country:any;
+  userImg:any;
 
-  async ngOnInit() {
-  const userDataString = localStorage.getItem('userData'); // Recupera i dati salvati
-  if (userDataString) {
-    this.userData = JSON.parse(userDataString); // Converte in oggetto
+  private previousUserImgUrl: string | null = null;//---
+
+constructor(private funzioniApiService:FunzioniApiService) {  }
+/*
+async ngOnInit() {
+this.userData = await this.funzioniApiService.getUserData();
+ // console.log("dati utente side bar "+this.userData.name);
+  this.userImg=await this.funzioniApiService.getUserImg();
+  //console.log(this.userImg);
+  this.country= await this.funzioniApiService.getCountry(this.userData.country);
+}*/
+async ngOnInit() {
+  this.userData = await this.funzioniApiService.getUserData();
+
+const blob = await this.funzioniApiService.getUserImg();
+  if (blob) {
+    if (this.userImg) URL.revokeObjectURL(this.userImg);
+    this.userImg = URL.createObjectURL(blob);
   }
+
+console.log(this.userImg);
+  this.country = await this.funzioniApiService.getCountry(this.userData.country);
 }
+
 
   @Input() isVisible: boolean = true;
   @Output() closed = new EventEmitter<void>();
@@ -95,16 +116,49 @@ export class UserProfileComponent {
     this.fileInput.nativeElement.click();
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.user.avatar = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
+/*
+onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+
+    this.funzioniApiService.uploadUserImg(file).then(success => {
+      if (success) {
+        this.funzioniApiService.getUserImg().then(url => {
+          if (url) {
+              if (this.userImg) {
+              URL.revokeObjectURL(this.userImg);
+            }
+            this.userImg = url;
+          }
+        });
+      }
+    });
   }
+}
+*/
+onFileSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+
+    this.funzioniApiService.uploadUserImg(file).then(success => {
+      if (success) {
+        this.funzioniApiService.getUserImg().then(blob => {
+          if (blob) {
+            if (this.userImg) {
+              URL.revokeObjectURL(this.userImg);
+            }
+
+            let imageUrl = URL.createObjectURL(blob);
+            this.userImg = imageUrl;
+          }
+        });
+      }
+    });
+  }
+}
+
+
 
 }

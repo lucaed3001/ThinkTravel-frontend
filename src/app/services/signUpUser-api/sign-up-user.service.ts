@@ -13,6 +13,7 @@ export class SignUpUserService {
 
   constructor() { }
 
+  //----------------------REGISTRAZIONE UTENTE
   async registerUser(
     email: string,
     password: string,
@@ -82,57 +83,79 @@ console.log(JSON.stringify(userData))
     }
   }
 
-//-----------------------------------
+//-----------------------------------REGISTRAZIONE ORGANIZZATORE 
   async registerOrg(
-    email: string,
-    password: string,
-    country: string,
-    name: string,
-    iva: string,
-    phone:string
-  ): Promise<boolean> {
-    const userData = { email, password, country, name, iva,phone };
-console.log(JSON.stringify(userData))
-    try {
-      const response = await fetch(this.apiUrlOrg, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({//(userData),
-        email,
-        password,
-        name,
-        iva,
-        country,
-        phone
-        }),
-      });
+  email: string,
+  password: string,
+  country: string, // sarà mappato in city
+  name: string,
+  iva: string,     // sarà mappato in vat
+  phone: string,
+  address: string
+): Promise<boolean> {
 
-      if (!response.ok) {
-         if(response.status==409){
-          console.log('Organizzatore già registrato');
-          return false;
-        }else if(response.status==500){
-          console.log('Errore interno');
-          return false;
-        }
-      }
+  const cityAsNumber = parseInt(country);
 
-      const responseJSON = await response.json();
-
-      if (response.status==201) {
-        console.log('Registrazione riuscita:', responseJSON);
-        localStorage.setItem('orgData', JSON.stringify(responseJSON));
-        return true;
-      } else {
-        throw new Error('Registrazione fallita');
-      }
-    } catch (error) {
-      //console.error('Errore durante la registrazione:', error);
-      return false;
-    }
+  if (isNaN(cityAsNumber)) {
+    console.error('Paese non valido:', country);
+    return false;
   }
+
+  const orgData = {
+    email: email,
+    password: password,
+    name: name,
+    address: address,
+    city: cityAsNumber,
+    phone: phone,
+    vat: iva
+  };
+
+  console.log(JSON.stringify(orgData));
+
+  try {
+    const response = await fetch(this.apiUrlOrg, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orgData),
+    });
+
+    if (!response.ok) {
+      if (response.status === 409) {
+        console.log('Organizzatore già registrato');
+        return false;
+      } else if (response.status === 422) {
+        const errData = await response.json();
+        console.error('Errore 422 - Dati non validi:', errData);
+        return false;
+      } else if (response.status === 500) {
+        console.log('Errore interno');
+        return false;
+      }
+    }
+
+    const dataOrg = await response.json();
+
+    if (response.status === 201) {
+      console.log('Registrazione riuscita:', dataOrg);
+
+      if (dataOrg.access_token) {
+      localStorage.setItem('token', dataOrg.token);
+      }
+
+      localStorage.setItem('orgData', JSON.stringify(dataOrg));
+
+      return true;
+    } else {
+      throw new Error('Registrazione fallita');
+    }
+  } catch (error) {
+    console.error('Errore durante la registrazione:', error);
+    return false;
+  }
+}
   //-------------------------------------------
   // get countriesNew
   async getCountriesNew(): Promise<{ name: string; _id: string }[]> {
