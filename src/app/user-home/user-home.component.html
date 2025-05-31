@@ -49,38 +49,40 @@
 
 
   <!-- Hero Section -->
-<!-- Hero Section Moderna -->
-<div class="hero-container">
-  <div class="hero-content">
+<div class="hero-wrapper">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-card">
     <div class="welcome-text">
-      <h1 class="greeting">WELCOME BACK</h1>
-      <h2 class="username">{{ userName }}</h2>
+      <h1>Welcome Back</h1>
+      <h2>{{ userName }}</h2>
     </div>
-    
+
     <div class="search-container">
-      <div class="form-group">
-        <label for="destination">Where to next?</label>
-        <div class="input-wrapper">
-          <input type="text" id="destination" placeholder="Insert a city" [(ngModel)]="searchQuery">
-          <button class="search-btn" (click)="search()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-        </div>
+      <label for="destination">Where to next?</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="destination"
+          placeholder="Insert a city..."
+          [(ngModel)]="searchQuery"
+        />
+        <button (click)="search()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </button>
       </div>
-      
+
       <div *ngIf="searchQuery.trim().length === 0 && submitted" class="error-message">
         Please enter at least one character to search.
       </div>
     </div>
   </div>
-  
-  <div class="hero-image">
-    <div class="image-overlay"></div>
-  </div>
 </div>
+
+
 
   <!--End Hero Section-->
 <!-- In your country-->
@@ -101,10 +103,8 @@
       </div>
     </div>
   </div>
-  
-  
-  
-  
+
+ 
 </section>
 
 <!--End in your country-->

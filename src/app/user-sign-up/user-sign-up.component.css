@@ -11,10 +11,46 @@ html, body {
   width: 100vw;
 }
 
+.back-arrow {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  font-size: 1.2rem;
+  color: #0077ff;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.back-arrow:hover {
+  color: #005bb5;
+}
+
+.home-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 2rem;
+}
+
+.home-icon a {
+  color: #0077ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.home-icon a:hover {
+  color: #005bb5;
+}
+
 
 .left-panel {
   width: 50%;
-  background: url('https://images.pexels.com/photos/18173403/pexels-photo-18173403/free-photo-of-torre-del-big-ben-a-londra.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load') no-repeat center center;
+  background: url('https://images.pexels.com/photos/32254176/pexels-photo-32254176/free-photo-of-tempio-tradizionale-giapponese-sotto-il-cielo-azzurro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center;
   background-size: cover;
   display: flex;
   justify-content: center;

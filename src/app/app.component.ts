@@ -11,6 +11,7 @@ import { DestinationPageComponent } from './destination-page/destination-page.co
 import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet,HomepageComponent,FooterComponent,UserLoginComponent,OrganizatorSignUpComponent,UserHomeComponent,UserSignUpComponent,OrganizatorHomeComponent,DestinationPageComponent,CalendarPageComponent,ThankYouPageComponent],

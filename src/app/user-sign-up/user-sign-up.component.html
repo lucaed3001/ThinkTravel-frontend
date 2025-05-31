@@ -16,7 +16,16 @@
 
     <!-- Right: login -->
     <div class="right-panel">
-      <div class="plane-icon"><a href="">🏠</a></div>
+      <div class="back-arrow" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back
+      </div>
+
+      <!-- Icona casetta in alto a destra -->
+      <div class="home-icon">
+        <a href="/">
+          <i class="fas fa-home"></i>
+        </a>
+      </div>
       <h2>Join out travel community</h2>
       <p>Create your account to unlock exclusive travel deals and experiences</p>
       <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">

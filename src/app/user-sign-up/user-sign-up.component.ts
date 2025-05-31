@@ -92,4 +92,8 @@ export class UserSignUpComponent {
       this.errorMessage = 'Compila tutti i campi obbligatori.';
     }
   }
+  goBack(): void {
+    window.history.back();
+  }
+  
   }
