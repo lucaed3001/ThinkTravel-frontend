@@ -16,7 +16,7 @@ import * as CryptoJS from 'crypto-js';
 export class OrganizatorSignUpComponent {
   loginForm: FormGroup;
 
-  countries: { name: string; _id: string }[] = [];// Array per la dropdown
+  countries: any[] = [];// Array per la dropdown
 
   errorMessage = ''; // Per gestire errori
   successMessage = ''; // Per gestire successo
@@ -34,19 +34,19 @@ export class OrganizatorSignUpComponent {
     });
   }
   async ngOnInit() {
-    try {
-      // Ottieni i paesi tramite il servizio
-      this.countries = await this.signUpUserService.getCountriesNew();
-      //console.log("prova "+this.countries);
-      // imposto il primo paese come valore di default
-      if (this.countries.length > 0) {
-        this.loginForm.patchValue({
-          country: this.countries[0]._id
-        });
+     try {
+        // Ottieni i paesi tramite il servizio
+        this.countries = await this.signUpUserService.getCountriesNew();
+        
+        // imposto il primo paese come valore di default
+        if (this.countries.length > 0) {
+          this.loginForm.patchValue({
+            country: this.countries[0].id.toString()
+          });
+        }
+      } catch (error) {
+        console.error('Errore durante il recupero dei paesi:', error);
       }
-    } catch (error) {
-      console.error('Errore durante il recupero dei paesi:', error);
-    }
   }
     async onSubmit() {
         if (this.loginForm.valid) {

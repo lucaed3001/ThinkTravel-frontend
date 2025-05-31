@@ -38,11 +38,12 @@
         </div>
         <div class="form-group">
           <i class="fas fa-globe icon"></i>
-          <select formControlName="country" required>
-            <option value="" disabled selected>Select Your Country</option>
-            <!-- ngFor countries here -->
-            <option *ngFor="let country of countries" [value]="country._id">{{ country.name }}</option>
-          </select>
+           <select formControlName="country">
+              <option value="" disabled selected>Select Your Country</option>
+              <option *ngFor="let country of countries" [value]="country.id">
+                {{ country.name }}
+              </option>
+            </select>
         </div>
         <div class="form-group">
           <i class="fas fa-building icon"></i>
