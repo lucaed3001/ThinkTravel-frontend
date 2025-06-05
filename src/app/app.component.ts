@@ -19,5 +19,6 @@ import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Think Travel';
 }
+

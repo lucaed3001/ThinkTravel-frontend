@@ -6,14 +6,41 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterLink,RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { Location } from '@angular/common';
+
+
+interface Language {
+  id: string;
+  name: string;
+  flagUrl: string;
+}
+const LANGUAGES: Language[] = [
+  { id: 'en', name: 'English', flagUrl: 'https://flagcdn.com/w20/gb.png' },
+  { id: 'fr', name: 'Français', flagUrl: 'https://flagcdn.com/w20/fr.png' },
+  { id: 'it', name: 'Italiano', flagUrl: 'https://flagcdn.com/w20/it.png' },
+  { id: 'de', name: 'Deutsch', flagUrl: 'https://flagcdn.com/w20/de.png' },
+  { id: 'es', name: 'Español', flagUrl: 'https://flagcdn.com/w20/es.png' },
+  { id: 'hu', name: 'Magyar', flagUrl: 'https://flagcdn.com/w20/hu.png' },
+  { id: 'nl', name: 'Nederlands', flagUrl: 'https://flagcdn.com/w20/nl.png' },
+  { id: 'hi', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
+  { id: 'pl', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
+  { id: 'ar', name: 'عربي', flagUrl: 'https://flagcdn.com/w20/sa.png' },
+  { id: 'zh-cn', name: '中國人', flagUrl: 'https://flagcdn.com/w20/cn.png' },
+];
 
 @Component({
   selector: 'app-search-destination-homepage',
-  imports: [FooterComponent,HomepageComponent,CommonModule,RouterLink,RouterOutlet,FormsModule],
+  imports: [FooterComponent,HomepageComponent,CommonModule,RouterLink,RouterOutlet,FormsModule,TranslateModule],
   templateUrl: './search-destination-homepage.component.html',
   styleUrl: './search-destination-homepage.component.css'
 })
+
+
 export class SearchDestinationHomepageComponent {
+  selectedCityId: string | null = null;
+
   searchQuery: string = '';
   searchActive: boolean = false; // Variabile di stato per mostrare/nascondere i contenitori
   defaultCities: any[] = []; // Città di default (esplora destinazioni)
@@ -23,10 +50,22 @@ export class SearchDestinationHomepageComponent {
   selectedCityDescription: string = '';
   cityImages: string[] = [];
   selectedCityPhotoUrl: string = '';
+  isMobileMenuOpen = false;
+  isDropdownOpen = false;
+  isOpen = false;
+  languages = LANGUAGES;
+  selectedLanguage = LANGUAGES[0];
 
   
   urlDNS:string = "http://thinktravel.ddns.net:8000";
-constructor( private functionApi: FunzioniApiService,private router: Router) {  }
+constructor( private functionApi: FunzioniApiService,private router: Router,private translate: TranslateService,private location: Location) { 
+  const savedLangId = localStorage.getItem('lang');
+    const langFromStorage = this.languages.find(lang => lang.id === savedLangId);
+    this.selectedLanguage = langFromStorage || this.languages[0]; 
+
+    this.translate.setDefaultLang(this.selectedLanguage.id.trim());
+    this.translate.use(this.selectedLanguage.id.trim());
+ }
 async ngOnInit() {
   const city=localStorage.getItem('searchCity');
 
@@ -121,6 +160,7 @@ async searchDestination() {
 
 //con il click del plsante della card 
 async searchDestinationClick(id: string, nome: string) {
+  this.selectedCityId = id;
   this.searchQuery = nome;
 
   try {
@@ -192,6 +232,7 @@ async returnToHome()
 
 }
 //va alla pag per prenotare
+showAlertMap: { [key: string]: boolean } = {};
 addPrenotation(nome:string,address:string,url:string,description:string):void{
   //console.log(nome)
   if(localStorage.getItem("userData")!=null){
@@ -202,8 +243,36 @@ addPrenotation(nome:string,address:string,url:string,description:string):void{
     this.router.navigate(['/prenotazioni']);
   }
   else{
-    alert("You have to login to book a hotel");
+    this.showAlertMap[nome] = true;
+
+    // Nascondi alert dopo 3 secondi (opzionale)
+    setTimeout(() => {
+      this.showAlertMap[nome] = false;
+    }, 3000);
   }
+}
+closeAlert(hotelName: string): void {
+  this.showAlertMap[hotelName] = false;
+}
+selectLanguage(lang: Language): void {
+     
+  this.selectedLanguage = lang;
+  this.isOpen = false;
+  console.log('Lingua selezionata:', lang.id);
+  localStorage.setItem("lang",lang.id);
+  console.log(localStorage.getItem("lang"));
+  window.location.reload();
+
+
+  // Qui puoi aggiungere la logica per cambiare lingua nell'app
+}
+goBack(): void {
+  this.selectedCityId = null;
+  this.searchActive = false;
+  this.hotels = [];
+  this.selectedCityName = '';
+  this.selectedCityDescription = '';
+  this.selectedCityPhotoUrl = '';
 }
 
 }

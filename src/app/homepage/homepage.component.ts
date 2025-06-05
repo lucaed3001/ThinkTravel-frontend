@@ -7,6 +7,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 
 interface Language {
@@ -22,7 +25,7 @@ const LANGUAGES: Language[] = [
   { id: 'es', name: 'Español', flagUrl: 'https://flagcdn.com/w20/es.png' },
   { id: 'hu', name: 'Magyar', flagUrl: 'https://flagcdn.com/w20/hu.png' },
   { id: 'nl', name: 'Nederlands', flagUrl: 'https://flagcdn.com/w20/nl.png' },
-  { id: 'hi ', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
+  { id: 'hi', name: 'भारतीय', flagUrl: 'https://flagcdn.com/w20/in.png' },
   { id: 'pl', name: 'Polski', flagUrl: 'https://flagcdn.com/w20/pl.png' },
   { id: 'ar', name: 'عربي', flagUrl: 'https://flagcdn.com/w20/sa.png' },
   { id: 'zh-cn', name: '中國人', flagUrl: 'https://flagcdn.com/w20/cn.png' },
@@ -30,7 +33,8 @@ const LANGUAGES: Language[] = [
 
 @Component({
   selector: 'app-homepage',
-  imports: [RouterOutlet, RouterLink,FooterComponent,CommonModule,FormsModule,ReactiveFormsModule],
+  standalone: true,
+  imports: [RouterOutlet, RouterLink,FooterComponent,CommonModule,FormsModule,ReactiveFormsModule,TranslateModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
@@ -48,15 +52,26 @@ export class HomepageComponent {
   isMobileMenuOpen = false;
   isDropdownOpen = false;
 
-  languages = LANGUAGES;
-  selectedLanguage: Language = this.languages[0]; // Imposta 'English' come predefinito
-  isOpen = false;
 
-constructor( private functionApi: FunzioniApiService,private router: Router,private cdr: ChangeDetectorRef ) {
+  isOpen = false;
+  languages = LANGUAGES;
+  selectedLanguage = LANGUAGES[0];
+
+
+constructor( private functionApi: FunzioniApiService,private router: Router,private cdr: ChangeDetectorRef,private translate: TranslateService ) {
   const savedLangId = localStorage.getItem('lang');
     const langFromStorage = this.languages.find(lang => lang.id === savedLangId);
     this.selectedLanguage = langFromStorage || this.languages[0]; 
+
+    this.translate.setDefaultLang(this.selectedLanguage.id.trim());
+    this.translate.use(this.selectedLanguage.id.trim());
   }
+
+
+
+
+
+
 async ngOnInit() {
 localStorage.setItem("country_id","");
 
@@ -155,12 +170,14 @@ search() {
     this.isOpen = !this.isOpen;
     this.dropdownOpen = !this.dropdownOpen;}
     selectLanguage(lang: Language): void {
+     
       this.selectedLanguage = lang;
       this.isOpen = false;
       console.log('Lingua selezionata:', lang.id);
       localStorage.setItem("lang",lang.id);
       console.log(localStorage.getItem("lang"));
       window.location.reload();
+    
 
       // Qui puoi aggiungere la logica per cambiare lingua nell'app
     }
